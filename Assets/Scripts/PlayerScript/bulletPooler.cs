@@ -6,8 +6,6 @@ public class bulletPooler : MonoBehaviour {
 
     public GameObject bulletPrefabs;
     public int numOfBullets;
-    public Transform spawnPos;
-
 
     public List<GameObject> bulletPool = new List<GameObject>();
 
@@ -17,7 +15,7 @@ public class bulletPooler : MonoBehaviour {
         GameObject objectHolder = new GameObject("BulletHolder");
             
         for(int i=0;i<numOfBullets;i++){
-            GameObject clone = Instantiate(bulletPrefabs,spawnPos.position, Quaternion.identity) as GameObject;
+            GameObject clone = Instantiate(bulletPrefabs,Vector2.zero, Quaternion.identity) as GameObject;
             clone.transform.parent = objectHolder.transform;
             clone.SetActive(false);
 
