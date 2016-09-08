@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 
         for(int i=0;i<enemypool.enemyPool.Count;i++){
             if(enemypool.enemyPool[i].activeInHierarchy == false){
+                enemypool.enemyPool[i].transform.position = enemypool.initPos.position;
                 enemypool.enemyPool[i].SetActive(true);
                 break;
             }

@@ -11,6 +11,7 @@ public class Enemy_01 : MonoBehaviour {
     private float reachDistance = 0.1f;
     private HealthBar healthbar;
 	
+    private float health;
     // Use this for initialization
 	void Start () {
         enemyspawner = FindObjectOfType<EnemySpawner>();
@@ -35,8 +36,9 @@ public class Enemy_01 : MonoBehaviour {
         if(currentPos>=enemyspawner.paths.Length){
             currentPos = 0;
        }
+            
 
-	}
+	} // end update
 
     void outofscreen(){
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
@@ -48,14 +50,15 @@ public class Enemy_01 : MonoBehaviour {
     }
 
     // add some damage to enemy 
-    void OnCollisionEnter2D(Collision2D col){
+    void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
-            
-            float health = healthbar.giveDamage(damage);
-            print(health);
-            if(health <= 0){
-                gameObject.SetActive(false);     
+            health = healthbar.giveDamage(damage);
+
+            if(health <=0){
+                healthbar.transform.localScale = new Vector2(1f, 1f);
+                gameObject.SetActive(false);
             }
+            print(health);
         }
 
     } //end

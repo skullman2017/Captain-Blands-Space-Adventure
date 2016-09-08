@@ -3,12 +3,12 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour {
 
-    private float initi;
-    public  float damage;
+    public float initi;
+    //public  float damage;
 	// Use this for initialization
 	void Start () {
-        initi = transform.localScale.x;
-
+        initi = 1f;
+        transform.localScale = new Vector2(1f, 1f);
 	}
 	
 	// Update is called once per frame
