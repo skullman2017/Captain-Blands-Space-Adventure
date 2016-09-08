@@ -1,0 +1,30 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Enemy_01 : MonoBehaviour {
+
+    public float moveSpeed;
+
+    private EnemyManager enemymanager;
+    private EnemyPool enemypool;
+
+    void Start(){
+        enemypool = FindObjectOfType<EnemyPool>();
+
+    }
+
+  
+    void Update(){
+        
+    }
+
+}
+
+
+
+
+
+
+
+
+
