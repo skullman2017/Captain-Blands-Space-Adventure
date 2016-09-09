@@ -9,7 +9,7 @@ public class ExplosionPooler : MonoBehaviour {
     public int numOfAmout;
     private GameObject objectHolder;
 
-    public List<GameObject> ObjectPool = new List<GameObject>();
+    private List<GameObject> ObjectPool = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
 	    

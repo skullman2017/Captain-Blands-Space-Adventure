@@ -11,15 +11,29 @@ public class Enemy_01 : MonoBehaviour {
     private float reachDistance = 0.1f;
     private HealthBar healthbar;
 
-    private ExplosionPooler explosionpool;
+    private ExplosionPooler explosionpool; // for explosion manager
 
     private float health;
+
+    private bulletPooler BulletPool;
+    public Transform bulletSpawnPos;
+    private Vector2 bulletDirection;
+    private bool isReady = false;
+    private Rigidbody2D bulletBody;
+    private GameObject bullet;
+    public float bulletSpeed;
+
     // Use this for initialization
 	void Start () {
         enemyspawner = FindObjectOfType<EnemySpawner>();
         healthbar = transform.FindChild("HealthBar").GetComponent<HealthBar>();
 
+        // get references 
         explosionpool = FindObjectOfType<ExplosionPooler>();
+        BulletPool = FindObjectOfType<bulletPooler>();
+
+        // fire bullet repeatdely 
+        InvokeRepeating("FireBullet", 2f,1f);
     }
 	
 
@@ -40,19 +54,34 @@ public class Enemy_01 : MonoBehaviour {
             currentPos = 0;
        }
             
-     
+
 
 	} // end update
 
-    void outofscreen(){
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+    void FireBullet(){
+         bullet = BulletPool.getEnemyBullet();
+     
+        GameObject playerShip = GameObject.Find("Player");
+        isReady = false;
 
-        if(transform.position.y < min.y){
-            // 
-            Debug.Log("out of camera set false");
+        if(bullet != null && playerShip!=null){
+            
+            bulletDirection = playerShip.transform.position;
+            bullet.transform.position = bulletSpawnPos.position; // initial position 
+            bullet.SetActive(true);
+            isReady = true;
+
         }
+       
     }
 
+    void FixedUpdate(){
+        if (isReady){
+            bullet.transform.Translate(bulletDirection*Time.deltaTime*bulletSpeed);
+        }
+
+    }
+   
     // add some damage to enemy 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
@@ -64,7 +93,7 @@ public class Enemy_01 : MonoBehaviour {
                 healthbar.transform.localScale = new Vector2(1f, 1f);
                 // controll enemy explosion and setFalse
                 gameObject.SetActive(false);
-                playAnimation();
+                playAnimation(); // play explosion animation 
             }
 
         }

@@ -5,16 +5,17 @@ public class EnemySpawner : MonoBehaviour {
 
     private EnemyPool enemypool;
     public Transform[] paths;
-
+     
     public float secToWait;
 	// Use this for initialization
 	void Start () {
         enemypool = FindObjectOfType<EnemyPool>();
 
        // spawnEnemy();
-        InvokeRepeating("spawnEnemy",secToWait,2f);
+        InvokeRepeating("spawnEnemy",secToWait,1f);
 	}
 	
+   
     void spawnEnemy(){
 
         for(int i=0;i<enemypool.enemyPool.Count;i++){

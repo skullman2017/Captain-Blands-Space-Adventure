@@ -108,19 +108,20 @@ public class PlayerController : MonoBehaviour {
                 break;
             }
         }
-
-        //print(b1);
-       // print(b2);
-
+            
         objPooler.bulletPool[b1].transform.position = spawPos1;
         objPooler.bulletPool[b1].SetActive(true);
 
         objPooler.bulletPool[b2].transform.position = spawPos2;
         objPooler.bulletPool[b2].SetActive(true);
-
-      
-
+       
     } // end 
         
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.tag == "Bullet"){
+            other.gameObject.SetActive(false);
+        }
+    }
 
 }
