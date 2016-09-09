@@ -10,8 +10,8 @@ public class Enemy_01 : MonoBehaviour {
     private int currentPos = 0;
     private float reachDistance = 0.1f;
     private HealthBar healthbar;
-	
-    public GameObject explosion; // explode animation 
+
+    private ExplosionPooler explosionpool;
 
     private float health;
     // Use this for initialization
@@ -19,7 +19,7 @@ public class Enemy_01 : MonoBehaviour {
         enemyspawner = FindObjectOfType<EnemySpawner>();
         healthbar = transform.FindChild("HealthBar").GetComponent<HealthBar>();
 
-
+        explosionpool = FindObjectOfType<ExplosionPooler>();
     }
 	
 
@@ -71,8 +71,13 @@ public class Enemy_01 : MonoBehaviour {
 
     } //end
 
+
     void playAnimation(){
-        GameObject go = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+        
+        GameObject explode = explosionpool.getExplosion();
+        explode.transform.position = transform.position;
+        explode.SetActive(true);
+
     }
 
 }

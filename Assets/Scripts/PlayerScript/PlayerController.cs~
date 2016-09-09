@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         accleStartY = Input.acceleration.y; // mobile 
 
         // firing autometically 
-        InvokeRepeating("FireBtn",0.5f, secondsToWait);
+       // InvokeRepeating("FireBtn",0.5f, secondsToWait);
 
 	}
 	
@@ -50,19 +50,21 @@ public class PlayerController : MonoBehaviour {
             
         // moveplayer
         movePlayer(direction);
+        // tap to fire 
+        FireBtn();
        
     } // end 
 
     public void FireBtn(){
         // fire bullets
-        //if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0)){
             //print("fire btn down");
             spawPos1 = bulletSpawnPos1.transform.position; // update the postion 
             spawPos2 = bulletSpawnPos2.transform.position;
 
             playerAudioSource.Play(); // play fire sfx
             FireBullet();
-        //}
+        }
     }
 
     void movePlayer(Vector2 dir){
