@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour {
         enemypool = FindObjectOfType<EnemyPool>();
 
        // spawnEnemy();
-        InvokeRepeating("spawnEnemy",secToWait,1f);
+        InvokeRepeating("spawnEnemy",secToWait,2f);
 	}
 	
     void spawnEnemy(){

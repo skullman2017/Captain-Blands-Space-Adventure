@@ -1,0 +1,22 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class AnimationManager : MonoBehaviour {
+
+    public GameObject explode;
+    public Transform pos;
+    private Animator explodeAni;
+
+
+    void Start(){
+        explodeAni = explode.GetComponent<Animator>();
+
+    }
+
+    void Update(){
+        
+    }
+
+   
+
+}

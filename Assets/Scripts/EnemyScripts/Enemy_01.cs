@@ -11,12 +11,15 @@ public class Enemy_01 : MonoBehaviour {
     private float reachDistance = 0.1f;
     private HealthBar healthbar;
 	
+    public GameObject explosion; // explode animation 
+
     private float health;
     // Use this for initialization
 	void Start () {
         enemyspawner = FindObjectOfType<EnemySpawner>();
         healthbar = transform.FindChild("HealthBar").GetComponent<HealthBar>();
-	    
+
+
     }
 	
 
@@ -37,6 +40,7 @@ public class Enemy_01 : MonoBehaviour {
             currentPos = 0;
        }
             
+     
 
 	} // end update
 
@@ -52,15 +56,23 @@ public class Enemy_01 : MonoBehaviour {
     // add some damage to enemy 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
+            col.gameObject.SetActive(false); // set bullet to false
+
             health = healthbar.giveDamage(damage);
 
             if(health <=0){
                 healthbar.transform.localScale = new Vector2(1f, 1f);
+                // controll enemy explosion and setFalse
                 gameObject.SetActive(false);
+                playAnimation();
             }
-            print(health);
+
         }
 
     } //end
+
+    void playAnimation(){
+        GameObject go = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+    }
 
 }
