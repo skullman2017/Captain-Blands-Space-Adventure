@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour {
         if (enemyClone != null)
         {
             float distance = Vector2.Distance(paths[CurrentPos].position, enemyClone.transform.position);
-            Debug.Log(distance);
+            //Debug.Log(distance);
             enemyClone.transform.position = Vector2.Lerp(enemyClone.transform.position, paths[CurrentPos].position, Time.deltaTime * moveSpeed);
 
             if(distance <= reachDistance){

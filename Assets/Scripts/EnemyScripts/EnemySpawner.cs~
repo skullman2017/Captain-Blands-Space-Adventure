@@ -13,9 +13,15 @@ public class EnemySpawner : MonoBehaviour {
 
        // spawnEnemy();
         InvokeRepeating("spawnEnemy",secToWait,1f);
+        //StartCoroutine(waitAndSpawn(5f));
 	}
 	
    
+    IEnumerator waitAndSpawn(float secs){
+        yield return new WaitForSeconds(secs);
+
+    }
+
     void spawnEnemy(){
 
         for(int i=0;i<enemypool.enemyPool.Count;i++){

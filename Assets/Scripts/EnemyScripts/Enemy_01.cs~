@@ -69,17 +69,22 @@ public class Enemy_01 : MonoBehaviour {
             bulletDirection = playerShip.transform.position;
             bullet.transform.position = bulletSpawnPos.position; // initial position 
             bullet.SetActive(true);
+            //bullet.transform.Translate((playerShip.transform.position-bulletSpawnPos.position) *Time.deltaTime);
             isReady = true;
 
         }
        
     }
+     
 
     void FixedUpdate(){
-        if (isReady){
-            bullet.transform.Translate(bulletDirection*Time.deltaTime*bulletSpeed);
+       
+        if(isReady && health != 0){
+            //float distance = Vector2.Distance(bullet.transform.position, bulletDirection);
+            //print("distance: "+distance);
+            bullet.transform.position = Vector2.Lerp(bullet.transform.position, bulletDirection, Time.deltaTime * bulletSpeed);
+            //isReady = false;
         }
-
     }
    
     // add some damage to enemy 
@@ -89,7 +94,7 @@ public class Enemy_01 : MonoBehaviour {
 
             health = healthbar.giveDamage(damage);
 
-            if(health <=0){
+            if(health <=0.1){
                 healthbar.transform.localScale = new Vector2(1f, 1f);
                 // controll enemy explosion and setFalse
                 gameObject.SetActive(false);

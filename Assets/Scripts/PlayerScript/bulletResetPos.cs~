@@ -8,7 +8,7 @@ public class bulletResetPos : MonoBehaviour {
        // print(other.gameObject.tag);
         if(other.gameObject.tag == "KillBox"){
             //reset bullet position
-            print("killbox");
+            //print("killbox");
             gameObject.SetActive(false);
             //gameObject.transform.position = spawPos;
         }
