@@ -33,7 +33,7 @@ public class Enemy_01 : MonoBehaviour {
         BulletPool = FindObjectOfType<bulletPooler>();
 
         // fire bullet repeatdely 
-        InvokeRepeating("FireBullet", 2f,1f);
+        InvokeRepeating("FireBullet", 3f,1f);
     }
 	
 
