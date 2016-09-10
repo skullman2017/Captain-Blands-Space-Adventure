@@ -17,15 +17,23 @@ public class PlayerController : MonoBehaviour {
 
     private float accleStartY;
 
+    // player audio 
     private AudioSource playerAudioSource;
+    private PlayerHealth playerHealth;
+    public float playerDamage;
+
+    private Rigidbody2D playerBody;
 
 	// Use this for initialization
 	void Start () {
         playerAudioSource = GetComponent<AudioSource>();
+        playerBody = GetComponent<Rigidbody2D>();
 
         objPooler = FindObjectOfType<bulletPooler>();
 
         accleStartY = Input.acceleration.y; // mobile 
+        // get PlayerHealth script
+        playerHealth = FindObjectOfType<PlayerHealth>();
 
         // firing autometically 
        // InvokeRepeating("FireBtn",0.5f, secondsToWait);
@@ -52,6 +60,7 @@ public class PlayerController : MonoBehaviour {
         movePlayer(direction);
         // tap to fire 
         FireBtn();
+
        
     } // end 
 
@@ -117,11 +126,24 @@ public class PlayerController : MonoBehaviour {
        
     } // end 
         
-
+    // enemy bullet hit player 
     void OnTriggerEnter2D(Collider2D other){
+        
         if(other.gameObject.tag == "Bullet"){
             other.gameObject.SetActive(false);
+            // give player some damage 
+            float health = playerHealth.giveDamage(playerDamage);
+           // print(health);
+            if(health<0){
+               // game over 
+               // print(health);
+            }
         }
-    }
+        else if(other.gameObject.tag == "Enemy"){
+            // shake player ship
+            iTween.ShakePosition(this.gameObject, new Vector3(0.6f, 1f, 0), 0.6f);
+        }
+
+    } // end method 
 
 }
