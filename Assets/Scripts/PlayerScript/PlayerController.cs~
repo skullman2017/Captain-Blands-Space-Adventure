@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour {
     private bulletPooler objPooler;
 
     public float secondsToWait;
-    public BulletSpawnPos bulletSpawnPos1; // instantiate position 
-    public BulletSpawnPos bulletSpawnPos2;
+    public Transform bulletSpawnPos1; // instantiate position 
+    public Transform bulletSpawnPos2;
 
     private Vector3 spawPos1;
     private Vector3 spawPos2;
@@ -68,8 +68,8 @@ public class PlayerController : MonoBehaviour {
         // fire bullets
         if(Input.GetMouseButtonDown(0)){
             //print("fire btn down");
-            spawPos1 = bulletSpawnPos1.transform.position; // update the postion 
-            spawPos2 = bulletSpawnPos2.transform.position;
+            spawPos1 = bulletSpawnPos1.position; // update the postion 
+            spawPos2 = bulletSpawnPos2.position;
 
             playerAudioSource.Play(); // play fire sfx
             FireBullet();

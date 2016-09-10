@@ -23,8 +23,12 @@ public class Enemy_01 : MonoBehaviour {
     private GameObject bullet;
     public float bulletSpeed;
 
+    private AudioSource theAudioSources;
+
     // Use this for initialization
 	void Start () {
+        theAudioSources = GetComponent<AudioSource>();
+
         enemyspawner = FindObjectOfType<EnemySpawner>();
         healthbar = transform.FindChild("HealthBar").GetComponent<HealthBar>();
 
@@ -68,6 +72,9 @@ public class Enemy_01 : MonoBehaviour {
             
             bulletDirection = playerShip.transform.position;
             bullet.transform.position = bulletSpawnPos.position; // initial position 
+            // play fire sound
+            theAudioSources.Play(); 
+
             bullet.SetActive(true);
             //bullet.transform.Translate((playerShip.transform.position-bulletSpawnPos.position) *Time.deltaTime);
             isReady = true;
