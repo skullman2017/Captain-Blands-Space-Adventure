@@ -86,12 +86,13 @@ public class Enemy_01 : MonoBehaviour {
 
     void FixedUpdate(){
        
-        if(isReady && health != 0){
+        if (isReady)
+        {
             //float distance = Vector2.Distance(bullet.transform.position, bulletDirection);
             //print("distance: "+distance);
-            bullet.transform.position = Vector2.Lerp(bullet.transform.position, bulletDirection, Time.deltaTime * bulletSpeed);
-            //isReady = false;
+            bullet.transform.position = Vector2.MoveTowards(bullet.transform.position, bulletDirection, Time.deltaTime * bulletSpeed);
         }
+        
     }
    
     // add some damage to enemy 

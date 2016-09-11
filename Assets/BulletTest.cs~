@@ -1,0 +1,20 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BulletTest : MonoBehaviour {
+
+    public PlayerController theplayer;
+    private float moveSpeed = 5f;
+    private Vector2 targetPos;
+
+	// Use this for initialization
+	void Start () {
+        //theplayer = FindObjectOfType<PlayerController>();
+        targetPos = theplayer.transform.position;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed*Time.deltaTime);
+	}
+}
