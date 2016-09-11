@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 
         if(isReady){
-          //  target = target - transform.position;
             bulletBody.velocity = theplayer.transform.position - transform.position;
             //iTween.MoveTo(go,target,1f);  
             isReady = false;

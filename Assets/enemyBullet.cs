@@ -3,13 +3,11 @@ using System.Collections;
 
 public class enemyBullet : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.tag == "Player"){
+            print("collide with player");
+            gameObject.SetActive(false);
+        }
+    }
+
 }
