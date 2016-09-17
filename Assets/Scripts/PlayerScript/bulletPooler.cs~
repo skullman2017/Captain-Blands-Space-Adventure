@@ -11,7 +11,7 @@ public class bulletPooler : MonoBehaviour {
  	// Use this for initialization
 	void Start () {     
 
-        GameObject objectHolder = new GameObject("BulletHolder");
+        GameObject objectHolder = new GameObject("PlayerBulletHolder");
             
         for(int i=0;i<numOfBullets;i++){
             GameObject clone = Instantiate(bulletPrefabs,Vector2.zero, Quaternion.identity) as GameObject;
