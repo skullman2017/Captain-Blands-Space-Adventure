@@ -4,13 +4,9 @@ using System.Collections;
 public class bulletResetPos : MonoBehaviour {
 
 
-    void OnCollisionEnter2D(Collision2D other){
-       // print(other.gameObject.tag);
-        if(other.gameObject.tag == "KillBox"){
-            //reset bullet position
-            //print("killbox");
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.tag == "KillBox"){
             gameObject.SetActive(false);
-            //gameObject.transform.position = spawPos;
         }
     }
 

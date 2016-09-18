@@ -4,7 +4,7 @@ using System.Collections;
 public class SimpleEnemySpawner : MonoBehaviour {
 
     private EnemyPoolManager theEnemyPool;
-    private float secToWait = 2f;
+    public float secToWait;
     private GameObject enemy;
 
     // enemy spawn position 
@@ -34,14 +34,30 @@ public class SimpleEnemySpawner : MonoBehaviour {
 
         enemy = theEnemyPool.getEnemy("SimpleEnemy");
         if(enemy){
-            enemy.SetActive(true);
-            enemy.transform.position = _center;
-            print(enemy.tag);
-        }
-    }
 
-	// Update is called once per frame
-	void Update () {
-	    
-	}
+            int rnd = Random.Range(1, 3);
+            enemy.SetActive(true);
+
+            if (rnd == 1)
+            {
+                enemy.transform.position = _topleft;
+            }
+            else if (rnd == 2)
+            {
+                enemy.transform.position = _center;
+            }
+            else
+            {
+                enemy.transform.position = _topright;
+            }
+                
+        }
+
+        // start again
+        StartCoroutine(poolEnemy(Random.Range(secToWait,secToWait+2f)));
+    } // end method 
+
+	
+
+
 }

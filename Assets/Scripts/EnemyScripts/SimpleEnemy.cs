@@ -7,6 +7,7 @@ public class SimpleEnemy : MonoBehaviour {
     private PlayerController theplayer;
     private Vector2 thetarget;
     private Rigidbody2D bulletBody;
+    private GameObject go;
 
     private bool isReady = false;
 
@@ -21,11 +22,13 @@ public class SimpleEnemy : MonoBehaviour {
         thepool = FindObjectOfType<EnemyBulletPool>();
 
         // fire bullet 
-        InvokeRepeating("FireToPlayer",3f,3f);
+       // InvokeRepeating("FireToPlayer",2f,3f);
+       // Invoke("FireToPlayer",1f);
+
 	}
 	
     void FireToPlayer(){
-        GameObject go = thepool.getBullet(); // get enemy 
+         go = thepool.getBullet(); // get enemy 
 
         if(go){
             theplayer = FindObjectOfType<PlayerController>();
@@ -56,14 +59,14 @@ public class SimpleEnemy : MonoBehaviour {
 
 
     void outOfScreen(){
-        // out of screen
+        // enemy ship out of screen
         gameObject.SetActive(false);
+       
+        // bullet 
+        //go.SetActive(false);
     }
 
-    /*void OnBecameInvisible(){
-        print("enemy out of camera");
-        gameObject.SetActive(false);
-    }*/
+   
 
 
 } // end class 

@@ -15,4 +15,16 @@ public class enemyBullet : MonoBehaviour {
     }
        
 
+    void OnBecameInvisible(){
+       // print("bullet out of camera");
+       // gameObject.SetActive(false);
+    }
+
+    void Update(){
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)); // bottom left of screen
+        if(transform.position.y < min.y){
+            gameObject.SetActive(false);
+        }
+    }
+
 }
