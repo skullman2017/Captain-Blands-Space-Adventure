@@ -22,7 +22,8 @@ public class SimpleEnemy : MonoBehaviour {
         thepool = FindObjectOfType<EnemyBulletPool>();
 
         // fire bullet 
-       // InvokeRepeating("FireToPlayer",2f,3f);
+        InvokeRepeating("FireToPlayer",2f,5f);
+        //FireToPlayer();
        // Invoke("FireToPlayer",1f);
 
 	}
@@ -30,7 +31,7 @@ public class SimpleEnemy : MonoBehaviour {
     void FireToPlayer(){
          go = thepool.getBullet(); // get enemy 
 
-        if(go){
+        if(go && isReady == false){
             theplayer = FindObjectOfType<PlayerController>();
             bulletBody = go.GetComponent <Rigidbody2D>();
             thetarget = theplayer.transform.position;
