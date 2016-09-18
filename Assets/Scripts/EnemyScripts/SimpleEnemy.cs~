@@ -5,7 +5,6 @@ public class SimpleEnemy : MonoBehaviour {
 
     private EnemyBulletPool thepool; // get enemy form the enemypool
     private PlayerController theplayer;
-    private Vector2 thetarget;
     private Rigidbody2D bulletBody;
     private GameObject go;
 
@@ -13,6 +12,8 @@ public class SimpleEnemy : MonoBehaviour {
 
     public float enemySpeed;
     public float bulletSpeed;
+    private float tmpX = 0f;
+    private float tmpY = 0f;
 
     private Rigidbody2D enemyBody;
 
@@ -34,21 +35,22 @@ public class SimpleEnemy : MonoBehaviour {
         if(go && isReady == false){
             theplayer = FindObjectOfType<PlayerController>();
             bulletBody = go.GetComponent <Rigidbody2D>();
-            thetarget = theplayer.transform.position;
-            go.transform.position = transform.position; // enemy position 
+
+            go.transform.position = transform.position; // enemy position or initial position 
             isReady = true;
             go.SetActive(true);
-            print("bullet found");
+            //print("bullet found");
         }
     }
 
 	// Update is called once per frame
 	void FixedUpdate () {
         // move to bottom
-        enemyBody.velocity = Vector2.down * Time.deltaTime * enemySpeed;
+        enemyBody.velocity = (Vector2.down * Time.deltaTime * enemySpeed);
 
         if(isReady){
-            bulletBody.velocity = (theplayer.transform.position - transform.position)* bulletSpeed * Time.deltaTime;
+            // fire bullet toward to theplayer
+            bulletBody.velocity = (theplayer.transform.position - transform.position).normalized * bulletSpeed;
             isReady = false;
         }
 
