@@ -36,21 +36,23 @@ public class PlayerController : MonoBehaviour {
         playerHealth = FindObjectOfType<PlayerHealth>();
 
         // firing autometically 
-       // InvokeRepeating("FireBtn",0.5f, secondsToWait);
+        InvokeRepeating("FireBtn",1f, secondsToWait);
 
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
-        //float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        //float v = CrossPlatformInputManager.GetAxis("Vertical");
+        // for joystikc controll
+        float h = CrossPlatformInputManager.GetAxis("Horizontal");
+        float v = CrossPlatformInputManager.GetAxis("Vertical");
 	    
-        float h = Input.acceleration.x;
-        float v = Input.acceleration.y - accleStartY;
+        // for accleometer 
+        //float h = Input.acceleration.x;
+       // float v = Input.acceleration.y - accleStartY;
 
         // get the joystick input 
-        Vector2 direction = new Vector2(h,v);
+        Vector2 direction = new Vector2(h,v) * Time.deltaTime * 15f;
 
         if(direction.sqrMagnitude > 1){
             direction.Normalize();  
@@ -59,21 +61,21 @@ public class PlayerController : MonoBehaviour {
         // moveplayer
         movePlayer(direction);
         // tap to fire 
-        FireBtn();
+        //FireBtn();
 
        
     } // end 
 
     public void FireBtn(){
         // fire bullets
-        if(Input.GetMouseButtonDown(0)){
+        //if(Input.GetMouseButtonDown(0)){
             //print("fire btn down");
             spawPos1 = bulletSpawnPos1.position; // update the postion 
             spawPos2 = bulletSpawnPos2.position;
 
             playerAudioSource.Play(); // play fire sfx
             FireBullet();
-        }
+      //  }
     }
 
     void movePlayer(Vector2 dir){
@@ -117,13 +119,15 @@ public class PlayerController : MonoBehaviour {
                 break;
             }
         }
-            
+
+        // set player bullet gravity to -4 if dont want velocity at run time
         objPooler.bulletPool[b1].transform.position = spawPos1;
         objPooler.bulletPool[b1].SetActive(true);
 
         objPooler.bulletPool[b2].transform.position = spawPos2;
         objPooler.bulletPool[b2].SetActive(true);
-       
+
+
     } // end 
 
 
