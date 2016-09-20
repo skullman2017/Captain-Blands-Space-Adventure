@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// player bullet 
 public class bulletResetPos : MonoBehaviour {
 
 
@@ -12,7 +13,7 @@ public class bulletResetPos : MonoBehaviour {
 
 
     void FixedUpdate(){
-        bulletBody.velocity = Vector2.up * Time.deltaTime * 300f;
+        bulletBody.velocity = Vector2.up * Time.deltaTime * 350f;
     }
         
 

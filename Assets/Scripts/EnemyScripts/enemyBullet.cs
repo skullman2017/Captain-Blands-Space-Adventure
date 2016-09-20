@@ -5,11 +5,11 @@ public class enemyBullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.tag == "Player"){
-            print("collide with player");
+            //print("collide with player");
             gameObject.SetActive(false);
         }
         else if(col.tag == "KillBox"){
-            print("collide with kill box ");
+            //print("collide with kill box ");
             gameObject.SetActive(false);
         }
     }

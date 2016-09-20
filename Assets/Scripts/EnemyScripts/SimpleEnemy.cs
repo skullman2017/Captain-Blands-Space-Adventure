@@ -52,6 +52,7 @@ public class SimpleEnemy : MonoBehaviour {
             // fire bullet toward to theplayer
             bulletBody.velocity = (theplayer.transform.position - transform.position).normalized * bulletSpeed;
             isReady = false;
+            print("bullet velocity : "+bulletBody.velocity);
         }
 
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)); // bottom left of screen

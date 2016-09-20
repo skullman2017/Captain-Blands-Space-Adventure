@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
        // float v = Input.acceleration.y - accleStartY;
 
         // get the joystick input 
-        Vector2 direction = new Vector2(h,v) * Time.deltaTime * 15f;
+        Vector2 direction = new Vector2(h,v);
 
         if(direction.sqrMagnitude > 1){
             direction.Normalize();  
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
         playerPos.y = Mathf.Clamp(playerPos.y , min.y, max.y);
 
         // update player position 
-        transform.position = playerPos;
+        transform.position = Vector2.Lerp(transform.position,playerPos, Time.deltaTime * 10f);
     }
 
 
