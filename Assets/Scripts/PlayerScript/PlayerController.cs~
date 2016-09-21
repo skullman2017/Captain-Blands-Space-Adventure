@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
         playerHealth = FindObjectOfType<PlayerHealth>();
 
         // firing autometically 
-        InvokeRepeating("FireBtn",1f, secondsToWait);
+        InvokeRepeating("FireBtn",3f, secondsToWait);
 
 	}
 	
