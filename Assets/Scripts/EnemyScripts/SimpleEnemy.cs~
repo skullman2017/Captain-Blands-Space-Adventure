@@ -46,7 +46,7 @@ public class SimpleEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         // move to bottom
-        enemyBody.velocity = (Vector2.down * Time.deltaTime * enemySpeed);
+        //enemyBody.velocity = (Vector2.down * Time.deltaTime * enemySpeed);
 
         if(isReady){
             // fire bullet toward to theplayer

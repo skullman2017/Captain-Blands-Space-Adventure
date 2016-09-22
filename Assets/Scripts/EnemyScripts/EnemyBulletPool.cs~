@@ -13,7 +13,7 @@ public class EnemyBulletPool : MonoBehaviour {
     private List<GameObject> BulletPool = new List<GameObject>();
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         EnemyBulletHolder = new GameObject("EnemyBulletHolder");
 
         for(int i=0;i<amount;i++){

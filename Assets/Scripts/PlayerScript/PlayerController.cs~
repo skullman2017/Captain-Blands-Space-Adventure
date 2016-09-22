@@ -35,6 +35,12 @@ public class PlayerController : MonoBehaviour {
         // get PlayerHealth script
         playerHealth = FindObjectOfType<PlayerHealth>();
 
+        // player set initial position 
+        float h = CrossPlatformInputManager.GetAxis("Horizontal");
+        float v = CrossPlatformInputManager.GetAxis("Vertical");
+        Vector2 _dir = new Vector2(h, v);
+        movePlayer(_dir);
+
         // firing autometically 
         InvokeRepeating("FireBtn",3f, secondsToWait);
 

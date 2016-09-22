@@ -54,7 +54,7 @@ public class SimpleEnemySpawner : MonoBehaviour {
         }
 
         // start again
-        StartCoroutine(poolEnemy(Random.Range(secToWait,secToWait+2f)));
+       // StartCoroutine(poolEnemy(Random.Range(secToWait,secToWait+2f)));
     } // end method 
 
 	
