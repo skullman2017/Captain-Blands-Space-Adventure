@@ -46,13 +46,13 @@ public class SimpleEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         // move to bottom
-        //enemyBody.velocity = (Vector2.down * Time.deltaTime * enemySpeed);
+        enemyBody.velocity = (Vector2.down * Time.deltaTime * enemySpeed);
 
         if(isReady){
             // fire bullet toward to theplayer
             bulletBody.velocity = (theplayer.transform.position - transform.position).normalized * bulletSpeed;
             isReady = false;
-            print("bullet velocity : "+bulletBody.velocity);
+           // print("bullet velocity : "+bulletBody.velocity);
         }
 
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)); // bottom left of screen
