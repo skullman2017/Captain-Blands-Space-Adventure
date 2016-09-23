@@ -24,6 +24,9 @@ public class bulletResetPos : MonoBehaviour {
         else if(col.tag == "SimpleEnemy"){
             gameObject.SetActive(false);
         }
+        else if(col.tag == "SpaceRocks"){
+            gameObject.SetActive(false);
+        }
     }
 
   
