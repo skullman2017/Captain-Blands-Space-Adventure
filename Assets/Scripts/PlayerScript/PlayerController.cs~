@@ -137,11 +137,4 @@ public class PlayerController : MonoBehaviour {
     } // end 
 
 
-    void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "SpaceRocks"){
-           // Debug.Log("collide with spaceRocks");
-            //iTween.ShakePosition(this.gameObject, new Vector2(0.5f,0.5f), 1f);
-        }
-    }
-
 }
