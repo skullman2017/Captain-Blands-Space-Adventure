@@ -1,0 +1,36 @@
+var angle = 20.0; // Maximum angle offset for new point 
+var speed = 8.0; // Units per second 
+private var pos = 0.0; 
+private var segLength = 2.0;
+private var path = new Vector3[100];
+
+function Start () {
+ path[path.Length-2] = Vector3.zero;
+ path[path.Length-1] = Vector3(0,0,segLength);
+ RecalcPath(); 
+ 
+ }
+
+function Update () {
+ 
+ iTween.PutOnPath(gameObject, path, pos);
+ var v3 = iTween.PointOnPath(path, Mathf.Clamp01(pos+.01));
+ transform.LookAt(v3);
+ pos = pos + Time.deltaTime * speed / path.Length; 
+ if (pos >= 1.0) { pos -= 1.0; RecalcPath(); }
+ 
+ }
+
+function RecalcPath() 
+{
+ var v3 = path[path.Length-1] - path[path.Length-2];
+ path[0] = path[path.Length-1]; 
+ 
+ for (var i = 1; i < path.Length; i++) { 
+ var q = Quaternion.AngleAxis(Random.Range(-angle, angle), Vector3.up);
+ v3 = q * v3; path[i] = path[i-1] + v3; 
+ }
+ 
+}
+
+

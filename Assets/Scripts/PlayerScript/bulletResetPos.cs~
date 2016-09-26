@@ -6,6 +6,8 @@ public class bulletResetPos : MonoBehaviour {
 
 
     private Rigidbody2D bulletBody;
+    [SerializeField]
+    private float speed = 350f;
 
     void Start(){
         bulletBody = GetComponent<Rigidbody2D>();
@@ -13,7 +15,7 @@ public class bulletResetPos : MonoBehaviour {
 
 
     void FixedUpdate(){
-        bulletBody.velocity = Vector2.up * Time.deltaTime * 350f;
+        bulletBody.velocity = Vector2.up * Time.deltaTime * speed;
     }
         
 
