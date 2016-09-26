@@ -5,15 +5,10 @@ public class Meteor : MonoBehaviour {
 
     private Rigidbody2D Body;
     public float speed;
-    private Vector2 _topright;
-    private Vector2 _topleft;
+
 	// Use this for initialization
 	void Start () {
-
-        _topright = Camera.main.ViewportToWorldPoint(new Vector2(1f,1f));
-        _topleft = Camera.main.ViewportToWorldPoint(new Vector2(0, 1));
-
-        transform.position = _topleft;
+       // Debug.Log("pos " + transform.position);
 
         Body = GetComponent<Rigidbody2D>();
 	}
@@ -22,4 +17,14 @@ public class Meteor : MonoBehaviour {
 	void FixedUpdate () {
         Body.velocity = new Vector2(1f, -3f).normalized * speed;
 	}
+
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.tag == "KillBox"){
+            gameObject.SetActive(false);
+        }
+    }
+
 }
+
+

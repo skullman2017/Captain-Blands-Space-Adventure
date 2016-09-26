@@ -23,9 +23,16 @@ public class MeteorPooler : MonoBehaviour {
             }
         }
 
+        shufflelist();
+        //print("count "+MeteorPool.Count);
+
 	}
 	
     public GameObject getMeteor(){
+
+        // shuffle list
+        //shufflelist();
+
 
         for(int i=0;i<MeteorPool.Count; i++){
             if(MeteorPool[i].activeInHierarchy == false){
@@ -35,6 +42,17 @@ public class MeteorPooler : MonoBehaviour {
 
         return null;
 
+    }
+
+    private void shufflelist(){
+
+        for(int i=MeteorPool.Count-1; i>0; i-- ){
+            int rnd = Random.Range(0, i);
+            //Debug.Log("rand "+rnd);
+            GameObject tmp = MeteorPool[i];
+            MeteorPool[i] = MeteorPool[rnd];
+            MeteorPool[rnd] = tmp;
+        }
     }
 
 }
