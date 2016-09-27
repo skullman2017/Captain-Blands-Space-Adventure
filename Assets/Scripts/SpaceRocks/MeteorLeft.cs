@@ -19,7 +19,7 @@ public class MeteorLeft : MonoBehaviour {
          _bottomleft = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f));
         _bottomright = Camera.main.ViewportToWorldPoint(new Vector2(1f, 0f));
 
-        rndX = Random.Range(-1f, _bottomright.x);
+        rndX = Random.Range(1f, _bottomright.x);
         rndY = -5f;
 
         //Debug.Log("rndX "+rndX);
@@ -34,9 +34,6 @@ public class MeteorLeft : MonoBehaviour {
             //Debug.Log("topleft");
             Body.velocity = new Vector2(rndX, rndY).normalized * speed;
         }
-       
-
-       // Body.velocity = new Vector2(1f, -3f).normalized * speed;
 	}
 
 

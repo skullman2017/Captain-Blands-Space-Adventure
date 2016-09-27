@@ -27,8 +27,6 @@ public class MeteorSpawnerRight : MonoBehaviour {
             meteor.transform.position = _topright;
             meteor.SetActive(true);
 
-            //meteor.SetActive(true);
-            //iTween.MoveTo(meteor, new Vector2(1f,0f), 0.5f);
         }
 
         //CancelInvoke();
