@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MeteorPooler : MonoBehaviour {
+public class MeteorPoolerLeft : MonoBehaviour {
 
     public int amount;
     [SerializeField]
@@ -11,7 +11,7 @@ public class MeteorPooler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
                     
-        GameObject meteorHolder = new GameObject("MeteorHolder");
+        GameObject meteorHolder = new GameObject("MeteorHolderLeft");
 
         for(int i=0;i<meteorfabs.Length;i++){
             for(int j=0;j<amount;j++){  

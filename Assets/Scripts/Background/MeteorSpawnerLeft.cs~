@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MeteorSpawner : MonoBehaviour {
+public class MeteorSpawnerLeft : MonoBehaviour {
 
-    private MeteorPooler thepool;
+    private MeteorPoolerLeft thepool;
     private Vector2 _topleft;
     private Vector2 _topright;
     public float _seconds;
 	// Use this for initialization
 	void Start () {
-        thepool = FindObjectOfType<MeteorPooler>();
+        thepool = FindObjectOfType<MeteorPoolerLeft>();
        
-        _topright = Camera.main.ViewportToWorldPoint(new Vector2(1f,1f));
-        _topright += new Vector2(1.2f, 1f);
+        //_topright = Camera.main.ViewportToWorldPoint(new Vector2(1f,1f));
+        //_topright += new Vector2(1.2f, 1f);
 
         _topleft = Camera.main.ViewportToWorldPoint(new Vector2(0, 1));
-        _topleft += new Vector2(-1.2f,1f);
+       // _topleft += new Vector2(-1.2f,1f);
         //Debug.Log(_topleft);
 
         InvokeRepeating("poolMeteor",3f,_seconds);
@@ -28,21 +28,13 @@ public class MeteorSpawner : MonoBehaviour {
             int rndPos = Random.Range(10, 20);// for random topleft & topright
             //Debug.Log("rand "+ rndPos);
             setProperty( meteor , rndPos);
-
-            //meteor.SetActive(true);
-            //iTween.MoveTo(meteor, new Vector2(1f,0f), 0.5f);
         }
 
         //CancelInvoke();
     }
 
     void setProperty(GameObject go, int _rndpos){
-        if(_rndpos <= 15){ 
-            go.transform.position = _topleft;
-        }
-        else { 
-            go.transform.position = _topright;
-        }
+        go.transform.position = _topleft;
 
         go.SetActive(true);
         //Debug.Log("pos "+go.transform.position);

@@ -2,16 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MeteorPoolerLeft : MonoBehaviour {
+public class MeteorPoolerRight : MonoBehaviour {
 
     public int amount;
     [SerializeField]
     private GameObject[] meteorfabs;
     private List<GameObject> MeteorPool = new List<GameObject>();
-	// Use this for initialization
-	void Start () {
-                    
-        GameObject meteorHolder = new GameObject("MeteorHolderLeft");
+    // Use this for initialization
+    void Start () {
+
+        GameObject meteorHolder = new GameObject("MeteorHolderRight");
 
         for(int i=0;i<meteorfabs.Length;i++){
             for(int j=0;j<amount;j++){  
@@ -26,8 +26,8 @@ public class MeteorPoolerLeft : MonoBehaviour {
         shufflelist();
         //print("count "+MeteorPool.Count);
 
-	}
-	
+    }
+
     public GameObject getMeteor(){
 
         // shuffle list
