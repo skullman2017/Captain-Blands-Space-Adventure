@@ -6,6 +6,8 @@ public class MeteorSpawnerRight : MonoBehaviour {
     private MeteorPoolerRight thepool;
     private Vector2 _topleft;
     private Vector2 _topright;
+
+    [Range(2,10)]
     public float _seconds;
     // Use this for initialization
     void Start () {
@@ -15,7 +17,7 @@ public class MeteorSpawnerRight : MonoBehaviour {
         _topright += new Vector2(1.2f, 1f);
 
 
-        InvokeRepeating("poolMeteor",3f,_seconds);
+        InvokeRepeating("poolMeteor",5f, Random.Range(_seconds,_seconds*2));
     }
 
     void poolMeteor(){
