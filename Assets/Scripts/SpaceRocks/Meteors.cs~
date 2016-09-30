@@ -59,6 +59,7 @@ public class Meteors : MonoBehaviour {
             GameObject explosion = theExplosion.getExplosion();
             explosion.transform.position = transform.position; // meteor position 
         
+            _sprite.color = new Color(255,255,255,255);
             gameObject.SetActive(false); // meteor kill
             explosion.SetActive(true);
         }
@@ -72,7 +73,7 @@ public class Meteors : MonoBehaviour {
 
         yield return new WaitForSeconds(secs);
          // back to initial color 
-        _sprite.color = new Color(255,255,255,255);
+        _sprite.color = new Color(255,255,255,255); // initial color 
 
     }
         

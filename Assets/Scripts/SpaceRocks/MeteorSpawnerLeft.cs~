@@ -27,15 +27,13 @@ public class MeteorSpawnerLeft : MonoBehaviour {
         GameObject meteor = thepool.getMeteor();
 
         if(meteor!=null){
-            int rndPos = Random.Range(10, 20);// for random topleft & topright
-            //Debug.Log("rand "+ rndPos);
-            setProperty( meteor , rndPos);
+            setProperty( meteor);
         }
 
         //CancelInvoke();
     }
 
-    void setProperty(GameObject go, int _rndpos){
+    void setProperty(GameObject go){
         go.transform.position = _topleft;
 
         go.SetActive(true);
