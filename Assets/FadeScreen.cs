@@ -10,7 +10,7 @@ public class FadeScreen : MonoBehaviour {
     public float fadespeed;
     public int drawDepth = -1000;
 
-    private float alpha = 1f; // to fade out make it zero 0 
+    private float alpha = 0; // to fade out make it zero 0 
     private float fadeDir = -1f;
 
 	// Use this for initialization
@@ -21,7 +21,7 @@ public class FadeScreen : MonoBehaviour {
 
     void OnGUI() {
 
-        alpha += fadeDir * fadespeed * Time.deltaTime; // and it will be negative
+        alpha -= fadeDir * fadespeed * Time.deltaTime; // and it will be negative
         alpha = Mathf.Clamp01(alpha);
 
         Color newColor = GUI.color; 

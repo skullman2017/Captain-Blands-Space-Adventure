@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
-        movePlayer(_dir);
+        //movePlayer(_dir);
 
         // firing autometically 
         InvokeRepeating("FireBtn",3f, secondsToWait);
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
         }
             
         // moveplayer
-        movePlayer(direction);
+        //movePlayer(direction);
         // tap to fire 
         //FireBtn();
 
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
       //  }
     }
 
-    void movePlayer(Vector2 dir){
+    public void movePlayer(Vector2 dir){
         //transform.Translate(h*Time.deltaTime * moveSpeed ,v*Time.deltaTime * moveSpeed,transform.position.z);
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)); // return the bottom-left position 
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)); // return the top-right position
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
         playerPos.y = Mathf.Clamp(playerPos.y , min.y, max.y);
 
         // update player position 
-        transform.position = Vector2.Lerp(transform.position,playerPos, Time.deltaTime * 10f);
+        transform.position = Vector2.Lerp(transform.position,dir, Time.deltaTime * 10f);
     }
 
 
