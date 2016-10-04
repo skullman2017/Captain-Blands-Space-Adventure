@@ -4,8 +4,9 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
 
+    public float moveSpeed;
+
     [SerializeField]
-    private float moveSpeed = 1f;
     private bulletPooler objPooler;
 
     public float secondsToWait;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
         Vector2 _dir = new Vector2(h, v);
-        //movePlayer(_dir);
+        movePlayer(_dir);
 
         // firing autometically 
         InvokeRepeating("FireBtn",3f, secondsToWait);
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         }
             
         // moveplayer
-        //movePlayer(direction);
+        movePlayer(direction);
         // tap to fire 
         //FireBtn();
 
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour {
         playerPos.y = Mathf.Clamp(playerPos.y , min.y, max.y);
 
         // update player position 
-        transform.position = Vector2.Lerp(transform.position,dir, Time.deltaTime * 10f);
+        transform.position = Vector2.Lerp(transform.position,playerPos, Time.deltaTime * moveSpeed);
     }
 
 
