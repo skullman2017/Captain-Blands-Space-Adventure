@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestTouch : MonoBehaviour {
 
-    public Transform player;
+    private Transform player;
     public float speed;
 
     bool isDragging = false;
