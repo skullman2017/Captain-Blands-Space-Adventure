@@ -1,20 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// script for enemy behaviour 
 public class Enemy_01 : MonoBehaviour {
 
     public int Health;
     private int damage = 10;
+    public float moveSpeed;
+
+    private float offset;
 
 	// Use this for initialization
 	void Start () {
-	
+        offset = transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        //moveLeftToRight();
+        moveSineWave();
+    }
+
+    void moveLeftToRight(){
+        transform.Translate(Vector2.left * Time.deltaTime*moveSpeed);
+    }
+
+    void moveSineWave(){
+        Vector2 pos = new Vector2(transform.position.x, Mathf.Sin(Time.time)*1f+offset);
+        transform.position = pos + Vector2.left * Time.deltaTime;
+    }
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
@@ -34,5 +48,7 @@ public class Enemy_01 : MonoBehaviour {
             Health -= damage; 
         }
     }
+
+
 
 }
