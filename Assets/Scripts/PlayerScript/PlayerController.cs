@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private bulletPooler objPooler;
 
-    public float secondsToWait;
+    public float fireRate;
     public Transform bulletSpawnPos1; // instantiate position 
     public Transform bulletSpawnPos2;
 
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
         movePlayer(_dir);
 
         // firing autometically 
-        InvokeRepeating("FireBtn",3f, secondsToWait);
+        InvokeRepeating("FireBtn",3f, fireRate);
 
 	}
 	
