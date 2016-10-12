@@ -13,7 +13,7 @@ public class KillBox : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer == enemyLayer){
             other.gameObject.SetActive(false); // kill all enemy
-            //print("enemylayer");
+            //print("enemy killed");
         }
     }
 

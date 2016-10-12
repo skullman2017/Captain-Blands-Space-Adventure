@@ -9,25 +9,28 @@ public class Enemy_01 : MonoBehaviour {
     public float moveSpeed;
 
     private float offset;
+    private Enemy_01_Spawner thespawner;
 
 	// Use this for initialization
 	void Start () {
         offset = transform.position.y;
+        thespawner = FindObjectOfType<Enemy_01_Spawner>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //moveLeftToRight();
-        moveSineWave();
+        moveTopToDown();
     }
 
-    void moveLeftToRight(){
-        transform.Translate(Vector2.left * Time.deltaTime*moveSpeed);
+
+    void moveTopToDown(){
+        transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
     }
+
 
     // move like wave 
     void moveSineWave(){
-        Vector2 pos = new Vector2(transform.position.x, Mathf.Sin(Time.time)*1.5f+offset);
+        Vector2 pos = new Vector2(transform.position.x, Mathf.Sin(Time.time*2f)*1f+offset);
         transform.position = pos + Vector2.left * Time.deltaTime;
     }
 
@@ -42,7 +45,8 @@ public class Enemy_01 : MonoBehaviour {
     void reduceHealth(int damage){
         if (Health <= 0)
         {
-            //gameObject.SetActive(false);    
+            gameObject.SetActive(false); 
+            thespawner.numOfAvilablePos +=1;
         }
         else
         {
