@@ -9,14 +9,14 @@ public class Enemy_01_Spawner : MonoBehaviour {
     private Enemy_01_Pooler thepool; // return enemy object
     private string[] enemyPtrn = new string[3];
     private int[] theArray;
-   
+
     [HideInInspector]
-    public int numOfAvilablePos; // for toptodown enemy
+    public string currentPtrn;
 
 	// Use this for initialization
 	void Start () {
         thepool = FindObjectOfType<Enemy_01_Pooler>();
-
+       
         initalStage();
 
         StartCoroutine(manageTopDownEnemy(5f));
@@ -41,7 +41,6 @@ public class Enemy_01_Spawner : MonoBehaviour {
     }
 
     void SpawnTopToDown_Enemy(){
-        // numOfAvilablePos = 0;
 
         int rndPos = Random.Range(0, 4);
         int startPos = 0;
@@ -80,13 +79,14 @@ public class Enemy_01_Spawner : MonoBehaviour {
         {
             GameObject go = thepool.getEnemy_01();
             go.transform.position = topDownPoints[i].position;
+            currentPtrn = "TopDown";
             go.SetActive(true);
-            numOfAvilablePos -= 1;
+
         }
     }
 
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("num of available position "+numOfAvilablePos);
+ 
 	}
 }

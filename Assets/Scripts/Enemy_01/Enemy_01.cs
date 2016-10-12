@@ -4,8 +4,7 @@ using System.Collections;
 // script for enemy behaviour 
 public class Enemy_01 : MonoBehaviour {
 
-    public int Health;
-    private int damage = 10;
+
     public float moveSpeed;
 
     private float offset;
@@ -15,6 +14,7 @@ public class Enemy_01 : MonoBehaviour {
 	void Start () {
         offset = transform.position.y;
         thespawner = FindObjectOfType<Enemy_01_Spawner>();
+      
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,11 @@ public class Enemy_01 : MonoBehaviour {
 
 
     void moveTopToDown(){
-        transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
+        if(thespawner.currentPtrn == "TopDown"){
+            //Debug.Log("moveToDown");
+            transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
+        }
+
     }
 
 
@@ -34,26 +38,5 @@ public class Enemy_01 : MonoBehaviour {
         transform.position = pos + Vector2.left * Time.deltaTime;
     }
 
-    void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Bullet"){
-            col.gameObject.SetActive(false);
-            reduceHealth(damage);
-            // Debug.Log("player bullet");
-        }
-    }
-
-    void reduceHealth(int damage){
-        if (Health <= 0)
-        {
-            gameObject.SetActive(false); 
-            thespawner.numOfAvilablePos +=1;
-        }
-        else
-        {
-            Health -= damage; 
-        }
-    }
-
-
-
+  
 }
