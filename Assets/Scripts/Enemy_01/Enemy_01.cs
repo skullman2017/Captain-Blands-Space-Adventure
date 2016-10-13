@@ -19,16 +19,14 @@ public class Enemy_01 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        moveTopToDown();
+        if(gameObject.tag == "TopToDown"){
+            moveTopToDown();
+        }
     }
 
 
     void moveTopToDown(){
-        if(thespawner.currentPtrn == "TopDown"){
-            //Debug.Log("moveToDown");
-            transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
-        }
-
+        transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
     }
 
 

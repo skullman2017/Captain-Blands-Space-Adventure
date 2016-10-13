@@ -17,7 +17,7 @@ public class Enemy_01_Pooler : MonoBehaviour {
 	void Start () {
         count = 0;
         enemyHolder = new GameObject("Enemy_01_Holder");
-
+       
         StartCoroutine(runInstance(secsTowait));
 	}
 	
@@ -43,9 +43,9 @@ public class Enemy_01_Pooler : MonoBehaviour {
         }
     }
 
-    public GameObject getEnemy_01(){
+    public GameObject getEnemy_01(string _tag){
         for(int i=0; i<EnemyPool.Count; i++){
-            if(EnemyPool[i].activeInHierarchy == false){
+            if(EnemyPool[i].activeInHierarchy == false && EnemyPool[i].tag == _tag){
                 return EnemyPool[i];
             }
         }
@@ -53,6 +53,7 @@ public class Enemy_01_Pooler : MonoBehaviour {
         GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
         clone.transform.parent = enemyHolder.transform;
         clone.SetActive(false);
+        clone.gameObject.tag = _tag;
 
         EnemyPool.Add(clone);
 

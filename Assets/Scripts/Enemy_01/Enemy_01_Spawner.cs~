@@ -6,9 +6,10 @@ using System.Collections.Generic;
 public class Enemy_01_Spawner : MonoBehaviour {
 
     public Transform[] topDownPoints;
+    public Transform[] waveLeftToRight;
+
     private Enemy_01_Pooler thepool; // return enemy object
     private string[] enemyPtrn = new string[3];
-    private int[] theArray;
 
     [HideInInspector]
     public string currentPtrn;
@@ -16,20 +17,15 @@ public class Enemy_01_Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         thepool = FindObjectOfType<Enemy_01_Pooler>();
-       
+      
         initalStage();
 
         StartCoroutine(manageTopDownEnemy(5f));
     }
 	
     void initalStage(){
-        theArray = new int[topDownPoints.Length];
-       
-        for(int i=0;i<theArray.Length;i++){
-            theArray[i] = i; // the available free position
-        }
 
-        enemyPtrn[0] = "TopDown";
+        enemyPtrn[0] = "TopToDown";
         enemyPtrn[1] = "SineWave";
         enemyPtrn[2] = "FollowPattern";
     }
@@ -77,11 +73,11 @@ public class Enemy_01_Spawner : MonoBehaviour {
         
         for (int i = startpos; i <= endpos; i++)
         {
-            GameObject go = thepool.getEnemy_01();
+            GameObject go = thepool.getEnemy_01(enemyPtrn[0]); // toptodown
             go.transform.position = topDownPoints[i].position;
             currentPtrn = "TopDown";
             go.SetActive(true);
-
+           
         }
     }
 

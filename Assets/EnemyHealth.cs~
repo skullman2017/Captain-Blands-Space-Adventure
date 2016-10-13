@@ -19,15 +19,20 @@ public class EnemyHealth : MonoBehaviour {
             col.gameObject.SetActive(false);
             giveDamage();
         }
+        else if(col.gameObject.tag == "KillBox"){
+            Health = initialHealth;
+        }
     }
 
     void giveDamage(){
+        
         if(Health>0){
             Health -= damage;
         }
-        else if(Health<=0){
+        else{
             gameObject.SetActive(false);
             Health = initialHealth;
         }
+
     }
 }
