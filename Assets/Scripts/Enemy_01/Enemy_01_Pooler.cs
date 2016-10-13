@@ -8,7 +8,7 @@ public class Enemy_01_Pooler : MonoBehaviour {
     public int amount;
     public int secsTowait;
     [SerializeField]
-    private GameObject[] prefabs; // toptodown
+    private GameObject prefabs; // toptodown
 
     private Enemy_01_Spawner theSpawner;
     private List<GameObject> EnemyPool = new List<GameObject>();
@@ -26,16 +26,14 @@ public class Enemy_01_Pooler : MonoBehaviour {
 	
     void _instantiate(){
 
-        for(int j=0;j<prefabs.Length;j++){
             for(int i=count ;i<amount;i++){
-                GameObject clone = Instantiate(prefabs[j], Vector2.up, Quaternion.identity) as GameObject;
+                GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
                 clone.transform.parent = enemyHolder.transform;
                 clone.SetActive(false);
                
                 EnemyPool.Add(clone);
                 break;
             }
-        }
 
     } // end 
 
@@ -64,14 +62,14 @@ public class Enemy_01_Pooler : MonoBehaviour {
                 return EnemyPool[i];
             }
         }
-/*
-        GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
+
+        /*GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
         clone.transform.parent = enemyHolder.transform;
         clone.SetActive(false);
         clone.gameObject.tag = _tag;
 
-        EnemyPool.Add(clone);
-*/
+        EnemyPool.Add(clone);*/
+
         return null;
        
     }

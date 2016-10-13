@@ -38,8 +38,10 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
         TopToDown();
 
-        yield return new WaitForSeconds(_secs);
+        yield return new WaitForSeconds(secToWait_1);
         LefttoRight();
+
+        StartSpawn();
 
     }
 
@@ -79,7 +81,8 @@ public class Enemy_01_Spawner : MonoBehaviour {
     }
 
     void LefttoRight(){
-        Debug.Log("left to right");
+       // Debug.Log("left to right");
+        _instantiate(0,2, "MoveLeftToRight", leftPos);
     }
 
     void RightToLeft(){
@@ -90,8 +93,11 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
         for(int i=start; i<=end;i++){
             GameObject go = thepooler.getEnemy_01(_tag);
-            go.transform.position = _spawnPos[i].position;
-            go.SetActive(true);
+            if (go != null)
+            {
+                go.transform.position = _spawnPos[i].position;
+                go.SetActive(true);
+            }
         }
 
     }

@@ -36,7 +36,7 @@ public class Enemy_01 : MonoBehaviour {
     }
 
     void moveLeftToRight(){
-        transform.Translate(Vector2.right * Time.deltaTime*moveSpeed);
+        transform.Translate(Vector2.right * Time.deltaTime*(moveSpeed-0.5f));
     }
 
     void moveRightToLeft(){
