@@ -6,48 +6,49 @@ using System.Collections.Generic;
 public class Enemy_01_Spawner : MonoBehaviour {
 
     public float secsToWait;
-
-    [Tooltip("secs for moveLeftToRight")]
-    public float secToWait_1;
-
+   
     public Transform[] topDownPos;
     public Transform[] leftPos; // left to right
     public Transform[] rightPos; // right to left
 
     private Enemy_01_Pooler thepooler;
-    private List<string> EventList = new List<string>();
+
     private int eventID = 0;
     private bool isRunning = false;
+
+    public bool ptr1 = false;
 
     void Start(){
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
 
-        EventList.Add("TopToDown");
-        EventList.Add("LefttoRight");
-        EventList.Add("RightToLeft");
-
     }
 
     public void StartSpawn(){
+        InvokeRepeating("cancelCoroutine", 2f,2f);
         StartCoroutine(Event_A(secsToWait));
+    }
+
+    void cancelCoroutine(){
+        if(Time.timeSinceLevelLoad > 50f){
+            StopAllCoroutines();
+            CancelInvoke();
+            //Debug.Log("stopped");
+        }
     }
 
     IEnumerator Event_A(float _secs){
         // toptodown, lefttoright and righttoleft no fire
         yield return new WaitForSeconds(_secs);
-
         TopToDown();
-
-        yield return new WaitForSeconds(secToWait_1);
+        yield return new WaitForSeconds(_secs*2);
         LefttoRight();
+        yield return new WaitForSeconds(_secs);
+        RightToLeft();
 
+        // repeat 
         StartSpawn();
-
     }
-
-    void Event_B(){
         
-    }
 
     void TopToDown(){
         int rnd = Random.Range(0, topDownPos.Length);
@@ -86,7 +87,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
     }
 
     void RightToLeft(){
-        
+        _instantiate(0,2, "MoveRightToLeft", rightPos);  
     }
 
     void _instantiate(int start, int end, string _tag, Transform[] _spawnPos){
@@ -104,8 +105,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 
     void Update(){
-        //Debug.Log("Time "+Time.timeSinceLevelLoad);
-
+       
     }
 
 }// end class 

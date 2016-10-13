@@ -6,24 +6,23 @@ public class Enemy_01 : MonoBehaviour {
 
 
     public float moveSpeed;
-
     private float offset;
-    private Enemy_01_Spawner thespawner;
+   
 
 	// Use this for initialization
 	void Start () {
         offset = transform.position.y;
-        thespawner = FindObjectOfType<Enemy_01_Spawner>();
-      
+            
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        // TODO : check aganist tag may cause problem find another way to slove this 
         if(gameObject.tag == "TopToDown"){
             moveTopToDown();
         }
         else if(gameObject.tag == "MoveLeftToRight"){
-            moveLeftToRight();
+            moveLeftToRight();        
         }
         else if(gameObject.tag == "MoveRightToLeft"){
             moveRightToLeft();
