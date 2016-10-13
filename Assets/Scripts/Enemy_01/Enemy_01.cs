@@ -22,6 +22,9 @@ public class Enemy_01 : MonoBehaviour {
         if(gameObject.tag == "TopToDown"){
             moveTopToDown();
         }
+        else if(gameObject.tag == "MoveLeftToRight"){
+            moveSineWave();
+        }
     }
 
 
