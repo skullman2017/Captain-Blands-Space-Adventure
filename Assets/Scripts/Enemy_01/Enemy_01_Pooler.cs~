@@ -10,6 +10,7 @@ public class Enemy_01_Pooler : MonoBehaviour {
     [SerializeField]
     private GameObject[] prefabs; // toptodown
 
+    private Enemy_01_Spawner theSpawner;
     private List<GameObject> EnemyPool = new List<GameObject>();
     private int count; 
     private GameObject enemyHolder;
@@ -18,7 +19,8 @@ public class Enemy_01_Pooler : MonoBehaviour {
 	void Start () {
         count = 0;
         enemyHolder = new GameObject("Enemy_01_Holder");
-       
+        theSpawner = FindObjectOfType<Enemy_01_Spawner>();
+
         StartCoroutine(runInstance(secsTowait));
 	}
 	
@@ -45,6 +47,10 @@ public class Enemy_01_Pooler : MonoBehaviour {
             _instantiate();
             count++;
             StartCoroutine(runInstance(secsTowait));
+        }
+        else if(count>amount){
+            //start spawn enemy
+            theSpawner.StartSpawn(); 
         }
     }
 

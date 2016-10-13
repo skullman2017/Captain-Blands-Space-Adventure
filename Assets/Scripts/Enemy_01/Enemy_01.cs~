@@ -23,7 +23,10 @@ public class Enemy_01 : MonoBehaviour {
             moveTopToDown();
         }
         else if(gameObject.tag == "MoveLeftToRight"){
-            moveSineWave();
+            moveLeftToRight();
+        }
+        else if(gameObject.tag == "MoveRightToLeft"){
+            moveRightToLeft();
         }
     }
 
@@ -32,6 +35,13 @@ public class Enemy_01 : MonoBehaviour {
         transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
     }
 
+    void moveLeftToRight(){
+        transform.Translate(Vector2.right * Time.deltaTime*moveSpeed);
+    }
+
+    void moveRightToLeft(){
+        transform.Translate(Vector2.left * Time.deltaTime*moveSpeed);
+    }
 
     // move like wave 
     void moveSineWave(){
