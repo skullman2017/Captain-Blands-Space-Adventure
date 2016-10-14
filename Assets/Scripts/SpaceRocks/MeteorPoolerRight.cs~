@@ -31,9 +31,18 @@ public class MeteorPoolerRight : MonoBehaviour {
 
     public GameObject getMeteor(){
         
-        for(int i=0;i<MeteorPool.Count; i++){
-            if(MeteorPool[i].activeInHierarchy == false){
-                return MeteorPool[i];
+        int rnd = Random.Range(0, MeteorPool.Count);
+        // try random if fail then iterate 
+        if(MeteorPool[rnd].activeInHierarchy == false){
+            //Debug.Log("rnd index "+rnd);
+            return MeteorPool[rnd];
+        }
+        else{
+            for(int i=0;i<MeteorPool.Count; i++){
+                if(MeteorPool[i].activeInHierarchy == false){
+                    //Debug.Log("index "+i);
+                    return MeteorPool[i];
+                }    
             }    
         }
 

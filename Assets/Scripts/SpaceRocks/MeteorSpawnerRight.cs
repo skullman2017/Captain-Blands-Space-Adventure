@@ -17,7 +17,7 @@ public class MeteorSpawnerRight : MonoBehaviour {
         _topright += new Vector2(1.2f, 1f);
 
 
-        InvokeRepeating("poolMeteor",5f, Random.Range(_seconds,_seconds*2));
+        InvokeRepeating("poolMeteor",5f, Random.Range(_seconds,_seconds+1f));
     }
 
     void poolMeteor(){

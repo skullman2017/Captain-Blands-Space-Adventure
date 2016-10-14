@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Enemy_01_Spawner : MonoBehaviour {
 
+    [Range(60,120)]
+    public float _eventTime;
     public float secsToWait;
    
     public Transform[] topDownPos;
@@ -29,7 +31,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
     }
 
     void cancelCoroutine(){
-        if(Time.timeSinceLevelLoad > 50f){
+        if(Time.timeSinceLevelLoad > _eventTime){
             StopAllCoroutines();
             CancelInvoke();
             //Debug.Log("stopped");
@@ -38,12 +40,28 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
     IEnumerator Event_A(float _secs){
         // toptodown, lefttoright and righttoleft no fire
-        yield return new WaitForSeconds(_secs);
-        TopToDown();
-        yield return new WaitForSeconds(_secs*2);
-        LefttoRight();
-        yield return new WaitForSeconds(_secs);
-        RightToLeft();
+
+        int rnd = Random.Range(1, 4);
+
+        if (rnd == 1)
+        {
+            yield return new WaitForSeconds(_secs);
+            TopToDown();
+        }
+
+        rnd = Random.Range(1, 4);
+        if (rnd == 2)
+        {
+            yield return new WaitForSeconds(_secs * 2);
+            LefttoRight();
+        }
+
+        rnd = Random.Range(1, 4);
+        if (rnd >= 3)
+        {
+            yield return new WaitForSeconds(_secs);
+            RightToLeft();
+        }
 
         // repeat 
         StartSpawn();
