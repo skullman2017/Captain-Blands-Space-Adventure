@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Enemy_01_Spawner : MonoBehaviour {
 
-    [Range(60,120)]
+    [Range(60,120)] // debuging purpose min value will be 60
     public float _eventTime;
     public float secsToWait;
    
@@ -14,57 +14,60 @@ public class Enemy_01_Spawner : MonoBehaviour {
     public Transform[] rightPos; // right to left
 
     private Enemy_01_Pooler thepooler;
-
-    private int eventID = 0;
-    private bool isRunning = false;
-
-    public bool ptr1 = false;
+   
 
     void Start(){
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
-
     }
 
+    // signal come from EnemeyPooler when all the object creted done
     public void StartSpawn(){
-        InvokeRepeating("cancelCoroutine", 2f,2f);
+        
         StartCoroutine(Event_A(secsToWait));
-    }
 
-    void cancelCoroutine(){
-        if(Time.timeSinceLevelLoad > _eventTime){
-            StopAllCoroutines();
-            CancelInvoke();
-            //Debug.Log("stopped");
-        }
     }
-
+        
+  
     IEnumerator Event_A(float _secs){
-        // toptodown, lefttoright and righttoleft no fire
 
-        int rnd = Random.Range(1, 4);
-
-        if (rnd == 1)
+        if (Time.timeSinceLevelLoad < _eventTime) // this is time the event will be called 
         {
-            yield return new WaitForSeconds(_secs);
-            TopToDown();
-        }
+       
+            int rnd = Random.Range(1, 3);
 
-        rnd = Random.Range(1, 4);
-        if (rnd == 2)
-        {
-            yield return new WaitForSeconds(_secs * 2);
-            LefttoRight();
-        }
+            if (rnd == 1) // 1 2 3
+            {
+                yield return new WaitForSeconds(_secs);
+                TopToDown();
+                yield return new WaitForSeconds(_secs);
+                LefttoRight();
+                yield return new WaitForSeconds(_secs);
+                RightToLeft();
+            }
+            else if (rnd == 2) // 2 1 3
+            {
+                yield return new WaitForSeconds(_secs);
+                LefttoRight();
+                yield return new WaitForSeconds(_secs);
+                TopToDown();
+                yield return new WaitForSeconds(_secs);
+                RightToLeft();
+            }
+            else if (rnd == 3) // 3 1 2
+            {
+                yield return new WaitForSeconds(_secs);
+                RightToLeft();
+                yield return new WaitForSeconds(_secs);
+                TopToDown();
+                yield return new WaitForSeconds(_secs);
+                LefttoRight();
+            }
 
-        rnd = Random.Range(1, 4);
-        if (rnd >= 3)
-        {
-            yield return new WaitForSeconds(_secs);
-            RightToLeft();
-        }
 
-        // repeat 
-        StartSpawn();
+            // repeat 
+            StartSpawn();
+        } // end if 
+        //Debug.Log("co1");
     }
         
 
@@ -123,7 +126,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 
     void Update(){
-       
+        //Debug.Log("Time delta  "+Time.time);
     }
 
 }// end class 

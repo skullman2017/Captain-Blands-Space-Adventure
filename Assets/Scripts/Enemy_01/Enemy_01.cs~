@@ -36,10 +36,12 @@ public class Enemy_01 : MonoBehaviour {
 
     void moveLeftToRight(){
         transform.Translate(Vector2.right * Time.deltaTime*(moveSpeed-0.5f));
+        //transform.Translate(Vector2.up * Time.deltaTime);
     }
 
     void moveRightToLeft(){
         transform.Translate(Vector2.left * Time.deltaTime*moveSpeed);
+        transform.Translate(Vector2.down * Time.deltaTime);
     }
 
     // move like wave 
