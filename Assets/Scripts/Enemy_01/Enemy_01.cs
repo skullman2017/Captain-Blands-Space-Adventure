@@ -17,7 +17,7 @@ public class Enemy_01 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // TODO : check aganist tag may cause problem find another way to slove this 
+        /* // TODO : check aganist tag may cause problem find another way to slove this 
         if(gameObject.tag == "TopToDown"){
             moveTopToDown();
         }
@@ -26,24 +26,15 @@ public class Enemy_01 : MonoBehaviour {
         }
         else if(gameObject.tag == "MoveRightToLeft"){
             moveRightToLeft();
-        }
+        }*/
+        moveTopToDown(); // only move top to down
     }
 
-
+   
     void moveTopToDown(){
         transform.Translate(Vector2.down * Time.deltaTime*moveSpeed);
     }
-
-    void moveLeftToRight(){
-        transform.Translate(Vector2.right * Time.deltaTime*(moveSpeed-0.5f));
-        //transform.Translate(Vector2.up * Time.deltaTime);
-    }
-
-    void moveRightToLeft(){
-        transform.Translate(Vector2.left * Time.deltaTime*moveSpeed);
-        transform.Translate(Vector2.down * Time.deltaTime);
-    }
-
+        
     // move like wave 
     void moveSineWave(){
         Vector2 pos = new Vector2(transform.position.x, Mathf.Sin(Time.time*2f)*1f+offset);

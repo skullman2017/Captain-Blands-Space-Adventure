@@ -10,13 +10,13 @@ public class Enemy_01_Spawner : MonoBehaviour {
     public float secsToWait;
    
     public Transform[] topDownPos;
-    public Transform[] leftPos; // left to right
-    public Transform[] rightPos; // right to left
 
     private Enemy_01_Pooler thepooler;
-   
+    private int lastRnd;
 
     void Start(){
+        lastRnd = Random.Range(0, topDownPos.Length);
+
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
     }
 
@@ -32,47 +32,40 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad < _eventTime) // this is time the event will be called 
         {
-       
-            int rnd = Random.Range(1, 3);
-
-            if (rnd == 1) // 1 2 3
-            {
-                yield return new WaitForSeconds(_secs);
-                TopToDown();
-                yield return new WaitForSeconds(_secs);
-                LefttoRight();
-                yield return new WaitForSeconds(_secs);
-                RightToLeft();
-            }
-            else if (rnd == 2) // 2 1 3
-            {
-                yield return new WaitForSeconds(_secs);
-                LefttoRight();
-                yield return new WaitForSeconds(_secs);
-                TopToDown();
-                yield return new WaitForSeconds(_secs);
-                RightToLeft();
-            }
-            else if (rnd == 3) // 3 1 2
-            {
-                yield return new WaitForSeconds(_secs);
-                RightToLeft();
-                yield return new WaitForSeconds(_secs);
-                TopToDown();
-                yield return new WaitForSeconds(_secs);
-                LefttoRight();
-            }
-
+      
+             yield return new WaitForSeconds(Random.Range(_secs,_secs*2));
+            TopToDown();
 
             // repeat 
             StartSpawn();
         } // end if 
         //Debug.Log("co1");
     }
-        
+
+
+    int UniqueRandomInt(int min, int max){
+        int newRnd = Random.Range(min, max);
+
+        while (true)
+        {
+            if (newRnd != lastRnd)
+            {
+                //Debug.Log("newRnd : "+newRnd);
+                return newRnd;
+            }
+            else
+            {
+                newRnd = Random.Range(min, max);      
+            }
+        }
+
+    } // end 
 
     void TopToDown(){
-        int rnd = Random.Range(0, topDownPos.Length);
+        
+        int rnd = UniqueRandomInt(0, topDownPos.Length);
+        lastRnd = rnd;
+       
 
         int _start = 0;
         int _end = 0;
@@ -93,28 +86,24 @@ public class Enemy_01_Spawner : MonoBehaviour {
             _start = 0;
             _end = 1;
             // call 
-            _instantiate(_start, _end, "TopToDown", topDownPos);
+            _instantiate(_start, _end, topDownPos);
             _start = 3;
             _end = 4;
         }
+        else{
+            _start = 1;
+            _end = 3;
+        }
 
         // call
-        _instantiate(_start, _end, "TopToDown", topDownPos);
+        _instantiate(_start, _end, topDownPos);
     }
+        
 
-    void LefttoRight(){
-       // Debug.Log("left to right");
-        _instantiate(0,2, "MoveLeftToRight", leftPos);
-    }
-
-    void RightToLeft(){
-        _instantiate(0,2, "MoveRightToLeft", rightPos);  
-    }
-
-    void _instantiate(int start, int end, string _tag, Transform[] _spawnPos){
+    void _instantiate(int start, int end, Transform[] _spawnPos){
 
         for(int i=start; i<=end;i++){
-            GameObject go = thepooler.getEnemy_01(_tag);
+            GameObject go = thepooler.getEnemy_01();
             if (go != null)
             {
                 go.transform.position = _spawnPos[i].position;

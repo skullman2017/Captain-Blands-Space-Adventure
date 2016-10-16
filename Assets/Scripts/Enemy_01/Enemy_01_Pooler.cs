@@ -56,10 +56,10 @@ public class Enemy_01_Pooler : MonoBehaviour {
     /*
      * if failed to return a tag then try for another tag  - call from EnemySpawner 
     */
-        public GameObject getEnemy_01(string _tag){
+        public GameObject getEnemy_01(){
         for(int i=0; i<EnemyPool.Count; i++){
             if(EnemyPool[i].activeInHierarchy == false){
-                EnemyPool[i].gameObject.tag = _tag;
+                
                 return EnemyPool[i];
             }
         }
