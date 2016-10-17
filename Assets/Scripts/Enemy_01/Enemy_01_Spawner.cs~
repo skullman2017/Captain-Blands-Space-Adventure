@@ -15,7 +15,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
     private int lastRnd;
 
     void Start(){
-        lastRnd = Random.Range(0, topDownPos.Length);
+        lastRnd = Random.Range(0, topDownPos.Length-1);
 
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
     }
@@ -63,10 +63,10 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
     void TopToDown(){
         
-        int rnd = UniqueRandomInt(0, topDownPos.Length);
+        int rnd = UniqueRandomInt(0, topDownPos.Length-1);
         lastRnd = rnd;
        
-
+        //print(rnd);
         int _start = 0;
         int _end = 0;
 
@@ -82,7 +82,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
             _start = 2;
             _end = 4;
         }
-        else if(rnd > 2){
+        else if(rnd == 3){
             _start = 0;
             _end = 1;
             // call 
@@ -91,11 +91,11 @@ public class Enemy_01_Spawner : MonoBehaviour {
             _end = 4;
         }
         else{
-            _start = 1;
+            _start = 0;
             _end = 3;
         }
 
-        // call
+       
         _instantiate(_start, _end, topDownPos);
     }
         

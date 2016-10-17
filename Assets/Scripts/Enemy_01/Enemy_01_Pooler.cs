@@ -64,12 +64,11 @@ public class Enemy_01_Pooler : MonoBehaviour {
             }
         }
 
-        /*GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
+        GameObject clone = Instantiate(prefabs, Vector2.up, Quaternion.identity) as GameObject;
         clone.transform.parent = enemyHolder.transform;
         clone.SetActive(false);
-        clone.gameObject.tag = _tag;
-
-        EnemyPool.Add(clone);*/
+       
+        EnemyPool.Add(clone);
 
         return null;
        
