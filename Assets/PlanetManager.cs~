@@ -1,0 +1,20 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class PlanetManager : MonoBehaviour {
+
+	public GameObject obj1;
+	private GameObject clone;
+
+	// Use this for initialization
+	void Start () {
+		Vector3 spawnPos = Camera.main.ViewportToWorldPoint (new Vector3 (Random.Range(0.1f,0.9f),1.5f,10f));
+		clone = Instantiate (obj1, spawnPos, Quaternion.identity) as GameObject;
+		clone.transform.parent = this.transform;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
