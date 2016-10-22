@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// planet behaviour
 public class BackgroundPlanet : MonoBehaviour {
 
 
