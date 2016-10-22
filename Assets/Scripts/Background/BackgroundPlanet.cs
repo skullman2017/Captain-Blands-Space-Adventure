@@ -7,7 +7,8 @@ public class BackgroundPlanet : MonoBehaviour {
 
 	public float movespeed;
 	private Vector3 outOfCamera;
-
+	[Tooltip("seconds to respawn")]
+	public float secsToReset;
 	// Use this for initialization
 	void Start () {
 		outOfCamera =  Camera.main.ViewportToWorldPoint (new Vector2 (1,-0.4f));	
@@ -21,7 +22,8 @@ public class BackgroundPlanet : MonoBehaviour {
 	void Update(){
 		if(transform.position.y < outOfCamera.y){
 			gameObject.SetActive (false);
-			resetPos ();
+
+			Invoke ("resetPos", secsToReset);
 		}
 	}
 
