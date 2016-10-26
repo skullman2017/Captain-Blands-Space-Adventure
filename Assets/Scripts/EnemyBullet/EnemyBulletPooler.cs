@@ -15,8 +15,12 @@ public class EnemyBulletPooler : MonoBehaviour {
 	public PooledObject[] _prefabs; // prefabs, store the objects info
 	private List<GameObject>[] thePool; // array of list 
 
-	[Range(2,100)]
-	public int secsTowait;
+	// used for enemy ID to getEnemyBullets
+	public enum Enemies {
+		Enemy_01,
+		Enemy_02
+	};
+
 
 	void Awake(){
 		_Instance = this;
@@ -24,11 +28,18 @@ public class EnemyBulletPooler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		createPool ();
+		//StartCoroutine (createPool ());
+	}
+		
+
+	public void runCoroutine(){
+		StartCoroutine (createPool ());
 	}
 
-	void createPool(){
+
+	IEnumerator createPool(){
 		GameObject clone;
+
 		// created an array of type list<GameObjetc>
 		thePool = new List<GameObject>[_prefabs.Length]; 
 
@@ -43,9 +54,12 @@ public class EnemyBulletPooler : MonoBehaviour {
 				clone.transform.parent = this.transform;
 				thePool [count].Add (clone);
 
+				yield return new WaitForSeconds (2f);
 			}
 		}
 			
+		Debug.Log ("created bullet done");
+
 	} // end method 
 		
 

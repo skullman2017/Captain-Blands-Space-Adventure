@@ -7,39 +7,58 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
     [Range(60,120)] // debuging purpose min value will be 60
     public float _eventTime;
+
+	[Tooltip("Seconds to wait to start Spawning")]
     public float secsToWait;
-   
+
+	[Tooltip("random max and min to spawn")]
+	public float max;
+	public float min;
+	private bool flag = false;
     public Transform[] topDownPos;
 
     private Enemy_01_Pooler thepooler;
     private int lastRnd;
 
+	private EnemyEventManager theEventManager;
+
     void Start(){
         lastRnd = Random.Range(0, topDownPos.Length-1);
 
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
+		theEventManager = FindObjectOfType <EnemyEventManager> ();
     }
 
-    // signal come from EnemeyPooler when all the object creted done
+    // signal come from EnemeyPooler when all the object creation done
     public void StartSpawn(){
         
+		//Debug.Log ("start co : "+Time.time);
         StartCoroutine(Event_A(secsToWait));
-
     }
         
   
     IEnumerator Event_A(float _secs){
 
-        if (Time.timeSinceLevelLoad < _eventTime) // this is time the event will be called 
-        {
-      
-             yield return new WaitForSeconds(Random.Range(_secs,_secs*2));
-            TopToDown();
+		if (Time.timeSinceLevelLoad < _eventTime) { // this is time the event will be called 
+			if (flag == false) {
+				yield return new WaitForSeconds (_secs);
+				flag = true;
+			}
+			else{
+				yield return new WaitForSeconds (Random.Range (max, min));
+			}
+			TopToDown ();
 
-            // repeat 
-            StartSpawn();
-        } // end if 
-        //Debug.Log("co1");
+			// repeat 
+			StartSpawn ();
+		} // end if 
+		else {
+			//StopCoroutine (Event_A ());
+			Debug.Log ("Event A done initiate event 2");
+
+			// call eventManage to preapare for firing enemy
+			theEventManager.SendMessage ("createEnemyBullet");
+		}
     }
 
 
@@ -115,7 +134,8 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 
     void Update(){
-        //Debug.Log("Time delta  "+Time.time);
+		
+		//Debug.Log ("Time since level load : "+Time.timeSinceLevelLoad);
     }
 
 }// end class 
