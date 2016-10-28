@@ -59,7 +59,7 @@ public class EnemyBulletPooler : MonoBehaviour {
 			}
 		}
 			
-		Debug.Log ("created bullet done");
+		// Debug.Log ("bullets creation done");
 		// send the message to EnemyEventManaget to initiate the second phase
 		EnemyEventManager.theEventDelegate ();
 
@@ -70,7 +70,7 @@ public class EnemyBulletPooler : MonoBehaviour {
 	// give id 
 	public GameObject getBullet(int id){
 
-		for(int count = 0; count < thePool[count].Count; count++){
+		for(int count = 0; count < thePool[id].Count; count++){
 			if(thePool[id][count].activeInHierarchy == false){
 				return thePool [id] [count];
 			}

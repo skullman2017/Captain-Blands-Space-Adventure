@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyBullet : MonoBehaviour {
 
 	private Rigidbody2D thebody;
-
+	public float speed;
 	// Use this for initialization
 	void Start () {
 		//thebody = GetComponent <Rigidbody2D> ();
@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour {
 	}
 
 	void straightFire(){
-		transform.Translate (Vector2.down * Time.deltaTime * 3f);
+		transform.Translate (Vector2.down * Time.deltaTime * speed);
 		//thebody.velocity = Vector2.down * Time.deltaTime * 50f;
 	}
 

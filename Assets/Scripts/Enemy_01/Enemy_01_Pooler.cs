@@ -48,7 +48,6 @@ public class Enemy_01_Pooler : MonoBehaviour {
         }
         else if(count>amount){
             //start spawn enemy
-            //Debug.Log("spawn started");
             theSpawner.StartSpawn(); 
         }
     }

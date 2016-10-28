@@ -5,8 +5,11 @@ using System.Collections.Generic;
 
 public class Enemy_01_Spawner : MonoBehaviour {
 
-    [Range(60,120)] // debuging purpose min value will be 60
-    public float _eventTime;
+    [Range(20,120)] // debuging purpose min value will be 60
+    public float _event_A_duration;
+
+	[Range(60,100)]
+	public float _event_B_duration;
 
 	[Tooltip("Seconds to wait to start Spawning")]
     public float secsToWait;
@@ -20,18 +23,21 @@ public class Enemy_01_Spawner : MonoBehaviour {
     private Enemy_01_Pooler thepooler;
     private int lastRnd;
 
+	private bool canFire = false;
+
 	private EnemyEventManager theEventManager;
+	private Enemy_01 theEnemy_01;
 
     void Start(){
         lastRnd = Random.Range(0, topDownPos.Length-1);
 
         thepooler = FindObjectOfType<Enemy_01_Pooler>();
 		theEventManager = FindObjectOfType <EnemyEventManager> ();
-    }
+
+	}
 
     // signal come from EnemeyPooler when all the object creation done
     public void StartSpawn(){
-        
 		//Debug.Log ("start co : "+Time.time);
         StartCoroutine(Event_A(secsToWait));
     }
@@ -39,7 +45,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
   
     IEnumerator Event_A(float _secs){
 
-		if (Time.timeSinceLevelLoad < _eventTime) { // this is time the event will be called 
+		if (Time.timeSinceLevelLoad < _event_A_duration) { // this is time the event will be called 
 			if (flag == false) {
 				yield return new WaitForSeconds (_secs);
 				flag = true;
@@ -53,8 +59,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
 			StartSpawn ();
 		} // end if 
 		else {
-			//StopCoroutine (Event_A ());
-			Debug.Log ("Event A done initiate event 2");
+			//Debug.Log ("Event A done preapare for event B");
 
 			// call eventManage to preapare for firing enemy
 			theEventManager.SendMessage ("createEnemyBullet");
@@ -120,22 +125,53 @@ public class Enemy_01_Spawner : MonoBehaviour {
         
 
     void _instantiate(int start, int end, Transform[] _spawnPos){
+		GameObject bullet = null;
 
         for(int i=start; i<=end;i++){
             GameObject go = thepooler.getEnemy_01();
+
+			if(canFire){
+				bullet = EnemyBulletPooler._Instance.getBullet (0);
+			}
+
             if (go != null)
             {
                 go.transform.position = _spawnPos[i].position;
                 go.SetActive(true);
+
+				// fire bullets
+				if(bullet != null){
+					bullet.transform.position = go.transform.position;
+					bullet.SetActive (true);
+				}
             }
-        }
+        } // end loop
 
     }
 
 
-    void Update(){
-		
-		//Debug.Log ("Time since level load : "+Time.timeSinceLevelLoad);
-    }
+   	// Event_B
+	public void FireEnemy(){
+		canFire = true;
+
+		StartCoroutine (Event_B (3f));
+	}
+
+
+	IEnumerator Event_B(float secs){
+
+		float startTime = Time.time;  // current time
+		float duration = _event_B_duration;
+
+		while(Time.time - startTime < duration){
+			yield return new WaitForSeconds (Random.Range (max, min));
+			TopToDown ();
+
+			// get active enemy and active bullet 
+
+			//Debug.Log ("topdown fire");
+		}
+
+	}
 
 }// end class 

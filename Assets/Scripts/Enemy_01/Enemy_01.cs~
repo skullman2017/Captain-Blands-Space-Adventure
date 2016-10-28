@@ -7,14 +7,14 @@ public class Enemy_01 : MonoBehaviour {
 
     public float moveSpeed;
     private float offset;
-   
-
+    
 	// Use this for initialization
 	void Start () {
         offset = transform.position.y;
-            
+     
 	}
-	
+				
+
 	// Update is called once per frame
 	void Update () {
         /* // TODO : check aganist tag may cause problem find another way to slove this 

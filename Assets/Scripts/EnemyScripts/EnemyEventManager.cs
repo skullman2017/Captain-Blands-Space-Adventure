@@ -5,13 +5,17 @@ public class EnemyEventManager : MonoBehaviour {
 
 	// Use this for initialization
 	private EnemyBulletPooler thebulletPooler;
+	private Enemy_01_Spawner theEnemy_01Spawner;
 
 	// used for event execution one after another
-	public delegate void MyDelegate();
+	public delegate void MyDelegate(); // delegate signature
 	public static MyDelegate theEventDelegate;
+
+	public static bool canFire = false; // used for enemy fire flag
 
 	void Start () {
 		thebulletPooler = FindObjectOfType <EnemyBulletPooler> ();	
+		theEnemy_01Spawner = FindObjectOfType <Enemy_01_Spawner> ();
 
 		// stack events here 
 		theEventDelegate += initiate_Event_B;
@@ -29,8 +33,8 @@ public class EnemyEventManager : MonoBehaviour {
 	}
 
 	 void initiate_Event_B(){
-		// enemy_01 shoot straight
-		Debug.Log ("initate event B");
+		//Debug.Log ("fire bullets");
+		theEnemy_01Spawner.FireEnemy ();
 	}
 
 }
