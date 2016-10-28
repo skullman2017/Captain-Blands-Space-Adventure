@@ -28,7 +28,7 @@ public class EnemyBulletPooler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//StartCoroutine (createPool ());
+
 	}
 		
 
@@ -54,11 +54,15 @@ public class EnemyBulletPooler : MonoBehaviour {
 				clone.transform.parent = this.transform;
 				thePool [count].Add (clone);
 
-				yield return new WaitForSeconds (2f);
+				// wait for 1 secs in each creation
+				yield return new WaitForSeconds (1f);
 			}
 		}
 			
 		Debug.Log ("created bullet done");
+		// send the message to EnemyEventManaget to initiate the second phase
+		EnemyEventManager.theEventDelegate ();
+
 
 	} // end method 
 		

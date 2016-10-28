@@ -9,8 +9,13 @@ public class bulletResetPos : MonoBehaviour {
     [SerializeField]
     private float speed = 350f;
 
+	private Vector2 topRightCorner;
+
     void Start(){
         bulletBody = GetComponent<Rigidbody2D>();
+
+		topRightCorner = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+		topRightCorner.y = topRightCorner.y + 0.5f;
     }
 
 
@@ -28,6 +33,11 @@ public class bulletResetPos : MonoBehaviour {
         }
     }
 
-  
+	void Update(){
+		if(transform.position.y > topRightCorner.y){
+			//Debug.Log ("bullet out of camera");
+			gameObject.SetActive (false);
+		}
+	}
 
 }
