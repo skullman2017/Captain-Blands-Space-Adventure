@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class Enemy_01_Spawner : MonoBehaviour {
 
-    [Range(20,120)] // debuging purpose min value will be 60
+    [Range(25,120)] // debuging purpose min value will be 60
     public float _event_A_duration;
 
-	[Range(60,100)]
+	[Range(25,100)]
 	public float _event_B_duration;
 
 	[Tooltip("Seconds to wait to start Spawning")]
@@ -141,6 +141,9 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 				// fire bullets
 				if(bullet != null){
+					Debug.Log ("call");
+					//StartCoroutine (fireBullets (4f, bullet, go));
+
 					bullet.transform.position = go.transform.position;
 					bullet.SetActive (true);
 				}
@@ -149,6 +152,15 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
     }
 
+
+	IEnumerator fireBullets(float sec, GameObject _bullet, GameObject _go){
+		yield return new WaitForSeconds (sec);
+
+		/*Debug.Log ("co");
+
+		_bullet.transform.position = _go.transform.position;
+		_bullet.SetActive (true);*/
+	}
 
    	// Event_B
 	public void FireEnemy(){

@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed;
 
-    [SerializeField]
     private bulletPooler objPooler;
 
     public float fireRate;
@@ -44,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 
         // firing autometically 
         InvokeRepeating("FireBtn",3f, fireRate);
+		//InvokeRepeating ("muzzleFlash",3f,fireRate);
 
 	}
 	
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
             spawPos2 = bulletSpawnPos2.position;
 
             playerAudioSource.Play(); // play fire sfx
-            FireBullet();
+			FireBullet();
       //  }
     }
 

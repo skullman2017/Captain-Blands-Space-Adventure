@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: e3072ae8cf3f48344b8bac839a26fde5
-timeCreated: 1477888835
+guid: ed412d0b0fd9e2e488ea8113de969e56
+timeCreated: 1478107547
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: new muzzle flash_0
+    21300002: new muzzle flash_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,18 +40,40 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 28
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: new muzzle flash_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 10
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: new muzzle flash_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 29
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 

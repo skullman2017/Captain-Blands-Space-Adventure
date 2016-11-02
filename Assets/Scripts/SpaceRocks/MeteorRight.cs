@@ -18,8 +18,8 @@ public class MeteorRight : MonoBehaviour {
         _bottomleft = Camera.main.ViewportToWorldPoint(new Vector2(0f, 0f));
         _bottomright = Camera.main.ViewportToWorldPoint(new Vector2(1f, 0f));
 
-        rndX = Random.Range(-1, -3);
-        rndY = -4f;
+        rndX = Random.Range(-3f, -2f);
+		rndY = Random.Range (-4f,-2f); 
             
         Body = GetComponent<Rigidbody2D>();
     }
