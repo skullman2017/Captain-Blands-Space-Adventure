@@ -7,7 +7,6 @@ public class PlayerBullet : MonoBehaviour {
 
 	public Sprite muzzleFlash; // muzzle flash sprite
 	public int frameToFlash;
-	public float destroyTime;
 
 	private SpriteRenderer spriteRend; 
 	private Sprite defaultSprite; // bullet sprite

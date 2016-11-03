@@ -141,9 +141,6 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 				// fire bullets
 				if(bullet != null){
-					Debug.Log ("call");
-					//StartCoroutine (fireBullets (4f, bullet, go));
-
 					bullet.transform.position = go.transform.position;
 					bullet.SetActive (true);
 				}
@@ -151,16 +148,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
         } // end loop
 
     }
-
-
-	IEnumerator fireBullets(float sec, GameObject _bullet, GameObject _go){
-		yield return new WaitForSeconds (sec);
-
-		/*Debug.Log ("co");
-
-		_bullet.transform.position = _go.transform.position;
-		_bullet.SetActive (true);*/
-	}
+		
 
    	// Event_B
 	public void FireEnemy(){
