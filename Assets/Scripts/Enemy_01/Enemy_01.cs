@@ -40,6 +40,6 @@ public class Enemy_01 : MonoBehaviour {
         Vector2 pos = new Vector2(transform.position.x, Mathf.Sin(Time.time*2f)*1f+offset);
         transform.position = pos + Vector2.left * Time.deltaTime;
     }
-
+		
   
 }

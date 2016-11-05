@@ -19,8 +19,12 @@ public class EnemyHealth : MonoBehaviour {
         if(col.gameObject.tag == "Bullet"){
 			//cnt++;
 			// coroutine can solve the problem or keep it as a feature 
-			giveDamage ();
+			giveDamage (damage);
         }
+		else if(col.gameObject.tag == "Player"){
+			//Debug.Log ("ship");
+			giveDamage (Health+10); // destroy
+		}
         else if(col.gameObject.tag == "KillBox"){
             Health = initialHealth;
         }
@@ -30,10 +34,10 @@ public class EnemyHealth : MonoBehaviour {
     } // end 
 		
 
-    void giveDamage(){
+	void giveDamage(int _dmg){
         
         if(Health>0){
-            Health -= damage;
+            Health -= _dmg;
         }
         else{
 			gameObject.SetActive(false);

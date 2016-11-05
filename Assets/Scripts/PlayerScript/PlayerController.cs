@@ -138,4 +138,11 @@ public class PlayerController : MonoBehaviour {
     } // end 
 
 
+	void OnTriggerEnter2D(Collider2D other){
+		if(other.tag == "Enemy"){
+			//Handheld.Vibrate (); // trigger vibration
+			iTween.ShakePosition (gameObject, new Vector2 (0.7f, 0.6f), Time.deltaTime*5f);
+		}
+	}
+
 }
