@@ -36,8 +36,13 @@ public class EnemyHealth : MonoBehaviour {
             Health -= damage;
         }
         else{
-            gameObject.SetActive(false);
-            Health = initialHealth;
+			gameObject.SetActive(false);
+
+			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);
+			explsion.transform.position = transform.position;
+			explsion.SetActive (true);
+
+			Health = initialHealth;
         }
 
     }

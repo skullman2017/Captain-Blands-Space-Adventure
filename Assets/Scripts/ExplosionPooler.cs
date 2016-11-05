@@ -2,48 +2,79 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+public class explosionObj{
+	public GameObject Object;
+	public int Amount;
+}
+
 public class ExplosionPooler : MonoBehaviour {
 
+	public static ExplosionPooler _Instance;
+	public PooledObject[] _prefabs; // prefabs, store the objects info
+	private List<GameObject>[] thePool; // array of list 
 
-    public GameObject explosionfabs;
-    public int numOfAmout;
-    private GameObject objectHolder;
+	// used for enemy ID to getEnemyBullets
+	public enum explosionFabs {
+		meteorExplosion,
+		enemyExplosion
+	};
 
-    private List<GameObject> ObjectPool = new List<GameObject>();
+
+	void Awake(){
+		_Instance = this;
+	}
+
 	// Use this for initialization
 	void Start () {
-	    
-         objectHolder = new GameObject("ExplosionHolder");
-
-        for(int i=0;i<numOfAmout;i++){
-            GameObject clone = Instantiate(explosionfabs,Vector2.zero, Quaternion.identity) as GameObject;
-            clone.transform.parent = objectHolder.transform;
-            clone.SetActive(false);
-
-            ObjectPool.Add(clone);
-        }
-
+		createPool ();
 	}
-	
-    public GameObject getExplosion(){
 
-        for(int i=0;i<ObjectPool.Count;i++){
-            if(ObjectPool[i].activeInHierarchy == false){
-                return ObjectPool[i];
-            }   
-        }
+	void createPool(){
+		GameObject clone;
+		// created an array of type list<GameObjetc>
+		thePool = new List<GameObject>[_prefabs.Length]; 
 
-        GameObject go = Instantiate(explosionfabs, Vector2.zero, Quaternion.identity) as GameObject;
-        go.transform.parent = objectHolder.transform;
-        go.SetActive(false);
+		for(int count=0; count < _prefabs.Length; count++){
+			// here created list in each position of array
+			thePool [count] = new List<GameObject> ();
 
-        ObjectPool.Add(go);
+			// now add gameobjects to the list 
+			for(int i=0;i<_prefabs[count].Amount;i++){
+				clone = Instantiate (_prefabs [count].Object, Vector2.zero, Quaternion.identity) as GameObject;
+				clone.SetActive (false);
+				clone.transform.parent = this.transform;
+				thePool [count].Add (clone);
 
-        return go;
-    }
+			}
+		}
 
-	
-} // end class 
+	} // end method 
+
+
+	// give id 
+	// pass param like 
+	/*
+	getBullet((int)Enemies.Enemy_01);
+	*/
+	public GameObject getExplosion(int id){
+
+		for(int count = 0; count < thePool[id].Count; count++){
+			if(thePool[id][count].activeInHierarchy == false){
+				return thePool [id] [count];
+			}
+		}
+
+		// if dont return anything then create a object and add to pool
+		GameObject clone = Instantiate (_prefabs [id].Object, Vector2.zero, Quaternion.identity) as GameObject;
+		clone.SetActive (false);
+		clone.transform.parent = this.transform;
+		thePool [id].Add (clone);
+
+		return clone;
+	}
+
+}
 
 
 

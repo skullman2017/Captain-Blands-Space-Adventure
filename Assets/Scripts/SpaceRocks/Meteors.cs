@@ -10,12 +10,10 @@ public class Meteors : MonoBehaviour {
 
     private int initialHealth;
     private SpriteRenderer _sprite;
-    private ExplosionPooler theExplosion;
+   
     // Use this for initialization
 	void Start () {
         initialHealth = health;
-
-        theExplosion = FindObjectOfType<ExplosionPooler>();
 
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.color = new Color(255, 255, 255, 255);
@@ -42,7 +40,7 @@ public class Meteors : MonoBehaviour {
             }
             else{
                 // health is zero kill meteor
-                GameObject explosion = theExplosion.getExplosion();
+				GameObject explosion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.meteorExplosion);
                 if(explosion){
                     explosion.transform.position = transform.position;
                     explosion.SetActive(true);
@@ -56,7 +54,7 @@ public class Meteors : MonoBehaviour {
 
         // collide with player ship destry meteor
         if(other.tag == "Player"){
-            GameObject explosion = theExplosion.getExplosion();
+			GameObject explosion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.meteorExplosion);
             explosion.transform.position = transform.position; // meteor position 
         
             _sprite.color = new Color(255,255,255,255);
