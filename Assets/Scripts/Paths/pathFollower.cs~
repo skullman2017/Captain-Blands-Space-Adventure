@@ -3,27 +3,27 @@ using System.Collections;
 
 public class pathFollower : MonoBehaviour {
 
-	public PathEditor pathtofollow;
+	private PathEditor pathtofollow;
 
 	private int currentWayPointID = 0;
 	public float speed;
 	private float reachDistance = 0.1f;
 	private float rotationSpeed;
-	private string pathName;
+	public string pathName = "Path 1";
 
 	Vector2 last_pos;
 	Vector2 current_pos;
 
 	// Use this for initialization
 	void Start () {
-		//pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
+		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
 		last_pos = transform.position;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);
-		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.fixedDeltaTime * speed);
+		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.deltaTime * speed);
 
 		/*  Vector2 targetRotation = pathtofollow.pathsObject[currentWayPointID].position - transform.position;
         float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
@@ -39,7 +39,10 @@ public class pathFollower : MonoBehaviour {
 
 		if(currentWayPointID >= pathtofollow.pathsObject.Count){
 			currentWayPointID = pathtofollow.pathsObject.Count-1;
+			currentWayPointID = 0;
+			gameObject.SetActive (false);
 		}
 
+		//Debug.Log ("current way point ID :"+currentWayPointID);
 	}
 }

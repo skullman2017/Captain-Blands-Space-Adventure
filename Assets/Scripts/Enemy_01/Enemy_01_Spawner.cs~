@@ -151,6 +151,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
 		
 
    	// Event_B
+	// get call from EventManager
 	public void FireEnemy(){
 		canFire = true;
 
@@ -166,12 +167,11 @@ public class Enemy_01_Spawner : MonoBehaviour {
 		while(Time.time - startTime < duration){
 			yield return new WaitForSeconds (Random.Range (max, min));
 			TopToDown ();
-
-			// get active enemy and active bullet 
-
-			//Debug.Log ("topdown fire");
 		}
+		Debug.Log ("event B done");
 
+		// start event C
+		EnemyEventManager.theEventDelegate ();
 	}
 
 }// end class 
