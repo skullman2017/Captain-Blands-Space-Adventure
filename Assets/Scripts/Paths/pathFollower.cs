@@ -8,7 +8,7 @@ public class pathFollower : MonoBehaviour {
 	private int currentWayPointID = 0;
 	public float speed;
 	private float reachDistance = 0.1f;
-	private float rotationSpeed;
+	private float rotationSpeed = 5f;
 	public string pathName = "Path 1";
 
 	Vector2 last_pos;
@@ -24,15 +24,15 @@ public class pathFollower : MonoBehaviour {
 	void Update () {
 		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);
 		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.deltaTime * speed);
-
-		/*  Vector2 targetRotation = pathtofollow.pathsObject[currentWayPointID].position - transform.position;
+/*
+		Vector2 targetRotation = pathtofollow.pathsObject[currentWayPointID].position - transform.position;
         float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
 
 
-        //var rotation = Quaternion.LookRotation(pathtofollow.pathsObject[currentWayPointID].position - transform.position);
-        transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle);*/
+        var rotation = Quaternion.LookRotation(pathtofollow.pathsObject[currentWayPointID].position - transform.position);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle);
 
-
+*/
 		if(distance <= reachDistance){
 			currentWayPointID++;
 		}
@@ -43,6 +43,7 @@ public class pathFollower : MonoBehaviour {
 			gameObject.SetActive (false);
 		}
 
+		//transform.rotation = Quaternion.LookRotation (pathtofollow.pathsObject [currentWayPointID].position);
 		//Debug.Log ("current way point ID :"+currentWayPointID);
 	}
 }
