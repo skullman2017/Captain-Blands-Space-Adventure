@@ -7,7 +7,7 @@ public class EnemyEventManager : MonoBehaviour {
 	// Use this for initialization
 	private EnemyBulletPooler thebulletPooler;
 	private Enemy_01_Spawner theEnemy_01Spawner;
-	private MultipleEnemySpawner theEnemySpawner;
+	private MultipleEnemySpawner theEnemySpawner; // multiple enemy spawner
 
 	// used for event execution one after another
 	public delegate void MyDelegate(); // delegate signature
@@ -48,6 +48,12 @@ public class EnemyEventManager : MonoBehaviour {
 	void initiate_Event_C(){
 		// path following enemy
 		theEnemySpawner.spawnEnemy ();
+		//test enemy 01 
+		theEnemy_01Spawner.fire_enemy_01 (20f);
+	}
+
+	void initiate_Event_C_02(){
+		
 	}
 
 }

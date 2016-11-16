@@ -154,12 +154,15 @@ public class Enemy_01_Spawner : MonoBehaviour {
 	// get call from EventManager
 	public void FireEnemy(){
 		canFire = true;
-
-		StartCoroutine (Event_B (3f));
+			StartCoroutine (Event_B ());
 	}
 
+	// get called from eventmanager 
+	public void fire_enemy_01(float _duration){
+		StartCoroutine (enemy_01_fire (_duration));
+	}
 
-	IEnumerator Event_B(float secs){
+	IEnumerator Event_B(){
 
 		float startTime = Time.time;  // current time
 		float duration = _event_B_duration;
@@ -172,6 +175,19 @@ public class Enemy_01_Spawner : MonoBehaviour {
 
 		// start event C
 		EnemyEventManager.theEventDelegate ();
+	}
+
+
+	IEnumerator enemy_01_fire(float _duration){
+
+		float startTime = Time.time;  // current time
+		float duration = _duration;
+
+		while(Time.time - startTime < duration){
+			yield return new WaitForSeconds (Random.Range (max, min));
+			TopToDown ();
+		}
+		Debug.Log ("enemy_01 fire");
 	}
 
 }// end class 
