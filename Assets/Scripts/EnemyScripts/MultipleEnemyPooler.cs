@@ -17,12 +17,13 @@ public class MultipleEnemyPooler : MonoBehaviour {
 
 	// used for enemy ID to getEnemyBullets
 	public enum Enemies {
-		Enemy_02
+		Enemy_02_pattern1,
+		Enemy_02_pattern2
 	};
 
-
+	[Tooltip("Secs To wait for creating objects")]
 	[Range(2,100)]
-	public int secsTowait;
+	public int secsTowait; // secs to wait to start creating obj
 
 	void Awake(){
 		_Instance = this;

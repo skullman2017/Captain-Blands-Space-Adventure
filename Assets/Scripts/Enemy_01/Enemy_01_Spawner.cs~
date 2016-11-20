@@ -158,8 +158,8 @@ public class Enemy_01_Spawner : MonoBehaviour {
 	}
 
 	// get called from eventmanager 
-	public void fire_enemy_01(float _duration){
-		StartCoroutine (enemy_01_fire (_duration));
+	public void fire_enemy_01(float _sectowait,float _duration){
+		StartCoroutine (enemy_01_fire (_sectowait, _duration));
 	}
 
 	IEnumerator Event_B(){
@@ -178,7 +178,11 @@ public class Enemy_01_Spawner : MonoBehaviour {
 	}
 
 
-	IEnumerator enemy_01_fire(float _duration){
+	IEnumerator enemy_01_fire(float _sec,float _duration){
+
+		Debug.Log ("wait");
+		yield return new WaitForSeconds (_sec);
+		Debug.Log ("started");
 
 		float startTime = Time.time;  // current time
 		float duration = _duration;
@@ -187,7 +191,6 @@ public class Enemy_01_Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (Random.Range (max, min));
 			TopToDown ();
 		}
-		Debug.Log ("enemy_01 fire");
 	}
 
 }// end class 

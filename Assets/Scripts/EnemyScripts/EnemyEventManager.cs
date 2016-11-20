@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class EnemyEventManager : MonoBehaviour {
 
 
@@ -31,6 +32,7 @@ public class EnemyEventManager : MonoBehaviour {
 	}
 
 	// signal get from the Enemy_01_Spawner
+	// get perpare for next enemy
 	void createEnemyBullet(){
 		thebulletPooler.runCoroutine ();
 	}
@@ -47,9 +49,11 @@ public class EnemyEventManager : MonoBehaviour {
 	// get call from Enemy_01_spawner
 	void initiate_Event_C(){
 		// path following enemy
+		Debug.Log ("pattern 1");
 		theEnemySpawner.spawnEnemy ();
+
 		//test enemy 01 
-		theEnemy_01Spawner.fire_enemy_01 (20f);
+		//theEnemy_01Spawner.fire_enemy_01 (20f,20f);
 	}
 
 	void initiate_Event_C_02(){
