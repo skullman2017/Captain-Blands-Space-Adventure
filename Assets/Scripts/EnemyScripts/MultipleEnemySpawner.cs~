@@ -5,7 +5,7 @@ public class MultipleEnemySpawner : MonoBehaviour {
 
 	public Transform spawnPos1;
 	public Transform spawnPos2;
-	[Range(20,60)]
+	[Range(20,100)]
 	public float _event_C_duration;
 
 	public float max;
