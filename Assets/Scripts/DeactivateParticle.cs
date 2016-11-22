@@ -13,7 +13,7 @@ public class DeactivateParticle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!theparticle.IsAlive ()){
-			Debug.Log ("particle set to false");
+			//Debug.Log ("particle set to false");
 			theparticle.gameObject.SetActive (false);
 		}
 	}

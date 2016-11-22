@@ -49,7 +49,7 @@ public class EnemyEventManager : MonoBehaviour {
 	// get call from Enemy_01_spawner
 	void initiate_Event_C(){
 		// path following enemy
-		Debug.Log ("pattern 1");
+		//Debug.Log ("pattern 1");
 		theEnemySpawner.spawnEnemy ();
 
 		//test enemy 01 
