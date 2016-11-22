@@ -17,7 +17,8 @@ public class ExplosionPooler : MonoBehaviour {
 	// used for enemy ID to getEnemyBullets
 	public enum explosionFabs {
 		meteorExplosion,
-		enemyExplosion
+		enemyExplosion,
+		hitEmitter
 	};
 
 

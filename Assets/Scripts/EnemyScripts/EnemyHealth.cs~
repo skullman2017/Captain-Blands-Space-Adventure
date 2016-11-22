@@ -10,6 +10,8 @@ public class EnemyHealth : MonoBehaviour {
     private int initialHealth;
 	private int cnt = 0;
 
+	private GameObject hitEmitter;
+
 	// Use this for initialization
 	void Start () {
         initialHealth = Health;
@@ -17,8 +19,10 @@ public class EnemyHealth : MonoBehaviour {
 	
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
-			//cnt++;
-			// coroutine can solve the problem or keep it as a feature 
+			//Debug.Log ("hit pos : "+transform.position);
+			hitEmitter = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.hitEmitter);
+			hitEmitter.transform.position = col.gameObject.transform.position;
+			hitEmitter.SetActive (true); 
 			giveDamage (damage);
         }
 		else if(col.gameObject.tag == "Player"){
