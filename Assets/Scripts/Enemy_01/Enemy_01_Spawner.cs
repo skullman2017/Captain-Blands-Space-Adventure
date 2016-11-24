@@ -171,7 +171,7 @@ public class Enemy_01_Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (Random.Range (max, min));
 			TopToDown ();
 		}
-		Debug.Log ("event B done");
+//		Debug.Log ("event B done");
 
 		// start event C
 		EnemyEventManager.theEventDelegate ();

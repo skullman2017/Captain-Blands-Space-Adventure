@@ -24,7 +24,8 @@ public class MultipleEnemySpawner : MonoBehaviour {
 		float startTime = Time.time;
 		float duration = _event_C_duration;
 
-		Debug.Log ("Event C 1");
+//		Debug.Log ("Event C 1");
+
 		while(Time.time - startTime < duration){
 			yield return new WaitForSeconds (Random.Range (max, min));
 

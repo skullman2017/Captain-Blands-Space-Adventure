@@ -55,8 +55,12 @@ public class pathFollower : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.gameObject.tag == "Bullet"){
-			//cnt++;
-			// coroutine can solve the problem or keep it as a feature 
+
+			// emitter 
+			GameObject hitEmitter = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.hitEmitter);
+			hitEmitter.transform.position = col.gameObject.transform.position;
+			hitEmitter.SetActive (true); 
+
 			giveDamage (damage);
 		}
 		else if(col.gameObject.tag == "Player"){
