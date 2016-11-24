@@ -139,9 +139,11 @@ public class PlayerController : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D other){
-		if(other.tag == "Enemy"){
+		//TODO : hitching problem 
+
+		/*if(other.tag == "Enemy"){
 			iTween.ShakePosition (gameObject, new Vector2 (0.5f, 0.5f), Time.deltaTime*4f);
-		}
+		}*/
 	}
 
 }
