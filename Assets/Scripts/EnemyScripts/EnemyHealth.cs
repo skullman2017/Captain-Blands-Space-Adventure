@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour {
         initialHealth = Health;
 	}
 	
-    void OnTriggerEnter2D(Collider2D col){
+	void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
 			//Debug.Log ("hit pos : "+transform.position);
 			hitEmitter = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.hitEmitter);
@@ -26,24 +26,20 @@ public class EnemyHealth : MonoBehaviour {
 			giveDamage (damage);
         }
 		else if(col.gameObject.tag == "Player"){
-			//Debug.Log ("ship");
+			//Debug.Log ("player collide ");
 			giveDamage (Health+10); // destroy
 		}
         else if(col.gameObject.tag == "KillBox"){
             Health = initialHealth;
         }
-			
-		//Debug.Log (cnt);
 
     } // end 
 		
 
-	void giveDamage(int _dmg){
+	public void giveDamage(int _dmg){
+		Health -= _dmg;
         
-        if(Health>0){
-            Health -= _dmg;
-        }
-        else{
+		if(Health<0){
 			gameObject.SetActive(false);
 
 			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);

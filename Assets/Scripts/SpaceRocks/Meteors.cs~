@@ -80,4 +80,17 @@ public class Meteors : MonoBehaviour {
         health -= damage;
     }
 
+	public void giveLaserDamage(int n){
+		health -= n;
+
+		if(health<0){
+			GameObject explosion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.meteorExplosion);
+			explosion.transform.position = transform.position; // meteor position 
+
+			_sprite.color = new Color(255,255,255,255);
+			gameObject.SetActive(false); // meteor kill
+			explosion.SetActive(true);
+		}
+
+	}
 }

@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D playerBody;
 
+	public bool isFire = true;
+
 	// Use this for initialization
 	void Start () {
         playerAudioSource = GetComponent<AudioSource>();
@@ -77,11 +79,14 @@ public class PlayerController : MonoBehaviour {
         // fire bullets
         //if(Input.GetMouseButtonDown(0)){
             //print("fire btn down");
-            spawPos1 = bulletSpawnPos1.position; // update the postion 
-            spawPos2 = bulletSpawnPos2.position;
+		if (isFire) {
+			spawPos1 = bulletSpawnPos1.position; // update the postion 
+			spawPos2 = bulletSpawnPos2.position;
 
-            playerAudioSource.Play(); // play fire sfx
-			FireBullet();
+			playerAudioSource.Play (); // play fire sfx
+			FireBullet ();
+		}
+
       //  }
     }
 
