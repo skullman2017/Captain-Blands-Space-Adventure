@@ -56,11 +56,8 @@ public class LaserBeam : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast (rayPos.position, laserDir, currentLaserSize,enemyHitLayer);
 
 			if(hit.collider != null){
-				float distance = Vector2.Distance (rayPos.position, hit.transform.position);
-
-				//Debug.DrawLine (rayPos.position, hit.transform.position, Color.green);
 				lineRenderer.SetPosition (0,rayPos.position);
-				lineRenderer.SetPosition (1,hit.point);
+				lineRenderer.SetPosition (1, hit.point);
 
 				laserParticle.transform.position = hit.point;
 				laserParticle.gameObject.SetActive (true);
@@ -72,6 +69,7 @@ public class LaserBeam : MonoBehaviour {
 				laserParticle.gameObject.SetActive (false);
 
 				Vector2 pos = new Vector2 (rayPos.position.x, transform.position.y+maxLaserSize);
+					
 				lineRenderer.SetPosition (0,rayPos.position);
 				lineRenderer.SetPosition (1,pos);
 
