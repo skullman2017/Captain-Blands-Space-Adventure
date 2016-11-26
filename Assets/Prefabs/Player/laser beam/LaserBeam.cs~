@@ -9,7 +9,7 @@ public class LaserBeam : MonoBehaviour {
 	public float maxLaserSize;
 	public GameObject laserParticle;
 	public int laserDamage;
-	public bool laserOn = false;
+	public bool laserOn = false; // switching variable 
 
 	private bool spawned = false;
 	private LineRenderer lineRenderer;
@@ -41,6 +41,8 @@ public class LaserBeam : MonoBehaviour {
 			theAnimator.SetBool ("startLaser",true);
 		}
 		else if(laserOn == false){
+			laserParticle.gameObject.SetActive (false);
+
 			lineRenderer.enabled = false;
 			theAnimator.SetBool ("startLaser",false);
 			thePlayer.isFire = true;
