@@ -31,7 +31,7 @@ public class LaserBeam : MonoBehaviour {
 		spawned = true;
 	}
 
-	void Update(){
+	void LateUpdate(){
 		
 		// switching laser and player power
 
@@ -70,15 +70,16 @@ public class LaserBeam : MonoBehaviour {
 			else{
 				laserParticle.gameObject.SetActive (false);
 
-				Vector2 pos = new Vector2 (rayPos.position.x, transform.position.y+maxLaserSize);
+				//Vector2 pos = new Vector2 (rayPos.position.x, transform.position.y+maxLaserSize);
 					
-				lineRenderer.SetPosition (0,rayPos.position);
-				lineRenderer.SetPosition (1,pos);
-
+				//lineRenderer.SetPosition (0,rayPos.position);
+				//lineRenderer.SetPosition (1,pos);
 			}
-				
 		}
-	}
+		Vector2 pos = new Vector2 (rayPos.position.x, transform.position.y+maxLaserSize);
+		lineRenderer.SetPosition (0,rayPos.position);
+		lineRenderer.SetPosition (1,pos);
+	} //end update
 
 	void damageEnemy(RaycastHit2D _hit){
 		if (_hit.collider.gameObject.layer == 10) {
