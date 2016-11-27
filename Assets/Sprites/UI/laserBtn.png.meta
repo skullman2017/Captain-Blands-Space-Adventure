@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: d956d9fb71fd45a45ab1639bc189d10d
-timeCreated: 1479785655
+guid: 49807d46b1aaae64ab8dc3586bb5b94d
+timeCreated: 1480219956
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: btn_0
-    21300002: btn_1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -40,40 +38,18 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: btn_0
-      rect:
-        serializedVersion: 2
-        x: 5
-        y: 12
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: btn_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 2
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
