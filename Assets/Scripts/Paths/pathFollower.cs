@@ -3,6 +3,10 @@ using System.Collections;
 
 public class pathFollower : MonoBehaviour {
 
+	[SerializeField]
+	private bool straightShoot;
+	private bool singleShot = true;
+
 	private PathEditor pathtofollow;
 
 	private int currentWayPointID = 0;
@@ -16,12 +20,14 @@ public class pathFollower : MonoBehaviour {
 	public int damage; // player bullet hit damage
 
 	private int initialHealth;
-	private int cnt = 0;
+	private int mid = 0;
 
 	// Use this for initialization
 	void Start () {
 		initialHealth = Health;
 		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
+		mid = pathtofollow.pathsObject.Count+1;
+		mid = mid / 2;
 	}
 
 	// Update is called once per frame
@@ -39,6 +45,11 @@ public class pathFollower : MonoBehaviour {
 
 */
 
+		if(mid==currentWayPointID && singleShot == true && straightShoot==true){
+			singleShot = false;
+			shoot ();
+		}
+
 		if(distance <= reachDistance){
 			currentWayPointID++;
 		}
@@ -47,10 +58,18 @@ public class pathFollower : MonoBehaviour {
 			currentWayPointID = pathtofollow.pathsObject.Count-1;
 			currentWayPointID = 0;
 			gameObject.SetActive (false);
+			singleShot = true; // again can single shoot
 		}
 
 		//transform.rotation = Quaternion.LookRotation (pathtofollow.pathsObject [currentWayPointID].position);
 		//Debug.Log ("current way point ID :"+currentWayPointID);
+	}
+
+	void shoot(){
+		GameObject bullet = EnemyBulletPooler._Instance.getBullet ((int)EnemyBulletPooler.Enemies.Enemy_02);
+		bullet.transform.position = this.transform.position;
+		bullet.SetActive (true);
+		//Debug.Log (mid);
 	}
 
 	void OnTriggerEnter2D(Collider2D col){

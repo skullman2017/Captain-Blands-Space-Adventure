@@ -55,7 +55,7 @@ public class MultipleEnemyPooler : MonoBehaviour {
 				thePool [count].Add (clone);
 
 				// wait for 1 secs in each creation
-				yield return new WaitForSeconds (0.5f);
+				yield return new WaitForSeconds (1f);
 			}
 		}
 

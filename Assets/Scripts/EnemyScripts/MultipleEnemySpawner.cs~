@@ -10,10 +10,6 @@ public class MultipleEnemySpawner : MonoBehaviour {
 
 	public float max;
 	public float min;
-	// Use this for initialization
-	void Start () {
-	
-	}
 
 	public void spawnEnemy(){
 		StartCoroutine (Enemy_02_pattern1 ());
