@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class pathFollower : MonoBehaviour {
+public class PathFollower_Rotation : MonoBehaviour {
 
-	[SerializeField]
-	private bool straightShoot;
-	private bool singleShot = true;
 
 	private PathEditor pathtofollow;
 
@@ -18,6 +15,9 @@ public class pathFollower : MonoBehaviour {
 	public int Health;
 	[Tooltip("Player bullet damage")]
 	public int damage; // player bullet hit damage
+
+	[Range(2,10)]
+	public int repeatRate;
 
 	private int initialHealth;
 	private int mid = 0;
@@ -32,6 +32,9 @@ public class pathFollower : MonoBehaviour {
 		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
 		mid = pathtofollow.pathsObject.Count+1;
 		mid = mid / 2;
+
+		// shoot 
+		InvokeRepeating ("shoot",2f,repeatRate);
 	}
 
 	// Update is called once per frame
@@ -39,11 +42,11 @@ public class pathFollower : MonoBehaviour {
 		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);
 		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.deltaTime * speed);
 
+		// rotation
+		Vector2 targetRotation = theplayer.transform.position - this.transform.position; // just awsome
+		float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle-269f);
 
-		if(mid-1==currentWayPointID && singleShot == true && straightShoot==true){
-			singleShot = false;
-			shoot ();
-		}
 
 		if(distance <= reachDistance){
 			currentWayPointID++;
@@ -53,23 +56,27 @@ public class pathFollower : MonoBehaviour {
 			currentWayPointID = pathtofollow.pathsObject.Count-1;
 			currentWayPointID = 0;
 			gameObject.SetActive (false);
-			singleShot = true; // again can single shoot
 		}
 
-		//transform.rotation = Quaternion.LookRotation (pathtofollow.pathsObject [currentWayPointID].position);
-		//Debug.Log ("current way point ID :"+currentWayPointID);
 	}
+		
 
 	void shoot(){
-		GameObject bullet = EnemyBulletPooler._Instance.getBullet ((int)EnemyBulletPooler.Enemies.Enemy_02);
-		bullet.transform.position = this.transform.position;
-		bullet.SetActive (true);
-		//Debug.Log (mid);
+		if (this.gameObject.activeInHierarchy) {
+			//Debug.Log ("fire");
+			for (int i = 1; i <= 3; i++) {
+				GameObject bullet = EnemyBulletPooler._Instance.getBullet ((int)EnemyBulletPooler.Enemies.Enemy_03);
+				bullet.transform.position = this.transform.position;
+				bullet.transform.Rotate (0,0,this.transform.rotation.z);
+				bullet.SetActive (true);
+			}
+		}
+		//Debug.Log ("not fire");
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.gameObject.tag == "Bullet"){
-
+			//col.gameObject.SetActive (false);
 			// emitter 
 			GameObject hitEmitter = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.hitEmitter);
 			hitEmitter.transform.position = col.gameObject.transform.position;
@@ -87,11 +94,8 @@ public class pathFollower : MonoBehaviour {
 	} // end 
 
 	void giveDamage(int _dmg){
-
-		if(Health>0){
-			Health -= _dmg;
-		}
-		else{
+		Health -= _dmg;
+		if(Health<0){
 			currentWayPointID = 0;
 			gameObject.SetActive(false);
 

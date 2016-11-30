@@ -18,7 +18,9 @@ public class MultipleEnemyPooler : MonoBehaviour {
 	// used for enemy ID to getEnemyBullets
 	public enum Enemies {
 		Enemy_02_pattern1,
-		Enemy_02_pattern2
+		Enemy_02_pattern2,
+		Enemy_03,
+		Enemy_03_pattern2
 	};
 
 	[Tooltip("Secs To wait for creating objects")]

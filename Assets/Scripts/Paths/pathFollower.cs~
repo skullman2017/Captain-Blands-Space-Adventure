@@ -22,8 +22,12 @@ public class pathFollower : MonoBehaviour {
 	private int initialHealth;
 	private int mid = 0;
 
+	private PlayerController theplayer;
+
 	// Use this for initialization
 	void Start () {
+		theplayer = FindObjectOfType <PlayerController> ();
+
 		initialHealth = Health;
 		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
 		mid = pathtofollow.pathsObject.Count+1;
@@ -35,17 +39,8 @@ public class pathFollower : MonoBehaviour {
 		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);
 		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.deltaTime * speed);
 
-/*
-		Vector2 targetRotation = pathtofollow.pathsObject[currentWayPointID].position - transform.position;
-        float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
 
-
-        var rotation = Quaternion.LookRotation(pathtofollow.pathsObject[currentWayPointID].position - transform.position);
-        transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle);
-
-*/
-
-		if(mid==currentWayPointID && singleShot == true && straightShoot==true){
+		if(mid-1==currentWayPointID && singleShot == true && straightShoot==true){
 			singleShot = false;
 			shoot ();
 		}

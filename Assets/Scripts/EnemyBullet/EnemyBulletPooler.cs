@@ -18,7 +18,8 @@ public class EnemyBulletPooler : MonoBehaviour {
 	// used for enemy ID to getEnemyBullets
 	public enum Enemies {
 		Enemy_01,
-		Enemy_02
+		Enemy_02,
+		Enemy_03
 	};
 
 

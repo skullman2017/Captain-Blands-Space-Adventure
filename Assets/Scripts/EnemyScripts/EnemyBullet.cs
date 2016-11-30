@@ -3,11 +3,10 @@ using System.Collections;
 
 public class EnemyBullet : MonoBehaviour {
 
-	private Rigidbody2D thebody;
 	public float speed;
 	// Use this for initialization
 	void Start () {
-		//thebody = GetComponent <Rigidbody2D> ();
+
 	}
 	
 	// Update is called once per frame
