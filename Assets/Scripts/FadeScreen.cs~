@@ -13,11 +13,6 @@ public class FadeScreen : MonoBehaviour {
     private float alpha = 0; // to fade out make it zero 0 
     private float fadeDir = -1f;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 
     void OnGUI() {
 
