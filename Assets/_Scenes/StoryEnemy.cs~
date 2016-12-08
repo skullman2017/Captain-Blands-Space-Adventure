@@ -67,10 +67,9 @@ public class StoryEnemy : MonoBehaviour {
 	void OnBecameInvisible(){
 		countEnemy++;
 		if(countEnemy>=4){
-			StoryManager storymanager = GameObject.FindObjectOfType <StoryManager>();
-			storymanager.fadeIn ();
+			Camera.main.SendMessage ("fadeIn");
 		}
-		//Debug.Log ("out of camera : "+countEnemy);
+
 	}
 
 }

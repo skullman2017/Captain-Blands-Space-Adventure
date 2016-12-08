@@ -3,17 +3,14 @@ using System.Collections;
 
 public class StoryManager : MonoBehaviour {
 
-	public GameObject fadeScreen;
+	public GameObject Scene1;
+	public GameObject Scene2;
+
 
 	// Use this for initialization
 	void Start () {
-		if(fadeScreen.activeInHierarchy){
-			fadeScreen.SetActive (false);
-		}
+		
 	}
 	
-	public void fadeIn(){
-		fadeScreen.SetActive (true);
-	}
 
 }
