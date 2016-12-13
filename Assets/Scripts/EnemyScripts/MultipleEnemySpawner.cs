@@ -8,8 +8,10 @@ public class MultipleEnemySpawner : MonoBehaviour {
 	public Transform spawnPos3;
 	public Transform spawnPos4;
 
+	public Transform[] enemy_05_Pos;
+
 	[Range(15,100)]
-	public float _event_C_duration; // enemy 2
+	public float _event_C_duration; // enemy 2 pattern 1
 
 	public float max;
 	public float min;
@@ -25,6 +27,7 @@ public class MultipleEnemySpawner : MonoBehaviour {
 
 		float startTime = Time.time;
 		float duration = _event_C_duration;
+
 		while(Time.time - startTime < duration){
 			yield return new WaitForSeconds (Random.Range (min, max));
 
@@ -42,6 +45,9 @@ public class MultipleEnemySpawner : MonoBehaviour {
 				}
 			}
 		}
+
+		// initiate enemy - 5 event 
+		StartCoroutine (Enemy_05_formation_1 ());
 
 	} // end 
 
@@ -61,5 +67,23 @@ public class MultipleEnemySpawner : MonoBehaviour {
 			}
 	} // end 
 		
+
+	public IEnumerator Enemy_05_formation_1(){
+
+		yield return new WaitForSeconds (Random.Range (min,max));
+
+			for(int i=0;i<enemy_05_Pos.Length;i++){
+				GameObject go = MultipleEnemyPooler._Instance.getEnemy ((int)MultipleEnemyPooler.Enemies.Enemy_05);
+				go.transform.position = enemy_05_Pos [i].position;
+				go.SetActive (true);
+			}
+			
+		yield return null;
+	} // end 
+
+	public IEnumerator Enemy_05_formation_2(){
+			
+		yield return null;
+	} // end 
 
 }

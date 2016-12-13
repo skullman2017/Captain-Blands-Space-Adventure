@@ -20,7 +20,8 @@ public class MultipleEnemyPooler : MonoBehaviour {
 		Enemy_02_pattern1,
 		Enemy_02_pattern2,
 		Enemy_03,
-		Enemy_03_pattern2
+		Enemy_03_pattern2,
+		Enemy_05
 	};
 
 	[Tooltip("Secs To wait for creating objects")]

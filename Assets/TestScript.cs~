@@ -1,0 +1,15 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class TestScript : MonoBehaviour {
+
+	public float heightScale = 1.0F;
+	public float xScale = 1.0F;
+	void Update() {
+		float height = heightScale * Mathf.Sin(Time.time * xScale);
+		//height = Mathf.Clamp (height, 1f, 10f);
+		Vector3 pos = transform.position;
+		pos.y = height;
+		transform.localScale = pos;
+	}
+}

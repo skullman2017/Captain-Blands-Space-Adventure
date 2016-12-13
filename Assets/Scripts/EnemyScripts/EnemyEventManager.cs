@@ -38,26 +38,30 @@ public class EnemyEventManager : MonoBehaviour {
 	}
 
 	 void initiate_Event_B(){
-		//Debug.Log ("fire bullets");
 		theEnemy_01Spawner.FireEnemy ();
-
+		// unstack
 		theEventDelegate -= initiate_Event_B;
+		// stack 
 		theEventDelegate += initiate_Event_C;
+		/*theEventDelegate += initiate_Event_C_02;*/
 	}
 
 	// enemy 02 pattern 
 	// get call from Enemy_01_spawner
 	void initiate_Event_C(){
 		// path following enemy
-		//Debug.Log ("pattern 1");
 		theEnemySpawner.spawnEnemy ();
 
-		//test enemy 01 
-		//theEnemy_01Spawner.fire_enemy_01 (20f,20f);
+		theEventDelegate -= initiate_Event_C;
+
+		theEventDelegate += initiate_Event_C_02;
 	}
 
+	// get call from multipleEnemySpawner
+	// Enemy - 05 spawn cal to multiple enemy spawner
 	void initiate_Event_C_02(){
-		
+		theEnemySpawner.StartCoroutine (theEnemySpawner.Enemy_05_formation_1 ());
+
 	}
 
 }
