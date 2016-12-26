@@ -54,9 +54,9 @@ public class PowerButtonManager : MonoBehaviour {
         canBomb = false;
         bombCount -= 1;
 
-        while (bombImage.transform.localScale.x <= 25f) {
-            yield return new WaitForSeconds(0.01f);
+        while (bombImage.transform.localScale.x <= 32f) {
             bombImage.transform.localScale += new Vector3(1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f);
+            yield return new WaitForSeconds(0.000001f);
         }
 
         bombImage.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);

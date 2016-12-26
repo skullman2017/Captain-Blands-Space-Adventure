@@ -9,7 +9,9 @@ public class pathFollower : MonoBehaviour {
 
 	private PathEditor pathtofollow;
 
-	private int currentWayPointID = 0;
+    [HideInInspector]
+	public int currentWayPointID = 0;
+
 	public float speed;
 	private float reachDistance = 0.1f;
 	private float rotationSpeed = 5f;
@@ -86,12 +88,11 @@ public class pathFollower : MonoBehaviour {
 		}
 	} // end 
 
-	void giveDamage(int _dmg){
+	public void giveDamage(int _dmg){
 
-		if(Health>0){
-			Health -= _dmg;
-		}
-		else{
+        Health -= _dmg;
+
+		if(Health<0){
 			currentWayPointID = 0;
 			gameObject.SetActive(false);
 
@@ -102,4 +103,6 @@ public class pathFollower : MonoBehaviour {
 			Health = initialHealth;
 		}
 	}
+
+
 }
