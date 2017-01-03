@@ -4,7 +4,7 @@ using System.Collections;
 public class PowerButtonManager : MonoBehaviour {
 
 	private LaserBeam theLaser;
-    public GameObject bombImage;
+    public GameObject playerBomb;
 	public int laserTime;
 	private bool laserFlag = false;
     private bool canBomb = true;
@@ -14,8 +14,8 @@ public class PowerButtonManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        if (bombImage.activeInHierarchy) {
-            bombImage.SetActive(false);
+        if (playerBomb.activeInHierarchy) {
+            playerBomb.SetActive(false);
         }
 		theLaser = FindObjectOfType <LaserBeam> ();
 	}
@@ -44,28 +44,30 @@ public class PowerButtonManager : MonoBehaviour {
 
     public void startBomb() {
         if (bombCount > 0 && canBomb == true) {
-            StartCoroutine(explodeBomb());
+             StartCoroutine(explodeBomb());
         }
     }
 
     IEnumerator explodeBomb() {
 
-        bombImage.SetActive(true);
+        playerBomb.SetActive(true);
         canBomb = false;
         bombCount -= 1;
 
-        while (bombImage.transform.localScale.x <= 32f) {
-            bombImage.transform.localScale += new Vector3(1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f);
+        while (playerBomb.transform.localScale.x <= 23f) {
+            playerBomb.transform.localScale += new Vector3(1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f);
             yield return new WaitForSeconds(0.000001f);
         }
 
-        bombImage.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        bombImage.SetActive(false);
+        playerBomb.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        playerBomb.SetActive(false);
 
         yield return new WaitForSeconds(1.5f);
 
         canBomb = true;
 
     }
+
+   
 
 }

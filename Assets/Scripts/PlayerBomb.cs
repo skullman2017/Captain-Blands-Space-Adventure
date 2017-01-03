@@ -19,7 +19,7 @@ public class PlayerBomb : MonoBehaviour {
 
          
             pathFollower go = null;
-            go = col.gameObject.GetComponent<pathFollower>();
+            go = col.gameObject.GetComponent<pathFollower>(); // here is also pathrotation
 
             if(go){
                 // for enemy_02 reset initial pathID
