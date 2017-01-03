@@ -14,9 +14,10 @@ public class StoryEnemy : MonoBehaviour {
 	private bool canShoot = true;
 	public float secsToWait;
 	private static int countEnemy = 0;
+    GameObject go = null;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
 		Invoke ("wait",2f);
 	}
@@ -31,13 +32,6 @@ public class StoryEnemy : MonoBehaviour {
 		if (flag) {
 			float distance = Vector2.Distance (pathtofollow.pathsObject [currentWayPointID].position, transform.position);
 			transform.position = Vector2.MoveTowards (transform.position, pathtofollow.pathsObject [currentWayPointID].position, Time.fixedDeltaTime * speed);
-
-			/*  Vector2 targetRotation = pathtofollow.pathsObject[currentWayPointID].position - transform.position;
-        float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-
-
-        //var rotation = Quaternion.LookRotation(pathtofollow.pathsObject[currentWayPointID].position - transform.position);
-        transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle);*/
 
 
 			if (distance <= reachDistance) {
@@ -59,10 +53,23 @@ public class StoryEnemy : MonoBehaviour {
 	}
 
 	IEnumerator Shoot(){
+        // first shoot 
 		yield return new WaitForSeconds (secsToWait);
-		GameObject go = Instantiate (shootFabs, transform.position, Quaternion.identity) as GameObject;
+	     go = Instantiate (shootFabs, transform.position, Quaternion.identity) as GameObject;
 		go.SetActive (true);
-	}
+        
+        // another shoot 
+        yield return new WaitForSeconds(1.5f);
+
+        InvokeRepeating("repeatingFire", 1f, 1f);
+    }
+
+    void repeatingFire() {
+        if (!go.activeInHierarchy) {
+            go.transform.position = this.transform.position;
+            go.SetActive(true);
+        }
+    }
 
 	void OnBecameInvisible(){
 		countEnemy++;
