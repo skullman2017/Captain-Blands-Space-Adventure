@@ -23,8 +23,6 @@ public class Enemy_05 : MonoBehaviour {
 	void Start () {
 		theplayer = FindObjectOfType <PlayerController> ();
 		posToStop = new Vector2 (transform.position.x, transform.position.y - 4f);
-
-
 	}
 		
 	void fire(){
