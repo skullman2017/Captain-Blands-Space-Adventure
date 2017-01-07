@@ -148,6 +148,13 @@ public class PlayerController : MonoBehaviour {
 
         if(other.tag == "EnemyBullet") {
             other.gameObject.SetActive(false);
+
+            // camera shake script from Brackeys 
+            //CameraShake.Shake(0.2f);
+        }
+
+        if(other.gameObject.tag =="Enemy") {
+            CameraShake.Shake(0.4f);
         }
 
 		/*if(other.tag == "Enemy"){
