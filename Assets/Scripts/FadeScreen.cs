@@ -18,6 +18,7 @@ public class FadeScreen : MonoBehaviour {
 	public GameObject PlayBtn;
     public GameObject skipBtn;
     private StoryEnemy[] enemies;
+    private EnemyBullet[] bullets;
 
 	void Start(){
 		scene1.SetActive (true);
@@ -65,14 +66,27 @@ public class FadeScreen : MonoBehaviour {
 		fadeOut ();
 	}
 
+    void removeAllEnemy_Bullets() {
+        bullets = FindObjectsOfType<EnemyBullet>();
+
+        foreach(var b in bullets) {
+            b.gameObject.SetActive(false);
+        }
+    }
+
     void removeAllEnemy() {
         enemies = FindObjectsOfType<StoryEnemy>();
 
         if (enemies.Length > 0) {
             foreach (var go in enemies) {
+                go.StopAllCoroutines();
+                go.CancelInvoke();
                 go.gameObject.SetActive(false);
             }
         }
+
+        // remove all bullets 
+        removeAllEnemy_Bullets();
 
     }
 
