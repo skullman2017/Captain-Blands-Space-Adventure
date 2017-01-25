@@ -1,0 +1,9 @@
+diff a/Assets/Scripts/PlayerScript/PlayerController.cs b/Assets/Scripts/PlayerScript/PlayerController.cs	(rejected hunks)
+@@ -0,6 +0,7 @@
+ using UnityStandardAssets.CrossPlatformInput;
+ 
+ public class PlayerController : MonoBehaviour {
++
+     [SerializeField]
+     private float moveSpeed = 1f;
+     private bulletPooler objPooler;
