@@ -58,10 +58,7 @@ public class GemsPooler : MonoBehaviour {
 
 
     // give id 
-    // pass param like 
-    /*
-	getBullet((int)Enemies.Enemy_01);
-	*/
+  
     public GameObject getGems(int id) {
 
         for (int count = 0; count < thePool[id].Count; count++) {

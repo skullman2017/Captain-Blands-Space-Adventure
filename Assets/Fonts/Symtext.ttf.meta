@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: aba4162343daf124288fd0965242851d
-timeCreated: 1474561982
+guid: ae888282b39369549a8d434645a59541
+timeCreated: 1486310171
 licenseType: Free
 TrueTypeFontImporter:
-  serializedVersion: 3
+  serializedVersion: 4
   fontSize: 16
   forceTextureCase: -2
-  characterSpacing: 1
-  characterPadding: 0
+  characterSpacing: 0
+  characterPadding: 1
   includeFontData: 1
-  fontNames: []
+  fontName: Symtext
+  fontNames:
+  - Symtext
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

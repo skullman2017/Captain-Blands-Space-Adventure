@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D playerBody;
 
-	public bool isFire = true;
+    public bool isFire = true;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         playerAudioSource = GetComponent<AudioSource>();
         playerBody = GetComponent<Rigidbody2D>();
 
@@ -45,17 +45,17 @@ public class PlayerController : MonoBehaviour {
 
         // firing autometically 
         InvokeRepeating("FireBtn",3f, fireRate);
-		//InvokeRepeating ("muzzleFlash",3f,fireRate);
+        //InvokeRepeating ("muzzleFlash",3f,fireRate);
 
-	}
-	
+    }
+    
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         // for joystikc controll
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
-	    
+        
         // for accleometer 
         //float h = Input.acceleration.x;
        // float v = Input.acceleration.y - accleStartY;
@@ -79,13 +79,13 @@ public class PlayerController : MonoBehaviour {
         // fire bullets
         //if(Input.GetMouseButtonDown(0)){
             //print("fire btn down");
-		if (isFire) {
-			spawPos1 = bulletSpawnPos1.position; // update the postion 
-			spawPos2 = bulletSpawnPos2.position;
+        if (isFire) {
+            spawPos1 = bulletSpawnPos1.position; // update the postion 
+            spawPos2 = bulletSpawnPos2.position;
 
-			playerAudioSource.Play (); // play fire sfx
-			FireBullet ();
-		}
+            playerAudioSource.Play (); // play fire sfx
+            FireBullet ();
+        }
 
       //  }
     }
@@ -143,8 +143,8 @@ public class PlayerController : MonoBehaviour {
     } // end 
 
 
-	void OnTriggerEnter2D(Collider2D other){
-		//TODO : hitching problem 
+    void OnTriggerEnter2D(Collider2D other){
+        //TODO : hitching problem 
 
         if(other.tag == "EnemyBullet") {
             other.gameObject.SetActive(false);
@@ -156,10 +156,6 @@ public class PlayerController : MonoBehaviour {
         if(other.gameObject.tag =="Enemy") {
             CameraShake.Shake(0.4f);
         }
-
-		/*if(other.tag == "Enemy"){
-			iTween.ShakePosition (gameObject, new Vector2 (0.5f, 0.5f), Time.deltaTime*4f);
-		}*/
-	}
+    }
 
 }

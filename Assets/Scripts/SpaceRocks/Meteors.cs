@@ -5,12 +5,12 @@ public class Meteors : MonoBehaviour {
 
     public float smooth;
     public int health;
-
     public int damage; // player bullet hit damage
 
     private int initialHealth;
     private SpriteRenderer _sprite;
-   
+
+
     // Use this for initialization
 	void Start () {
         initialHealth = health;
@@ -44,6 +44,8 @@ public class Meteors : MonoBehaviour {
                 if(explosion){
                     explosion.transform.position = transform.position;
                     explosion.SetActive(true);
+
+                    spawnGems();
                 }
                 _sprite.color = new Color(255,255,255,255);
                 gameObject.SetActive(false);
@@ -60,10 +62,15 @@ public class Meteors : MonoBehaviour {
             _sprite.color = new Color(255,255,255,255);
             gameObject.SetActive(false); // meteor kill
             explosion.SetActive(true);
+
+            spawnGems();
         }
             
     } // end method 
 
+    void spawnGems() {
+        GemsSpawner.spawnGems(this.transform.position);
+    }
    
     // back to initial color
     IEnumerator changeColor(float secs){
@@ -90,7 +97,9 @@ public class Meteors : MonoBehaviour {
 			_sprite.color = new Color(255,255,255,255);
 			gameObject.SetActive(false); // meteor kill
 			explosion.SetActive(true);
-		}
+
+            spawnGems();
+        }
 
 	}
 }
