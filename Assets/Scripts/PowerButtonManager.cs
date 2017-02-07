@@ -48,6 +48,12 @@ public class PowerButtonManager : MonoBehaviour {
         }
     }
 
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            startBomb();
+        }
+    }
+
     IEnumerator explodeBomb() {
 
         playerBomb.SetActive(true);

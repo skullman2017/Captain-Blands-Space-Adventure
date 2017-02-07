@@ -102,8 +102,9 @@ public class PathFollower_Rotation : MonoBehaviour {
 			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);
 			explsion.transform.position = transform.position;
 			explsion.SetActive (true);
-
 			Health = initialHealth;
+
+           // GemsSpawner.spawnMultipleGems(this.transform.position);
 		}
 	}
 }

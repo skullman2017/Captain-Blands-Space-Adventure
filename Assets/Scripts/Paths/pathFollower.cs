@@ -99,9 +99,11 @@ public class pathFollower : MonoBehaviour {
 			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);
 			explsion.transform.position = transform.position;
 			explsion.SetActive (true);
-
 			Health = initialHealth;
-		}
+
+            //gems spawn
+            GemsSpawner.spawnGems(this.transform.position);
+        }
 	}
 
 

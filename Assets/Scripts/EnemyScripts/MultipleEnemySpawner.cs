@@ -81,9 +81,4 @@ public class MultipleEnemySpawner : MonoBehaviour {
 		yield return null;
 	} // end 
 
-	public IEnumerator Enemy_05_formation_2(){
-			
-		yield return null;
-	} // end 
-
 }

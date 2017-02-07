@@ -45,8 +45,11 @@ public class EnemyHealth : MonoBehaviour {
 			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);
 			explsion.transform.position = transform.position;
 			explsion.SetActive (true);
+            Health = initialHealth;
 
-			Health = initialHealth;
+            // spaw gems here
+            GemsSpawner.spawnMultipleGems(this.transform.position);
+            
         }
     }
 }
