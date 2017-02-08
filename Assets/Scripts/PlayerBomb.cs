@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerBomb : MonoBehaviour {
 
-
     // Use this for initialization
     void Start () {
        
@@ -16,24 +15,32 @@ public class PlayerBomb : MonoBehaviour {
             //col.gameObject.SetActive(false);
 
 
-            pathFollower go = null;
-            EnemyHealth enemyHealth = null;
+            pathFollower go = null; // enemy 
+            EnemyHealth go1 = null; // enemy 
+            PathFollower_Rotation go2 = null;
 
-            go = col.gameObject.GetComponent<pathFollower>(); // here is also pathrotation
-
-            if (go) {
+            if (go = col.gameObject.GetComponent<pathFollower>()) {
                 // for enemy_02 reset initial pathID
                 go.giveDamage(100);
-                enemyExplosion(col);
                 return;
             }
-            else if(enemyHealth = col.gameObject.GetComponent<EnemyHealth>()) {
-                enemyHealth.giveDamage(100);
+            else if(go1 = col.gameObject.GetComponent<EnemyHealth>()) {
+                go1.giveDamage(100);
+                return;
+            }
+            else if (go2 = col.gameObject.GetComponent<PathFollower_Rotation>()) {
+                go2.giveDamage(500);
+            }
+            else if(col.tag == "Meteor") {
+                col.gameObject.SetActive(false);
+                enemyExplosion(col);
+              //  GemsSpawner.spawnGems(offset);
                 return;
             }
             else {
+               // print("bullet");
                 col.gameObject.SetActive(false);
-                enemyExplosion(col);
+                //enemyExplosion(col);
             }
         }
     }

@@ -6,7 +6,7 @@ public class CameraShake : MonoBehaviour {
 
 	public Camera cam;
 
-	public float shakeAmount = 0.8f;
+	public float shakeAmount = 0.6f;
 	public float decrease = 1f;
 
     private Transform initialPos;

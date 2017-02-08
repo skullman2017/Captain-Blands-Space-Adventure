@@ -48,7 +48,7 @@ public class EnemyHealth : MonoBehaviour {
             Health = initialHealth;
 
             // spaw gems here
-            GemsSpawner.spawnMultipleGems(this.transform.position);
+           // GemsSpawner.spawnMultipleGems(this.transform.position);
             
         }
     }

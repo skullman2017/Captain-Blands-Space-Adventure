@@ -44,8 +44,6 @@ public class Meteors : MonoBehaviour {
                 if(explosion){
                     explosion.transform.position = transform.position;
                     explosion.SetActive(true);
-
-                    spawnGems();
                 }
                 _sprite.color = new Color(255,255,255,255);
                 gameObject.SetActive(false);
@@ -62,16 +60,11 @@ public class Meteors : MonoBehaviour {
             _sprite.color = new Color(255,255,255,255);
             gameObject.SetActive(false); // meteor kill
             explosion.SetActive(true);
-
-            spawnGems();
         }
             
     } // end method 
 
-    void spawnGems() {
-        GemsSpawner.spawnGems(this.transform.position);
-    }
-   
+  
     // back to initial color
     IEnumerator changeColor(float secs){
         _sprite.color = new Color(255, 0, 0, 255); // when get hit
@@ -97,8 +90,6 @@ public class Meteors : MonoBehaviour {
 			_sprite.color = new Color(255,255,255,255);
 			gameObject.SetActive(false); // meteor kill
 			explosion.SetActive(true);
-
-            spawnGems();
         }
 
 	}

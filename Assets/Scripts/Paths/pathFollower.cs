@@ -102,7 +102,7 @@ public class pathFollower : MonoBehaviour {
 			Health = initialHealth;
 
             //gems spawn
-            GemsSpawner.spawnGems(this.transform.position);
+           // GemsSpawner.spawnGems(this.transform.position);
         }
 	}
 

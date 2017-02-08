@@ -11,7 +11,8 @@ public class DestroyAnimation : MonoBehaviour {
 
 	// kill on last frame of animation
     void destroy(){
+        GemsSpawner.spawnGems(this.transform.position);
         gameObject.SetActive(false);
-        //Destroy(gameObject);
+        // spawn gems
     }
 }

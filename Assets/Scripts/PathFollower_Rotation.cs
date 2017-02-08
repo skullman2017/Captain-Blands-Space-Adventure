@@ -93,7 +93,7 @@ public class PathFollower_Rotation : MonoBehaviour {
 		}
 	} // end 
 
-	void giveDamage(int _dmg){
+	public void giveDamage(int _dmg){
 		Health -= _dmg;
 		if(Health<0){
 			currentWayPointID = 0;

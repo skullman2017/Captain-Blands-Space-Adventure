@@ -28,8 +28,8 @@ public class GemsSpawner : MonoBehaviour {
             GameObject go = gemsPool.getGems(0);
 
             // random position 
-            var x = Random.Range(pos.x - 0.35f, pos.x + 0.4f);
-            var y = Random.Range(pos.y - 0.4f, pos.y + 0.3f);
+            var x = Random.Range(pos.x - 0.35f, pos.x + 0.3f);
+            var y = Random.Range(pos.y - 0.3f, pos.y + 0.3f);
             Vector2 randPos = new Vector2(x, y);
 
             go.transform.position = randPos;
