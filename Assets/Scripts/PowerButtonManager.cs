@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerButtonManager : MonoBehaviour {
 
-	private LaserBeam theLaser;
+	private LaserBeamTest theLaser;
     public GameObject playerBomb;
 	public int laserTime;
 	private bool laserFlag = false;
@@ -17,7 +17,8 @@ public class PowerButtonManager : MonoBehaviour {
         if (playerBomb.activeInHierarchy) {
             playerBomb.SetActive(false);
         }
-		theLaser = FindObjectOfType <LaserBeam> ();
+
+		theLaser = FindObjectOfType <LaserBeamTest> ();
 	}
 
 	public void startLaser(){
@@ -25,19 +26,21 @@ public class PowerButtonManager : MonoBehaviour {
         //StartCoroutine(explodeBomb());
 
 		if (laserFlag == false) {
-		    StartCoroutine (fireLaser (laserTime));
+		    StartCoroutine (fireLaser ((int)theLaser.rayDuration));
 		}
 	}
 
 	IEnumerator fireLaser(int laserTime){
 		laserFlag = true;
-		theLaser.laserOn = true;
-		// laser time 
-		yield return new WaitForSeconds (laserTime);
+        theLaser.FireLaser();
+        //theLaser.laserOn = true;
+        // laser time 
 
-		theLaser.laserOn = false;
-		// wait to active again reload again 
-		yield return new WaitForSeconds (laserTime);
+        yield return new WaitForSeconds (laserTime);
+ 
+		////theLaser.laserOn = false;
+		//// wait to active again reload again 
+		//yield return new WaitForSeconds (laserTime);
 
 		laserFlag = false;
 	}
