@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerBody;
 
     public bool isFire = true;
+    [Space]
+    public LayerMask colliderToHit;
 
     // Use this for initialization
     void Start () {
@@ -72,7 +74,9 @@ public class PlayerController : MonoBehaviour {
         // tap to fire 
         //FireBtn();
 
-       
+        //Debug.DrawRay(transform.position, transform.forward, Color.green);
+        //Debug.Log(isHitByBullets());
+
     } // end 
 
     public void FireBtn(){
@@ -145,17 +149,20 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other){
         //TODO : hitching problem 
-
-        if(other.tag == "EnemyBullet") {
+        if (other.tag == "EnemyBullet") {
             other.gameObject.SetActive(false);
 
-            // camera shake script from Brackeys 
-            //CameraShake.Shake(0.2f);
+            CameraShake.Shake(0.2f);
         }
 
         if(other.gameObject.tag =="Enemy") {
             CameraShake.Shake(0.4f);
         }
     }
+
+    bool isHitByBullets() {
+        return Physics2D.CircleCast(transform.position, 1f, transform.forward, 1f, colliderToHit);
+    }
+
 
 }

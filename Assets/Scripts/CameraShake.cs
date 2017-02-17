@@ -9,7 +9,7 @@ public class CameraShake : MonoBehaviour {
 	public float shakeAmount = 0.6f;
 	public float decrease = 1f;
 
-    private Transform initialPos;
+	private Transform initialPos;
 
 	private static float shake;
 

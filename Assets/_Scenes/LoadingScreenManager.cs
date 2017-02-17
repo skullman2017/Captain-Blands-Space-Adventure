@@ -7,7 +7,7 @@ public class LoadingScreenManager : MonoBehaviour {
 
     [Header("Loading Visuals")]
     public Image loadingIcon;
-    public Image loadingDoneIcon;
+    //public Image loadingDoneIcon;
     public Text loadingText;
     public Image progressBar;
     public Image fadeOverlay;
@@ -31,7 +31,7 @@ public class LoadingScreenManager : MonoBehaviour {
     // IMPORTANT! This is the build index of your loading scene. You need to change this to match your actual scene index
     static int loadingSceneIndex = 1;
 
-    public static void LoadScene(int levelNum) {   
+    public static void LoadScene(int levelNum) {
         Application.backgroundLoadingPriority = ThreadPriority.High;
         sceneToLoad = levelNum;
         SceneManager.LoadScene(loadingSceneIndex);
@@ -49,7 +49,7 @@ public class LoadingScreenManager : MonoBehaviour {
     private IEnumerator LoadAsync(int levelNum) {
         ShowLoadingVisuals();
 
-        yield return null; 
+        yield return null;
 
         FadeIn();
         StartOperation(levelNum);
@@ -93,7 +93,7 @@ public class LoadingScreenManager : MonoBehaviour {
     }
 
     private bool DoneLoading() {
-        return (loadSceneMode == LoadSceneMode.Additive && operation.isDone) || (loadSceneMode == LoadSceneMode.Single && operation.progress >= 0.9f); 
+        return (loadSceneMode == LoadSceneMode.Additive && operation.isDone) || (loadSceneMode == LoadSceneMode.Single && operation.progress >= 0.9f);
     }
 
     void FadeIn() {
@@ -106,7 +106,7 @@ public class LoadingScreenManager : MonoBehaviour {
 
     void ShowLoadingVisuals() {
         loadingIcon.gameObject.SetActive(true);
-        loadingDoneIcon.gameObject.SetActive(false);
+        //loadingDoneIcon.gameObject.SetActive(false);
 
         progressBar.fillAmount = 0f;
         loadingText.text = "LOADING...";
@@ -114,7 +114,7 @@ public class LoadingScreenManager : MonoBehaviour {
 
     void ShowCompletionVisuals() {
         loadingIcon.gameObject.SetActive(false);
-        loadingDoneIcon.gameObject.SetActive(true);
+        //loadingDoneIcon.gameObject.SetActive(true);
 
         progressBar.fillAmount = 1f;
         loadingText.text = "LOADING DONE";

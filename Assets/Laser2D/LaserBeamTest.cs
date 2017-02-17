@@ -6,10 +6,10 @@ public class LaserBeamTest : MonoBehaviour {
 
 
     [Tooltip("Laser instantiate position")]
-    public Transform rayBeginPos; // laser instantiate postion 
+    public Transform rayBeginPos; // laser instantiate postion
 
     [Tooltip("Laser Hit Layer")]
-    public LayerMask enemyHitLayer; // which layer laser should hit 
+    public LayerMask enemyHitLayer; // which layer laser should hit
 
     [Tooltip("Allocate the The Laser Size")]
     [Range(5, 50)]
@@ -23,10 +23,10 @@ public class LaserBeamTest : MonoBehaviour {
     public GameObject laserHitEmitter; // emitter when laser collide with Enemy/EnemyHitLayer
 
     [Tooltip("Emitter when laser start firingr")]
-    public GameObject laserMeltEmitter;  // emitter when laser start firing 
+    public GameObject laserMeltEmitter;  // emitter when laser start firing
 
     [Tooltip("Laser Damage amount for enemy")]
-    public int laserDamage; // laser damage amout for enemy 
+    public int laserDamage; // laser damage amout for enemy
 
     [Tooltip("Laser Firing Duration")]
     public float rayDuration; // laser firing duration
@@ -34,19 +34,19 @@ public class LaserBeamTest : MonoBehaviour {
     [Tooltip("The Laser Glow Sprite")]
     public Transform laserGlow;
 
-    public bool laserOn = false; // switching variable 
+    public bool laserOn = false; // switching variable
 
     private LineRenderer lineRenderer;
-    private Animator theAnimator; // to animate laser beginning animation 
-    private float length = 0; // length of linerender 
-    float lerpTime = 1f; // used to lerp 
+    private Animator theAnimator; // to animate laser beginning animation
+    private float length = 0; // length of linerender
+    float lerpTime = 1f; // used to lerp
     private float currentLerpTime = 0; // used to lerp
 
-    GameObject hitParticle = null;  // you can use object pooler here 
-    GameObject meltParticle = null; // you can use object pooler here 
+    GameObject hitParticle = null;  // you can use object pooler here
+    GameObject meltParticle = null; // you can use object pooler here
     Vector2 endPos;
 
-    private EnemyHealth theEnemy; // used to cache EnemyHealth component 
+    private EnemyHealth theEnemy; // used to cache EnemyHealth component
 
     private bool canFire = true;
 
@@ -54,14 +54,14 @@ public class LaserBeamTest : MonoBehaviour {
 
         laserGlow.gameObject.SetActive(false);
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = false; // at the beginning the linerenderer should disable 
+        lineRenderer.enabled = false; // at the beginning the linerenderer should disable
         lineRenderer.sortingOrder = 4; // tthe laser should be visible top of the enemy layer
 
-        theAnimator = GetComponent<Animator>(); // get the animator 
+        theAnimator = GetComponent<Animator>(); // get the animator
     }
 
     /// <summary>
-    ///  get call from animation event 
+    ///  get call from animation event
     /// </summary>
     void actvieLaser() {
         laserOn = true;
@@ -81,15 +81,15 @@ public class LaserBeamTest : MonoBehaviour {
 
      //   FireLaser(); // laser Firing
 
-        // laser is on 
+        // laser is on
         if (laserOn) {
 
             float currentLaserSize = maxLaserSize;
             endPos = new Vector2(rayBeginPos.position.x, transform.position.y + maxLaserSize); // end position of the layer just make sure its out of game screen
-            Vector2 laserDir = Vector2.up; // laser direction 
+            Vector2 laserDir = Vector2.up; // laser direction
 
              //Debug.DrawRay(rayBeginPos.position, laserDir, Color.black);
-            Debug.DrawLine(rayBeginPos.position, endPos, Color.black);     
+            Debug.DrawLine(rayBeginPos.position, endPos, Color.black);
 
             lineRenderer.enabled = true;
             RaycastHit2D hit = Physics2D.Raycast(rayBeginPos.position, laserDir, currentLaserSize, enemyHitLayer); // cast ray
@@ -101,7 +101,7 @@ public class LaserBeamTest : MonoBehaviour {
                 meltParticle.transform.parent = this.transform;
             }
 
-            // laser hit a physics body 
+            // laser hit a physics body
             if (hit.collider != null) {
 
                 lineRenderer.SetPosition(0, rayBeginPos.position);
@@ -109,7 +109,7 @@ public class LaserBeamTest : MonoBehaviour {
 
                 hit = laserColGlow(hit);
 
-                // hit emitter 
+                // hit emitter
                 if (hitParticle == null) {
                     hitParticle = Instantiate(laserHitEmitter, hit.point, Quaternion.identity) as GameObject;
                 }
@@ -126,7 +126,7 @@ public class LaserBeamTest : MonoBehaviour {
                     Destroy(hitParticle);
                 }
 
-                // laser dont collide with any physics body 
+                // laser dont collide with any physics body
 
                 float perc = _lerpLaser();
                 Vector2 lerp = Vector2.Lerp(rayBeginPos.position, endPos, perc * 3f);
@@ -137,7 +137,7 @@ public class LaserBeamTest : MonoBehaviour {
                 laserNotColGlow();
             }
         }
-        else if (laserOn == false && canFire==false) {
+        else if (laserOn == false) {
 
             if (hitParticle != null) {
                 Destroy(hitParticle);
@@ -164,7 +164,7 @@ public class LaserBeamTest : MonoBehaviour {
         }
 
         if(hit.collider.tag == "Meteor") {
-          
+
             if(mt = hit.collider.gameObject.GetComponent<Meteors>()) {
                 mt.giveLaserDamage(laserDamage);
             }
@@ -235,7 +235,7 @@ public class LaserBeamTest : MonoBehaviour {
 
 
     /// <summary>
-    /// turn of laser smoothly 
+    /// turn of laser smoothly
     /// </summary>
     void turnOfLaser() {
 

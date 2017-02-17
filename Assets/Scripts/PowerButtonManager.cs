@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class PowerButtonManager : MonoBehaviour {
 
@@ -7,8 +9,13 @@ public class PowerButtonManager : MonoBehaviour {
     public GameObject playerBomb;
 	public int laserTime;
 	private bool laserFlag = false;
-    private bool canBomb = true;
-    public int bombCount = 2;
+    private bool bombFlag = true;
+
+    public int laserCount;
+    public int bombCount;
+
+  	public Text bombCntText;
+    public Text laserCntText;
 
 
 	// Use this for initialization
@@ -19,34 +26,49 @@ public class PowerButtonManager : MonoBehaviour {
         }
 
 		theLaser = FindObjectOfType <LaserBeamTest> ();
+
+        bombCntText.text = bombCount.ToString();
+        laserCntText.text = laserCount.ToString();
 	}
+
+
+    public  void laserUp(int cnt) {
+        laserCount += cnt;
+        laserCntText.text = laserCount.ToString();
+    }
 
 	public void startLaser(){
 
-        //StartCoroutine(explodeBomb());
-
-		if (laserFlag == false) {
-		    StartCoroutine (fireLaser ((int)theLaser.rayDuration));
-		}
+				if(laserCount>0){
+					if (laserFlag == false) {
+						 StartCoroutine (fireLaser ((int)theLaser.rayDuration));
+					 }
+                }
 	}
 
 	IEnumerator fireLaser(int laserTime){
 		laserFlag = true;
         theLaser.FireLaser();
-        //theLaser.laserOn = true;
-        // laser time 
 
-        yield return new WaitForSeconds (laserTime);
- 
+		int tmp = Convert.ToInt32(laserCntText.text);
+        tmp += -1;
+		laserCount = tmp;
+        laserCntText.text = tmp.ToString();
+
+            //theLaser.laserOn = true;
+        // laser time
+
+        yield return new WaitForSeconds (laserTime+2f);
+
 		////theLaser.laserOn = false;
-		//// wait to active again reload again 
+		//// wait to active again reload again
 		//yield return new WaitForSeconds (laserTime);
 
 		laserFlag = false;
 	}
 
     public void startBomb() {
-        if (bombCount > 0 && canBomb == true) {
+        if (bombCount > 0 && bombFlag == true) {
              StartCoroutine(explodeBomb());
         }
     }
@@ -60,8 +82,9 @@ public class PowerButtonManager : MonoBehaviour {
     IEnumerator explodeBomb() {
 
         playerBomb.SetActive(true);
-        canBomb = false;
+        bombFlag = false;
         bombCount -= 1;
+        bombCntText.text = bombCount.ToString();
 
         while (playerBomb.transform.localScale.x <= 23f) {
             playerBomb.transform.localScale += new Vector3(1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f);
@@ -73,7 +96,7 @@ public class PowerButtonManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1.5f);
 
-        canBomb = true;
+        bombFlag = true;
 
     }
 
