@@ -4,74 +4,47 @@ using System.Collections;
 public class PathFollower_Rotation : MonoBehaviour {
 
 
-	private PathEditor pathtofollow;
-
-	private int currentWayPointID = 0;
 	public float speed;
-	private float reachDistance = 0.1f;
-	private float rotationSpeed = 5f;
-	public string pathName = "Path 1";
-
+	float rotationSpeed = 5f;
 	public int Health;
 	[Tooltip("Player bullet damage")]
 	public int damage; // player bullet hit damage
 	private int initialHealth;
-	private int mid = 0;
-    private bool canShoot = false;
 	private PlayerController theplayer;
-    private float distance = -4f;
+
+    Vector2 dir = Vector2.one;
 
     // Use this for initialization
     void Start () {
 		theplayer = FindObjectOfType <PlayerController> ();
-
 		initialHealth = Health;
-		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
-		mid = pathtofollow.pathsObject.Count+1;
-		mid = mid / 2;
-	}
+        dir = (theplayer.transform.position - transform.position).normalized;
+
+        enemyRotation();
+
+    }
 
 	// Update is called once per frame
 	void Update () {
-		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);
-		transform.position = Vector2.MoveTowards(transform.position, pathtofollow.pathsObject[currentWayPointID].position, Time.deltaTime * speed);
 
-		// rotation
-		Vector2 targetRotation = theplayer.transform.position - this.transform.position; // just awsome
-		float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle-269f);
+        Vector3 tmp = dir * speed * Time.deltaTime;
+        transform.position += tmp;
 
+       // enemyRotation();
 
-		if(distance <= reachDistance){
-			currentWayPointID++;
-		}
-
-		if(currentWayPointID >= pathtofollow.pathsObject.Count){
-			currentWayPointID = pathtofollow.pathsObject.Count-1;
-			currentWayPointID = 0;
-			gameObject.SetActive (false);
-		}
-
-	}
-		
-
-	void shoot(){
-
-            GameObject bullet = null;
-            bullet = EnemyBulletPooler._Instance.getBullet((int)EnemyBulletPooler.Enemies.Enemy_03);
-            bullet.transform.position = this.transform.position;
-            bullet.transform.Rotate(0, 0, this.transform.rotation.z);
-            bullet.SetActive(true);
-            print("shoot1");
-            return;
-
-	}
-
-    void FixedUpdate() {
-        
     }
 
-	void OnTriggerEnter2D(Collider2D col){
+    private void enemyRotation() {
+        //// rotation
+        Vector2 targetRotation = theplayer.transform.position - this.transform.position; // just awsome
+        float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle - 269f);
+    }
+
+ 
+
+
+    void OnTriggerEnter2D(Collider2D col){
 		if(col.gameObject.tag == "Bullet"){
 			//col.gameObject.SetActive (false);
 			// emitter 
@@ -93,7 +66,6 @@ public class PathFollower_Rotation : MonoBehaviour {
 	public void giveDamage(int _dmg){
 		Health -= _dmg;
 		if(Health<0){
-			currentWayPointID = 0;
 			gameObject.SetActive(false);
 
 			GameObject explsion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.enemyExplosion);

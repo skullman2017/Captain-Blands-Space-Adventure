@@ -53,18 +53,15 @@ public class MultipleEnemySpawner : MonoBehaviour {
 
 	void Enemy_03(){
 
-			for (int j = 1; j <= 2; j++) {
-
 				GameObject go = MultipleEnemyPooler._Instance.getEnemy ((int)MultipleEnemyPooler.Enemies.Enemy_03);
 				go.transform.position = spawnPos3.position;
 				go.SetActive (true);
 
-				for (int i = 1; i <= 2; i++) {
-					GameObject go2 = MultipleEnemyPooler._Instance.getEnemy ((int)MultipleEnemyPooler.Enemies.Enemy_03_pattern2);
-					go2.transform.position = spawnPos4.position;
-					go2.SetActive (true);
-				}
-			}
+				GameObject go2 = MultipleEnemyPooler._Instance.getEnemy ((int)MultipleEnemyPooler.Enemies.Enemy_03);
+				go2.transform.position = spawnPos4.position;
+				go2.SetActive (true);
+		
+		
 	} // end 
 		
 
