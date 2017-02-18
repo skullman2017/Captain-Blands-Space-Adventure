@@ -70,10 +70,11 @@ public class EnemyBulletPooler : MonoBehaviour {
 
 	// give id 
 	public GameObject getBullet(int id){
-
+       
 		for(int count = 0; count < thePool[id].Count; count++){
 			if(thePool[id][count].activeInHierarchy == false){
-				return thePool [id] [count];
+               
+                return thePool [id] [count];
 			}
 		}
 

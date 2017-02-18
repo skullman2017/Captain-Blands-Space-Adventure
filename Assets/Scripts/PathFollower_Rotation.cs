@@ -15,26 +15,20 @@ public class PathFollower_Rotation : MonoBehaviour {
 	public int Health;
 	[Tooltip("Player bullet damage")]
 	public int damage; // player bullet hit damage
-
-	[Range(2,10)]
-	public int repeatRate;
-
 	private int initialHealth;
 	private int mid = 0;
-
+    private bool canShoot = false;
 	private PlayerController theplayer;
+    private float distance = -4f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		theplayer = FindObjectOfType <PlayerController> ();
 
 		initialHealth = Health;
 		pathtofollow = GameObject.Find(pathName).GetComponent<PathEditor>();
 		mid = pathtofollow.pathsObject.Count+1;
 		mid = mid / 2;
-
-		// shoot 
-		InvokeRepeating ("shoot",2f,repeatRate);
 	}
 
 	// Update is called once per frame
@@ -62,17 +56,20 @@ public class PathFollower_Rotation : MonoBehaviour {
 		
 
 	void shoot(){
-		if (this.gameObject.activeInHierarchy) {
-			//Debug.Log ("fire");
-			for (int i = 1; i <= 3; i++) {
-				GameObject bullet = EnemyBulletPooler._Instance.getBullet ((int)EnemyBulletPooler.Enemies.Enemy_03);
-				bullet.transform.position = this.transform.position;
-				bullet.transform.Rotate (0,0,this.transform.rotation.z);
-				bullet.SetActive (true);
-			}
-		}
-		//Debug.Log ("not fire");
+
+            GameObject bullet = null;
+            bullet = EnemyBulletPooler._Instance.getBullet((int)EnemyBulletPooler.Enemies.Enemy_03);
+            bullet.transform.position = this.transform.position;
+            bullet.transform.Rotate(0, 0, this.transform.rotation.z);
+            bullet.SetActive(true);
+            print("shoot1");
+            return;
+
 	}
+
+    void FixedUpdate() {
+        
+    }
 
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.gameObject.tag == "Bullet"){

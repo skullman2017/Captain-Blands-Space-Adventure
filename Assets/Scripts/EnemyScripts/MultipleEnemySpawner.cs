@@ -70,7 +70,9 @@ public class MultipleEnemySpawner : MonoBehaviour {
 
 	public IEnumerator Enemy_05_formation_1(){
 
-		yield return new WaitForSeconds (Random.Range (min,max));
+        print("now prepare for the Boss 1");
+
+        yield return new WaitForSeconds (Random.Range (min,max));
 
 			for(int i=0;i<enemy_05_Pos.Length;i++){
 				GameObject go = MultipleEnemyPooler._Instance.getEnemy ((int)MultipleEnemyPooler.Enemies.Enemy_05);

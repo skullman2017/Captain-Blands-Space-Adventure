@@ -18,7 +18,8 @@ public class ExplosionPooler : MonoBehaviour {
 	public enum explosionFabs {
 		meteorExplosion,
 		enemyExplosion,
-		hitEmitter
+		hitEmitter,
+        bulletHitExplosion
 	};
 
 

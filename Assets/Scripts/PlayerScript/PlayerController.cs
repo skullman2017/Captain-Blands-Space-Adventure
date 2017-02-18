@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D playerBody;
 
     public bool isFire = true;
-    [Space]
-    public LayerMask colliderToHit;
 
     // Use this for initialization
     void Start () {
@@ -73,9 +71,6 @@ public class PlayerController : MonoBehaviour {
         movePlayer(direction);
         // tap to fire 
         //FireBtn();
-
-        //Debug.DrawRay(transform.position, transform.forward, Color.green);
-        //Debug.Log(isHitByBullets());
 
     } // end 
 
@@ -152,16 +147,14 @@ public class PlayerController : MonoBehaviour {
         if (other.tag == "EnemyBullet") {
             other.gameObject.SetActive(false);
 
-            CameraShake.Shake(0.2f);
+            GameObject go = ExplosionPooler._Instance.getExplosion((int)ExplosionPooler.explosionFabs.bulletHitExplosion);
+            go.transform.position = other.gameObject.transform.position;
+            go.SetActive(true);
         }
 
         if(other.gameObject.tag =="Enemy") {
             CameraShake.Shake(0.4f);
         }
-    }
-
-    bool isHitByBullets() {
-        return Physics2D.CircleCast(transform.position, 1f, transform.forward, 1f, colliderToHit);
     }
 
 

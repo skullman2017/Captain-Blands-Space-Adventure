@@ -55,14 +55,10 @@ public class PowerButtonManager : MonoBehaviour {
 		laserCount = tmp;
         laserCntText.text = tmp.ToString();
 
-            //theLaser.laserOn = true;
+        //theLaser.laserOn = true;
         // laser time
 
-        yield return new WaitForSeconds (laserTime+2f);
-
-		////theLaser.laserOn = false;
-		//// wait to active again reload again
-		//yield return new WaitForSeconds (laserTime);
+        yield return new WaitForSeconds(laserTime + 2f);
 
 		laserFlag = false;
 	}

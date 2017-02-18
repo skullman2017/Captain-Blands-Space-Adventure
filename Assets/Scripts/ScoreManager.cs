@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour {
     /// little animation for score addition
     /// </summary>
     private void scoreTween() {
-   
+            // pop up score
     }
 
 }

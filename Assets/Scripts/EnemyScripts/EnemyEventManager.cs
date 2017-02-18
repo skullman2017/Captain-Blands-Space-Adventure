@@ -26,11 +26,6 @@ public class EnemyEventManager : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	// signal get from the Enemy_01_Spawner
 	// get perpare for next enemy
 	void createEnemyBullet(){
@@ -50,18 +45,11 @@ public class EnemyEventManager : MonoBehaviour {
 	// get call from Enemy_01_spawner
 	void initiate_Event_C(){
 		// path following enemy
+        // this spawnEnemy will also call Enemy_5 formation follow the chain
 		theEnemySpawner.spawnEnemy ();
-
 		theEventDelegate -= initiate_Event_C;
-
-		theEventDelegate += initiate_Event_C_02;
 	}
 
-	// get call from multipleEnemySpawner
-	// Enemy - 05 spawn cal to multiple enemy spawner
-	void initiate_Event_C_02(){
-		theEnemySpawner.StartCoroutine (theEnemySpawner.Enemy_05_formation_1 ());
 
-	}
 
 }
