@@ -57,9 +57,7 @@ public class PlayerBullet : MonoBehaviour {
 			yield return 0;
 		}
 
-
 		spriteRend.sprite = defaultSprite;
-
 	}
 
 	void OnEnable(){

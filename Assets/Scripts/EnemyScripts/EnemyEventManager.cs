@@ -50,6 +50,6 @@ public class EnemyEventManager : MonoBehaviour {
 		theEventDelegate -= initiate_Event_C;
 	}
 
-
+	
 
 }

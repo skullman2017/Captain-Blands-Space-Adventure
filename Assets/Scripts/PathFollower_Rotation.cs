@@ -5,7 +5,6 @@ public class PathFollower_Rotation : MonoBehaviour {
 
 
 	public float speed;
-	float rotationSpeed = 5f;
 	public int Health;
 	[Tooltip("Player bullet damage")]
 	public int damage; // player bullet hit damage
@@ -35,13 +34,11 @@ public class PathFollower_Rotation : MonoBehaviour {
     }
 
     private void enemyRotation() {
-        //// rotation
+        // rotation
         Vector2 targetRotation = theplayer.transform.position - this.transform.position; // just awsome
         float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle - 269f);
     }
-
- 
 
 
     void OnTriggerEnter2D(Collider2D col){

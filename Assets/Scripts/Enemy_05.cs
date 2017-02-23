@@ -27,7 +27,7 @@ public class Enemy_05 : MonoBehaviour {
 		
 	void fire(){
 
-		for(int i=0;i<3;i++){
+		for(int i=0;i<2;i++){
 			Vector3 rot = transform.rotation.eulerAngles;
 
 			GameObject go = EnemyBulletPooler._Instance.getBullet ((int)EnemyBulletPooler.Enemies.Enemy_01);

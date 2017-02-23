@@ -157,10 +157,13 @@ public class LaserBeamTest : MonoBehaviour {
     private void EnemyDamage(RaycastHit2D hit) {
         // give enemy damage
         Meteors mt = null;
-
+        // 10 = Enemy Layer 
         if (hit.collider.gameObject.layer == 10) {
             //   print("Called");
             hit.transform.SendMessage("giveDamage", laserDamage);
+        }
+        else if(hit.collider.gameObject.layer == 14){ // boss layer 
+              hit.transform.SendMessage("giveDamage", 5f);
         }
 
         if(hit.collider.tag == "Meteor") {
@@ -169,12 +172,13 @@ public class LaserBeamTest : MonoBehaviour {
                 mt.giveLaserDamage(laserDamage);
             }
         }
+        
 
     }
 
 
     /// <summary>
-    /// this glow effect when laser did not collide with any Enem Object
+    /// this glow effect when laser did not collide with any Enemy Object
     /// </summary>
     private void laserNotColGlow() {
         //print("laser dont hit");
@@ -241,23 +245,24 @@ public class LaserBeamTest : MonoBehaviour {
 
         //Debug.Log("turn of laser");
 
-        Vector2 startPos = lineRenderer.GetPosition(0);
-        Vector2 endPos = lineRenderer.GetPosition(1);
+        //Vector2 startPos = lineRenderer.GetPosition(0);
+       // Vector2 endPos = lineRenderer.GetPosition(1);
 
-        length = (endPos - startPos).magnitude;
+       // length = (endPos - startPos).magnitude;
 
-        float perc = _lerpLaser();
-
-        Vector2 lerp = Vector2.Lerp(endPos, startPos, perc);
-
-        if (length > 0.3f) {
+       // float perc = _lerpLaser();
+       // perc = Mathf.Abs(perc*2.5f);
+        //Vector2 lerp = Vector2.Lerp(endPos, startPos, perc);
+        lineRenderer.enabled = false;
+        /* 
+        if (length > 0.1f) {
             lineRenderer.SetPosition(1, lerp);
         }
         else {
             lineRenderer.enabled = false;
             currentLerpTime = 0;
         }
-
+        */
     }
 
 }
