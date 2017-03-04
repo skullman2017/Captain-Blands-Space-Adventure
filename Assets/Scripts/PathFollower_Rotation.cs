@@ -15,17 +15,27 @@ public class PathFollower_Rotation : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		theplayer = FindObjectOfType <PlayerController> ();
 		initialHealth = Health;
+    }
+
+	void OnEnable(){
+		theplayer = FindObjectOfType <PlayerController> ();
         dir = (theplayer.transform.position - transform.position).normalized;
 
         enemyRotation();
 
-    }
+		print("Activate");
+	}
+
+	
+	void OnDisable(){
+		theplayer = null;
+		print("Deactivate");
+	}
 
 	// Update is called once per frame
 	void Update () {
-
+		
         Vector3 tmp = dir * speed * Time.deltaTime;
         transform.position += tmp;
 
@@ -35,7 +45,7 @@ public class PathFollower_Rotation : MonoBehaviour {
 
     private void enemyRotation() {
         // rotation
-        Vector2 targetRotation = theplayer.transform.position - this.transform.position; // just awsome
+        Vector2 targetRotation = theplayer.transform.position - transform.position;
         float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, angle - 269f);
     }
