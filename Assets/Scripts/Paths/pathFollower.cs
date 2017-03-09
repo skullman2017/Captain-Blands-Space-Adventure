@@ -36,6 +36,12 @@ public class pathFollower : MonoBehaviour {
 		mid = mid / 2;
 	}
 
+
+	/* void OnDisable() {
+		Health = initialHealth;
+    }
+	*/
+
 	// Update is called once per frame
 	void Update () {
 		float distance = Vector2.Distance(pathtofollow.pathsObject[currentWayPointID].position, transform.position);

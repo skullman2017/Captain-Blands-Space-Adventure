@@ -37,7 +37,7 @@ public class PlayerBullet : MonoBehaviour {
         
 
     void OnTriggerEnter2D(Collider2D col){
-		if(col.tag == "KillBox" || col.tag == "Enemy"){
+		if(col.tag == "KillBox" || col.tag == "Enemy" || col.tag=="Boss"){
             gameObject.SetActive(false);
         }
         

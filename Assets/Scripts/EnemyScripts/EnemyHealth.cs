@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyHealth : MonoBehaviour {
 
@@ -17,6 +18,10 @@ public class EnemyHealth : MonoBehaviour {
         initialHealth = Health;
 	}
 	
+	void onDisable(){
+		Health = initialHealth;
+	}
+
 	void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Bullet"){
 			//Debug.Log ("hit pos : "+transform.position);
@@ -37,8 +42,26 @@ public class EnemyHealth : MonoBehaviour {
 		
 
 	public void giveDamage(int _dmg){
-		Health -= _dmg;
+		//Health -= _dmg;
         
+		// if it is Boss
+		if(this.gameObject.layer==14){
+
+			double amount = (float)_dmg/Health; // _dmg/Health take only three precesion value
+			amount = Math.Round(amount,4);
+
+			float bossHealth = BossHealth.damageHealthBar(amount);
+
+			if(bossHealth<=0.001){
+				Health = -1;
+			}
+			//print(bossHealth);
+		}
+		else{
+			Health -= _dmg;
+		}
+		
+
 		if(Health<0){
 			gameObject.SetActive(false);
 

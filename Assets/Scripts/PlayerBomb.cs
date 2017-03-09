@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBomb : MonoBehaviour {
 
@@ -43,6 +41,14 @@ public class PlayerBomb : MonoBehaviour {
                 //enemyExplosion(col);
             }
         }
+
+
+        if(col.gameObject.tag=="Boss"){
+            print(col.gameObject);
+            EnemyHealth eH = col.gameObject.GetComponent<EnemyHealth>();
+            eH.giveDamage(250);
+        }
+
     }
 
 

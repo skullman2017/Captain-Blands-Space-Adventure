@@ -28,7 +28,6 @@ public class Boss_1_Shoot : MonoBehaviour {
 
 		while(Time.time - startTime < duration){
 			yield return new WaitForSeconds (0.30f);
-			print("shoot");
 			fire();
 			//Instantiate(bullet, transform.position, transform.rotation);
 		}

@@ -24,13 +24,13 @@ public class PathFollower_Rotation : MonoBehaviour {
 
         enemyRotation();
 
-		print("Activate");
+		//print("Activate");
 	}
 
 	
 	void OnDisable(){
 		theplayer = null;
-		print("Deactivate");
+		//print("Deactivate");
 	}
 
 	// Update is called once per frame

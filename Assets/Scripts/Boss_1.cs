@@ -32,7 +32,7 @@ public class Boss_1 : MonoBehaviour {
         }
       
         yield return new WaitForSeconds(1f);		 
-		print("start shooting");
+	
 		gameObject.BroadcastMessage("_startShooting");
 		// shoot for sometime
 		yield return new WaitForSeconds(15f);
