@@ -19,11 +19,11 @@ public class PlayerBomb : MonoBehaviour {
 
             if (go = col.gameObject.GetComponent<pathFollower>()) {
                 // for enemy_02 reset initial pathID
-                go.giveDamage(100);
+                go.giveDamage(150);
                 return;
             }
             else if(go1 = col.gameObject.GetComponent<EnemyHealth>()) {
-                go1.giveDamage(100);
+                go1.giveDamage(150);
                 return;
             }
             else if (go2 = col.gameObject.GetComponent<PathFollower_Rotation>()) {
@@ -44,9 +44,10 @@ public class PlayerBomb : MonoBehaviour {
 
 
         if(col.gameObject.tag=="Boss"){
-            print(col.gameObject);
+         //   print(col.gameObject);
             EnemyHealth eH = col.gameObject.GetComponent<EnemyHealth>();
-            eH.giveDamage(250);
+            float dmg = 250f;
+            eH.giveDamage(dmg);
         }
 
     }

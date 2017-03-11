@@ -32,10 +32,10 @@ public class Boss_1_Shoot : MonoBehaviour {
 			//Instantiate(bullet, transform.position, transform.rotation);
 		}
 
-		print("end phase");
+		//print("end phase");
 		yield return new WaitForSeconds(pushTime);
 		
-		print("start phase");
+		//print("start phase");
 		StartCoroutine(startShooting(pushTime));
 	
 	}

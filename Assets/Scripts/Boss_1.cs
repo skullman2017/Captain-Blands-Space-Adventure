@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class Boss_1 : MonoBehaviour {
 
+	// this is a test of github
 	
 	private PlayerController thePlayer;
 	private Vector2 posToStop;
 	private Vector2 initialPos;
+	
 	MultipleEnemySpawner multipleEnemySpawner;
+	BossHealth bossHealth;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +25,9 @@ public class Boss_1 : MonoBehaviour {
 		if(thePlayer){
 			StartCoroutine(moveToPlayer(posToStop));
 		}
+
+		bossHealth = GetComponent<BossHealth>();
+		
 	}
 	
 	
@@ -31,29 +39,35 @@ public class Boss_1 : MonoBehaviour {
             yield return null;
         }
       
-        yield return new WaitForSeconds(1f);		 
+        yield return new WaitForSeconds(2f);		 
 	
 		gameObject.BroadcastMessage("_startShooting");
 		// shoot for sometime
-		yield return new WaitForSeconds(15f);
+		yield return new WaitForSeconds(Random.Range(15,20));
 
 		// then revert back to previous position
 		StartCoroutine(backToPreviousPosition(initialPos));
+		// stop shooting 
 		gameObject.BroadcastMessage("stopShooting");
     }
 
 	IEnumerator backToPreviousPosition(Vector2 initialPos){
-		//gameObject.BroadcastMessage("stopShooting");
+		gameObject.BroadcastMessage("stopShooting");
 		
-		 while(Vector2.Distance(transform.position, initialPos) > 0.05f) {
-            transform.position = Vector2.MoveTowards(transform.position, initialPos,Time.deltaTime*1.5f);
-            yield return null;
-        }
+		float health = bossHealth.getHealth();
+
+		if(health>0.25f){
+			 while(Vector2.Distance(transform.position, initialPos) > 0.05f) {
+           		 transform.position = Vector2.MoveTowards(transform.position, initialPos,Time.deltaTime*1.5f);
+            	yield return null;
+       		 }
+		}
+		
 		yield return new WaitForSeconds(2f);
 		
-		// rocket enemy here 
-		multipleEnemySpawner.Enemy_03();
 		
+		// rocket enemy here 
+		multipleEnemySpawner.Enemy_03();		
 		StartCoroutine(moveToPlayer(posToStop));
 	}
 

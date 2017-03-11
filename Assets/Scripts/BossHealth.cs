@@ -9,6 +9,7 @@ public class BossHealth : MonoBehaviour {
 	public static Image health;
 	private Vector2 screenPos = Vector2.zero;
 	public Vector2 offset;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,11 @@ public class BossHealth : MonoBehaviour {
 	public static float damageHealthBar(double amount){
 		health.fillAmount -= (float)amount; 
 
+		// threshold used to stay boss when health is less than 20%
+		return health.fillAmount;
+	}
+
+	public float getHealth(){
 		return health.fillAmount;
 	}
 

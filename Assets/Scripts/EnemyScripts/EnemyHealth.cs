@@ -4,11 +4,11 @@ using System;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public int Health;
+    public float Health;
     [Tooltip("Player bullet damage")]
     public int damage; // player bullet hit damage
 
-    private int initialHealth;
+    private float initialHealth;
 	private int cnt = 0;
 
 	private GameObject hitEmitter;
@@ -41,7 +41,7 @@ public class EnemyHealth : MonoBehaviour {
     } // end 
 		
 
-	public void giveDamage(int _dmg){
+	public void giveDamage(float _dmg){
 		//Health -= _dmg;
         
 		// if it is Boss
