@@ -19,7 +19,7 @@ public class Boss_1_Shoot : MonoBehaviour {
 	}
 	
 	IEnumerator startShooting(float t){
-		print("startShooting");
+		// print("startShooting");
 		//Instantiate(bullet, transform.position, transform.rotation);
 		
 
