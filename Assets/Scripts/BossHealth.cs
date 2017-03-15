@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour {
 
@@ -9,7 +9,7 @@ public class BossHealth : MonoBehaviour {
 	public static Image health;
 	private Vector2 screenPos = Vector2.zero;
 	public Vector2 offset;
-	
+	private TextManager textmanager;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +25,14 @@ public class BossHealth : MonoBehaviour {
 			//print(pos);
 		}
 		
+
+		GameObject canvas = GameObject.FindGameObjectWithTag("UICanvas");
+
+		if(canvas) {
+			textmanager = canvas.GetComponentInChildren<TextManager>();
+		}
+		else{ print("not found"); }
+
 	}
 	
 	public static float damageHealthBar(double amount){
@@ -42,6 +50,14 @@ public class BossHealth : MonoBehaviour {
 		screenPos = Camera.main.WorldToScreenPoint(transform.position);
 		healthBar.transform.position = (screenPos-offset);
 
+	}
+
+	 /// <summary>
+	/// This function is called when the behaviour becomes disabled or inactive.
+	/// </summary>
+	void OnDisable(){
+		//print("boss is disabled");
+		textmanager.startDialogue();
 	}
 
 }

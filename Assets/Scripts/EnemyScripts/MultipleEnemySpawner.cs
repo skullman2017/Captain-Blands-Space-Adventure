@@ -143,7 +143,7 @@ public class MultipleEnemySpawner : MonoBehaviour
     // get call after enemy_05 event 
     public IEnumerator instantiateBoss()
     {
-		yield return new WaitForSeconds(6f);
+		yield return new WaitForSeconds(10f);
         GameObject bossObj = Instantiate(Boss1, bossSpawPos.position, Quaternion.identity) as GameObject;
     }
 

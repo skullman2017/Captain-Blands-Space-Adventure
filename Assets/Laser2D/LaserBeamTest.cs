@@ -56,6 +56,7 @@ public class LaserBeamTest : MonoBehaviour {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false; // at the beginning the linerenderer should disable
         lineRenderer.sortingOrder = 8; // tthe laser should be visible top of the enemy layer
+       // lineRenderer.sortingLayerName = "Foreground";
 
         theAnimator = GetComponent<Animator>(); // get the animator
     }

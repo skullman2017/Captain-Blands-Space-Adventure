@@ -53,6 +53,7 @@ public class EnemyHealth : MonoBehaviour {
 			float bossHealth = BossHealth.damageHealthBar(amount);
 
 			if(bossHealth<=0.001){
+				// boss dead here 
 				Health = -1;
 			}
 			//print(bossHealth);
