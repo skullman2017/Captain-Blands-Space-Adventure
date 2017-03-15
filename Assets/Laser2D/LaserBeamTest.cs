@@ -55,7 +55,7 @@ public class LaserBeamTest : MonoBehaviour {
         laserGlow.gameObject.SetActive(false);
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false; // at the beginning the linerenderer should disable
-        lineRenderer.sortingOrder = 4; // tthe laser should be visible top of the enemy layer
+        lineRenderer.sortingOrder = 8; // tthe laser should be visible top of the enemy layer
 
         theAnimator = GetComponent<Animator>(); // get the animator
     }
