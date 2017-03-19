@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     private AudioSource playerAudioSource;
     private PlayerHealth playerHealth;
     public float playerDamage;
-
+    public GameObject destroyAnimation;
     private Rigidbody2D playerBody;
 
     public bool isFire = true;
@@ -152,19 +152,32 @@ public class PlayerController : MonoBehaviour {
             go.transform.position = other.gameObject.transform.position;
             go.SetActive(true);
 
-            float health =  playerHealth.playerDamage((float)playerDamage/100f);
+            givePlayerDamage((float)playerDamage/100f);
         }
 
        else if(other.gameObject.tag =="Enemy" || other.gameObject.tag == "Boss") {
             CameraShake.Shake(0.4f);
             // give damage 
-            float health =  playerHealth.playerDamage((float)playerDamage/100f);
+            givePlayerDamage((float)playerDamage/100f);
         }
         else if(other.gameObject.tag=="Meteor"){
-            float health =  playerHealth.playerDamage((float)playerDamage/100f);
+           givePlayerDamage((float)playerDamage/100f);
         }
 
     } // end 
 
+    void givePlayerDamage(float dmg){
+        float health =  playerHealth.playerDamage((float)playerDamage/100f);
+        if(health<0.005f){
+            GameObject go = Instantiate(destroyAnimation, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+            
+            // save score 
+            ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
+            // save total score
+            ScoreManager.Instance.saveTotalScore(ScoreManager.Instance.SCORE);
+            print("player died");
+        }
+    }
 
 }

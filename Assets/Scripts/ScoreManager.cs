@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour {
     public static ScoreManager Instance ;
 
     public Text scoreText;
-    private  int SCORE = 0;
+    public  int SCORE = 0;
 
     private static  ScoreManager instance
     {
@@ -43,6 +43,16 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     private void scoreTween() {
             // pop up score
+    }
+
+    public void saveCurrentScore(int score){
+        PlayerPrefs.SetInt("PLAYER_CURRENT_SCORE",score);
+    }
+
+    public void saveTotalScore(int _score){
+        int curScore = PlayerPrefs.GetInt("PLAYER_CURRENT_SCORE");
+        curScore += _score;
+        PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", curScore);
     }
 
 }
