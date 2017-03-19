@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
+    public Image healthBar;
+
 	// Use this for initialization
 	void Start () {
-        // at the beginning player has full health
-        transform.localScale = new Vector2(1f, 1f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-       // if(transform.localScale.x <= 0.01){
-           // print("player healt empty");
-       // }
+
+        if(healthBar!=null){
+            healthBar.fillAmount = 1f;
+        }
+        else{
+            GameObject HB = GameObject.FindGameObjectWithTag("UICanvas");
+            healthBar = HB.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>();
+        }
 	}
 
-    public float giveDamage(float dmg){
-        if (transform.localScale.x > 0.01)
-        {
-            transform.localScale = new Vector2(transform.localScale.x - (dmg * Time.deltaTime), 1f);
-        }
-        return transform.localScale.x;
+    public float playerDamage(float dmg){
+        healthBar.fillAmount -= dmg;
+        
+        return healthBar.fillAmount;
     }
+
 
 }

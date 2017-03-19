@@ -34,8 +34,9 @@ public class PlayerController : MonoBehaviour {
         objPooler = FindObjectOfType<bulletPooler>();
 
         accleStartY = Input.acceleration.y; // mobile 
+      
         // get PlayerHealth script
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         // player set initial position 
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -143,19 +144,27 @@ public class PlayerController : MonoBehaviour {
 
 
     void OnTriggerEnter2D(Collider2D other){
-        //TODO : hitching problem 
+      
         if (other.tag == "EnemyBullet") {
             other.gameObject.SetActive(false);
 
             GameObject go = ExplosionPooler._Instance.getExplosion((int)ExplosionPooler.explosionFabs.bulletHitExplosion);
             go.transform.position = other.gameObject.transform.position;
             go.SetActive(true);
+
+            float health =  playerHealth.playerDamage((float)playerDamage/100f);
         }
 
-        if(other.gameObject.tag =="Enemy") {
+       else if(other.gameObject.tag =="Enemy" || other.gameObject.tag == "Boss") {
             CameraShake.Shake(0.4f);
+            // give damage 
+            float health =  playerHealth.playerDamage((float)playerDamage/100f);
         }
-    }
+        else if(other.gameObject.tag=="Meteor"){
+            float health =  playerHealth.playerDamage((float)playerDamage/100f);
+        }
+
+    } // end 
 
 
 }
