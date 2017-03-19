@@ -9,7 +9,7 @@ public class SetTotalScore : MonoBehaviour {
 		scoreText = GetComponent<Text>();
 		int totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
 
-		scoreText.text = totalScore.ToString();
+		scoreText.text = totalScore.ToString()+"$";
 	}
 	
 	// Update is called once per frame
