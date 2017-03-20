@@ -1,16 +1,70 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 public class ShopManager : MonoBehaviour {
 
+	public Text warningText;
+	public Text totalText;
+	public Text bombBuyText;
+	public Text lasyerBuyText;
+	private int totalScore = 0;
+	private int currentScore = 0;
+
+	int bombPrice = 300;
+	int laserPrice = 500;
+	int bombCnt = 0;
+	int laserCnt = 0;
+	bool Flag = true;
 	// Use this for initialization
-	void Start () {
-		
+	void Start () {	
+		warningText.text = string.Empty;
+
+		//StartCoroutine(fadeText(warningText));
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void buyBomb(){
+		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
+		if(totalScore>=bombPrice){
+			bombCnt++;
+			bombBuyText.text = bombCnt.ToString();
+
+			totalScore -= bombPrice;
+			totalText.text = totalScore.ToString();
+			PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
+		}
+		else{
+			
+			warningText.text = "YOU DONT HAVE ENOUGH MONEY !";
+			//StopCoroutine("fadeText");
+			if(Flag == true){
+				StartCoroutine(fadeText(warningText));
+				Flag = false;
+			}
+		}
+
 	}
+
+	IEnumerator fadeText(Text txt){
+		Flag = false;
+		print("co");
+		yield return new WaitForSeconds(1f);
+		
+		Text myText= txt.GetComponent<Text>();
+
+		while(myText.color.a>0){
+
+		Color c = myText.color;
+		c.a -= 1f*Time.deltaTime;
+		myText.color = c;	
+		
+		yield return null;
+
+		}
+
+		warningText.text = string.Empty;
+		myText.color = new Color(myText.color.r, myText.color.g, myText.color.b, 255);
+		Flag = true;
+	}
+	
+
 }
