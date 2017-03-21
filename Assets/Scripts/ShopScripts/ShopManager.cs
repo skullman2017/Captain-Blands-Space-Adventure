@@ -6,7 +6,7 @@ public class ShopManager : MonoBehaviour {
 	public Text warningText;
 	public Text totalText;
 	public Text bombBuyText;
-	public Text lasyerBuyText;
+	public Text laserBuyText;
 	private int totalScore = 0;
 	private int currentScore = 0;
 
@@ -42,6 +42,28 @@ public class ShopManager : MonoBehaviour {
 			}
 		}
 
+	}
+
+
+	public void buyLaser(){
+		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
+		if(totalScore>=laserPrice){
+			laserCnt++;
+			laserBuyText.text = laserCnt.ToString();
+
+			totalScore -= laserPrice;
+			totalText.text = totalScore.ToString();
+			PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
+		}
+		else{
+			
+			warningText.text = "YOU DONT HAVE ENOUGH MONEY !";
+			//StopCoroutine("fadeText");
+			if(Flag == true){
+				StartCoroutine(fadeText(warningText));
+				Flag = false;
+			}
+		}
 	}
 
 	IEnumerator fadeText(Text txt){
