@@ -17,6 +17,8 @@ public class PowerButtonManager : MonoBehaviour {
   	public Text bombCntText;
     public Text laserCntText;
 
+    AudioSource laserCharge;
+    AudioSource laserShoot;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +31,10 @@ public class PowerButtonManager : MonoBehaviour {
 
         bombCntText.text = bombCount.ToString();
         laserCntText.text = laserCount.ToString();
+
+
+        AudioSource[] audios = GetComponents<AudioSource>();
+
 	}
 
 

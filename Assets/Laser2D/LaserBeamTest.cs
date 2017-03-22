@@ -49,6 +49,13 @@ public class LaserBeamTest : MonoBehaviour {
     private EnemyHealth theEnemy; // used to cache EnemyHealth component
 
     private bool canFire = true;
+    private AudioSource audio;
+   // private AudioSource laserShoot;
+
+    [Space(10)]
+    public AudioClip shootSound;
+    public AudioClip chargeSound;
+
 
     void Start() {
 
@@ -59,7 +66,11 @@ public class LaserBeamTest : MonoBehaviour {
        // lineRenderer.sortingLayerName = "Foreground";
 
         theAnimator = GetComponent<Animator>(); // get the animator
-    }
+
+        // get audios 
+        audio = GetComponent<AudioSource>();
+
+    } // end 
 
     /// <summary>
     ///  get call from animation event
@@ -238,6 +249,18 @@ public class LaserBeamTest : MonoBehaviour {
         return perc;
     }
 
+
+    void playerLaserSound(){
+        StartCoroutine(laserSound());
+    }
+
+    IEnumerator laserSound(){
+        audio.clip = chargeSound;
+        audio.Play();
+        yield return new WaitForSeconds(audio.clip.length);
+        audio.clip = shootSound;
+        audio.Play();
+    }
 
     /// <summary>
     /// turn of laser smoothly
