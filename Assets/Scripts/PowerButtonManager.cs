@@ -19,6 +19,7 @@ public class PowerButtonManager : MonoBehaviour {
 
     AudioSource laserCharge;
     AudioSource laserShoot;
+    private PlayerController thePlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +35,7 @@ public class PowerButtonManager : MonoBehaviour {
 
 
         AudioSource[] audios = GetComponents<AudioSource>();
-
+        thePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
 
 
@@ -47,6 +48,9 @@ public class PowerButtonManager : MonoBehaviour {
 
 				if(laserCount>0){
 					if (laserFlag == false) {
+                        // turn of player shoot 
+                        thePlayer.CancelInvoke("FireBtn");
+
 						 StartCoroutine (fireLaser ((int)theLaser.rayDuration));
 					 }
                 }
@@ -67,6 +71,9 @@ public class PowerButtonManager : MonoBehaviour {
         yield return new WaitForSeconds(laserTime + 2f);
 
 		laserFlag = false;
+
+        // turn on player shoot again 
+        thePlayer.InvokeRepeating("FireBtn",1.5f, thePlayer.fireRate);
 	}
 
     public void startBomb() {
