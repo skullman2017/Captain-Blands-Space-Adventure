@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 
     public bool isFire = true;
 
+    [Space(10)]
+    public GameObject gameOverMenu;
+
     // Use this for initialization
     void Start () {
         playerAudioSource = GetComponent<AudioSource>();
@@ -170,14 +173,38 @@ public class PlayerController : MonoBehaviour {
         float health =  playerHealth.playerDamage((float)playerDamage/100f);
         if(health<0.005f){
             GameObject go = Instantiate(destroyAnimation, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+          //  Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            
+            CancelInvoke("FireBtn");
+
+            foreach(Transform child in transform){
+                child.gameObject.SetActive(false);
+            }
+
             
             // save score 
             ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
             // save total score
             ScoreManager.Instance.saveTotalScore(ScoreManager.Instance.SCORE);
             print("player died");
+
+            gameOver();
         }
+    }
+    
+    public void gameOver(){
+        Animator animator = gameOverMenu.GetComponent<Animator>();
+        animator.SetBool("gameOver", true);
+        
+        gameOverMenu.transform.GetChild(0).GetComponent<TextManager>().startDialogue();
+
+        Invoke("resertGame",3f);
+       // FindObjectOfType<LoadTargetScene>().LoadSceneNum(2);
+    }
+
+    void resertGame(){
+        print("Game restarted");
     }
 
 }

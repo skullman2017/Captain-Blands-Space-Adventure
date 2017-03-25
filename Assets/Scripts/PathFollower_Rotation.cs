@@ -20,7 +20,9 @@ public class PathFollower_Rotation : MonoBehaviour {
 
 	void OnEnable(){
 		theplayer = FindObjectOfType <PlayerController> ();
-        dir = (theplayer.transform.position - transform.position).normalized;
+		
+		if(theplayer!=null)
+       		 dir = (theplayer.transform.position - transform.position).normalized;
 
         enemyRotation();
 
