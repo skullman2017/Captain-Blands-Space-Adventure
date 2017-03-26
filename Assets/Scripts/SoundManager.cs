@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
 
 	public static SoundManager Instance;
-
+	
 	private static SoundManager instance{
 		get{
 			if(Instance == null){
@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public AudioClip player_death;
+	public AudioClip hitExplosion;
 	private AudioSource audio;
 	private AudioSource currentAudio;
 	void Start()
@@ -40,6 +41,12 @@ public class SoundManager : MonoBehaviour {
 
 	public void playPlayerDeadSFX(){
 		currentAudio.clip = player_death;
+		currentAudio.Play();
+	}
+
+	public void hitSFX(){
+		currentAudio.Stop();
+		currentAudio.clip = hitExplosion;
 		currentAudio.Play();
 	}
 

@@ -160,6 +160,8 @@ public class PlayerController : MonoBehaviour {
 
        else if(other.gameObject.tag =="Enemy" || other.gameObject.tag == "Boss") {
             CameraShake.Shake(0.4f);
+            // play sound 
+            SoundManager.Instance.hitSFX();
             // give damage 
             givePlayerDamage((float)playerDamage/100f);
         }
@@ -204,13 +206,6 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("gameOver", true);
         
         gameOverMenu.transform.GetChild(0).GetComponent<TextManager>().startDialogue();
-
-        Invoke("resertGame",3f);
-       // FindObjectOfType<LoadTargetScene>().LoadSceneNum(2);
-    }
-
-    void resertGame(){
-        print("Game restarted");
     }
 
 }
