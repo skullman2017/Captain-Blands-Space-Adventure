@@ -7,10 +7,10 @@ public class Gems : MonoBehaviour {
 
     public int scorePoint = 5;
     private string playerTag = "Player";
-
+    private SoundManager soundManager;
     // Use this for initialization
     void Start () {
-        
+        // soundManager =  FindObjectOfType<SoundManager>();
 	}
 	
 	// Update is called once per frame
@@ -22,6 +22,7 @@ public class Gems : MonoBehaviour {
         if (col.gameObject.tag==playerTag) {
             this.gameObject.SetActive(false);
 
+            SoundManager.playGemSound();
             // add score to the scoreboard 
             ScoreManager.Instance.addScore(scorePoint);
         }

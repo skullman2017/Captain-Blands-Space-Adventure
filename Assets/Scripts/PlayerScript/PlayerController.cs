@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     [Space(10)]
     public GameObject gameOverMenu;
+    public AudioClip explodeSound;
 
     // Use this for initialization
     void Start () {
@@ -171,18 +172,12 @@ public class PlayerController : MonoBehaviour {
 
     void givePlayerDamage(float dmg){
         float health =  playerHealth.playerDamage((float)playerDamage/100f);
-        if(health<0.005f){
+        if(health<0.005f)
+        {
             GameObject go = Instantiate(destroyAnimation, transform.position, Quaternion.identity);
-          //  Destroy(this.gameObject);
-            this.gameObject.SetActive(false);
-            
-            CancelInvoke("FireBtn");
+        
+            StartCoroutine(playerDead());
 
-            foreach(Transform child in transform){
-                child.gameObject.SetActive(false);
-            }
-
-            
             // save score 
             ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
             // save total score
@@ -192,7 +187,29 @@ public class PlayerController : MonoBehaviour {
             gameOver();
         }
     }
+
+    IEnumerator playerDead()
+    {
+        //  Destroy(this.gameObject);
+        CancelInvoke("FireBtn");
+        // play explosion audio
+        playerAudioSource.Stop();
+        playerAudioSource.clip = explodeSound;
+        playerAudioSource.volume = 0.8f;
+        playerAudioSource.Play();
+
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+        yield return new  WaitForSeconds(playerAudioSource.clip.length);
+
+       // Destroy(this.gameObject, playerAudioSource.clip.length);
+       this.gameObject.SetActive(false);
     
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
     public void gameOver(){
         Animator animator = gameOverMenu.GetComponent<Animator>();
         animator.SetBool("gameOver", true);

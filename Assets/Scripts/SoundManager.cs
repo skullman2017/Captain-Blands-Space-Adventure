@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+	private static AudioSource[] audio;
+	private static AudioSource gemAudio;
+
 	// Use this for initialization
 	void Start () {
-		
+		audio = GetComponents<AudioSource>();
+		gemAudio = audio[0];
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public static void playGemSound(){
+		gemAudio.Play();
 	}
+
 }
