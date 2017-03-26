@@ -22,7 +22,7 @@ public class Gems : MonoBehaviour {
         if (col.gameObject.tag==playerTag) {
             this.gameObject.SetActive(false);
 
-            SoundManager.playGemSound();
+            SoundManager.Instance.playGemSound();
             // add score to the scoreboard 
             ScoreManager.Instance.addScore(scorePoint);
         }

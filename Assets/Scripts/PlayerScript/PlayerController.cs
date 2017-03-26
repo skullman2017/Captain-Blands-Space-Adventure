@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour {
 
     [Space(10)]
     public GameObject gameOverMenu;
-    public AudioClip explodeSound;
 
     // Use this for initialization
     void Start () {
@@ -172,11 +171,11 @@ public class PlayerController : MonoBehaviour {
 
     void givePlayerDamage(float dmg){
         float health =  playerHealth.playerDamage((float)playerDamage/100f);
-        if(health<0.005f)
+        if(health<0.05f)
         {
             GameObject go = Instantiate(destroyAnimation, transform.position, Quaternion.identity);
         
-            StartCoroutine(playerDead());
+           playerDead();
 
             // save score 
             ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
@@ -188,24 +187,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    IEnumerator playerDead()
+    void  playerDead()
     {
         //  Destroy(this.gameObject);
         CancelInvoke("FireBtn");
-        // play explosion audio
-        playerAudioSource.Stop();
-        playerAudioSource.clip = explodeSound;
-        playerAudioSource.volume = 0.8f;
-        playerAudioSource.Play();
-
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = null;
-        yield return new  WaitForSeconds(playerAudioSource.clip.length);
-
-       // Destroy(this.gameObject, playerAudioSource.clip.length);
+        SoundManager.Instance.playPlayerDeadSFX();
        this.gameObject.SetActive(false);
     
-        foreach (Transform child in transform)
-        {
+        foreach (Transform child in transform){
             child.gameObject.SetActive(false);
         }
     }

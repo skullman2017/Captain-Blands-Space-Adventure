@@ -4,17 +4,43 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
-	private static AudioSource[] audio;
-	private static AudioSource gemAudio;
+	public static SoundManager Instance;
 
-	// Use this for initialization
-	void Start () {
-		audio = GetComponents<AudioSource>();
-		gemAudio = audio[0];
+	private static SoundManager instance{
+		get{
+			if(Instance == null){
+				GameObject go = new GameObject("SoundManager");
+				go.AddComponent<SoundManager>();
+			}
+			return instance;
+		}
 	}
-	
-	public static void playGemSound(){
-		gemAudio.Play();
+
+
+
+	void Awake()
+	{
+		Instance = this;
+	}
+
+	public AudioClip player_death;
+	private AudioSource audio;
+	private AudioSource currentAudio;
+	void Start()
+	{
+		AudioSource[] audios = GetComponents<AudioSource>();
+		audio = audios[0];
+		currentAudio = audios[1];
+	}
+
+
+	public void playGemSound(){
+		audio.Play();
+	}
+
+	public void playPlayerDeadSFX(){
+		currentAudio.clip = player_death;
+		currentAudio.Play();
 	}
 
 }
