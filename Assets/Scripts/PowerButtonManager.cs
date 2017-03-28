@@ -17,8 +17,6 @@ public class PowerButtonManager : MonoBehaviour {
   	public Text bombCntText;
     public Text laserCntText;
 
-    AudioSource laserCharge;
-    AudioSource laserShoot;
     private PlayerController thePlayer;
 
     [Space(10)]
@@ -50,13 +48,9 @@ public class PowerButtonManager : MonoBehaviour {
                 laserCntText.text = laserCount.ToString();
         }
 
-        print("PLAYTIMES : "+PlayerPrefs.GetInt("PLAYTIMES"));
+        //laserCount = 3;
 
-        AudioSource[] audios = GetComponents<AudioSource>();
-        thePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-
-
+        //print("PLAYTIMES : "+PlayerPrefs.GetInt("PLAYTIMES"));
 	}
 
     void Awake(){
@@ -129,10 +123,13 @@ public class PowerButtonManager : MonoBehaviour {
         bombFlag = false;
         bombCount -= 1;
         bombCntText.text = bombCount.ToString();
+        
+        // play death wave sound 
+        SoundManager.Instance.playDeathWaveSFX();
 
         while (playerBomb.transform.localScale.x <= 23f) {
             playerBomb.transform.localScale += new Vector3(1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f, 1f*Time.deltaTime*50f);
-            yield return new WaitForSeconds(0.000001f);
+            yield return new WaitForSeconds(0.001f);
         }
 
         playerBomb.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);

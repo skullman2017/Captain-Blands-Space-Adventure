@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour {
 
 	public AudioClip player_death;
 	public AudioClip hitExplosion;
+	public AudioClip deathWave;
 	private AudioSource audio;
 	private AudioSource currentAudio;
 	void Start()
@@ -47,6 +48,12 @@ public class SoundManager : MonoBehaviour {
 	public void hitSFX(){
 		currentAudio.Stop();
 		currentAudio.clip = hitExplosion;
+		currentAudio.Play();
+	}
+
+	public void playDeathWaveSFX(){
+		currentAudio.Stop();
+		currentAudio.clip = deathWave;
 		currentAudio.Play();
 	}
 
