@@ -11,27 +11,34 @@ public class TextManager : MonoBehaviour {
 	private Text theText;
 
 	// Use this for initialization
+	
+	[HideInInspector]
+	 float time = 3f;
+
 	void Start () {
 		theText = GetComponent<Text>();
-
-		//fullText.Replace("\\n", "\n");
-	//	startDialogue();
 	}
 	
 	IEnumerator typeWriteText(string text){
 
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(3f);
 
 		for(int i=0;i <text.Length; i++){
 			currentText = fullText.Substring(0,i);
 			theText.text = currentText;
 			yield return new WaitForSeconds(delay);
+			time += delay;
+			
 		}
-
+		time += 3f;
+		//print("text duration : "+time);
+		
 	}
 
 	public void startDialogue(){
 		StartCoroutine(typeWriteText(fullText));
 	}
+
+
 
 }

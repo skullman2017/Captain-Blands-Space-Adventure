@@ -21,7 +21,14 @@ public class PowerButtonManager : MonoBehaviour {
     AudioSource laserShoot;
     private PlayerController thePlayer;
 
+    [Space(10)]
+    [SerializeField]
+    private Button LaserBtn;
+    [SerializeField]
+    private Button BombBtn;
 	// Use this for initialization
+    bool flag = false;
+
 	void Start () {
 
         if (playerBomb.activeInHierarchy) {
@@ -29,15 +36,32 @@ public class PowerButtonManager : MonoBehaviour {
         }
 
 		theLaser = FindObjectOfType <LaserBeamTest> ();
+        
+        if(PlayerPrefs.GetInt("PLAYTIMES")>0){
 
-        bombCntText.text = bombCount.ToString();
-        laserCntText.text = laserCount.ToString();
+            bombCount = PlayerPrefs.GetInt("BOMB");
+            laserCount = PlayerPrefs.GetInt("LASER");
 
+                bombCntText.text = bombCount.ToString();
+                laserCntText.text = laserCount.ToString();
+        }
+        else{
+                bombCntText.text = bombCount.ToString();
+                laserCntText.text = laserCount.ToString();
+        }
+
+        print("PLAYTIMES : "+PlayerPrefs.GetInt("PLAYTIMES"));
 
         AudioSource[] audios = GetComponents<AudioSource>();
         thePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+
+
 	}
 
+    void Awake(){
+        PlayerPrefs.SetInt("FIRST_TIME_PLAY",1);
+    }
 
     public  void laserUp(int cnt) {
         laserCount += cnt;
@@ -80,6 +104,17 @@ public class PowerButtonManager : MonoBehaviour {
         if (bombCount > 0 && bombFlag == true) {
              StartCoroutine(explodeBomb());
         }
+    }
+
+     /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    void OnDisable()
+    {
+        if(LaserBtn != null)
+            LaserBtn.interactable = false;
+        else if(BombBtn != null)
+             BombBtn.interactable = false;
     }
 
     void Update() {

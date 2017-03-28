@@ -16,15 +16,15 @@ public class FadeScreen : MonoBehaviour {
 	public GameObject scene1;
 	public GameObject scene2;
 	public GameObject PlayBtn;
-    public GameObject skipBtn;
-    private StoryEnemy[] enemies;
-    private EnemyBullet[] bullets;
 
 	void Start(){
 		scene1.SetActive (true);
 
 		scene2.SetActive (false);
 		PlayBtn.SetActive (false);
+
+       // fadeIn();
+	  // Invoke("fadeIn",7f); // put the time value from textmanager
 	}
 
 	// runtime 
@@ -44,8 +44,7 @@ public class FadeScreen : MonoBehaviour {
 
     }
 
-	void fadeIn(){
-		//scene1.gameObject.SetActive (false);
+	public void fadeIn(){
 		fadeDir = -1;
 
 		StartCoroutine (nextScene ());
@@ -53,42 +52,15 @@ public class FadeScreen : MonoBehaviour {
 
 	IEnumerator nextScene(){
 
-        // kill the enemies and bullets dont need them
-        removeAllEnemy();
-
 		yield return new WaitForSeconds (2f);
 		scene1.SetActive (false);
-
-        Destroy(skipBtn);
 
 		scene2.SetActive (true);
 
 		fadeOut ();
 	}
 
-    void removeAllEnemy_Bullets() {
-        bullets = FindObjectsOfType<EnemyBullet>();
 
-        foreach(var b in bullets) {
-            b.gameObject.SetActive(false);
-        }
-    }
-
-    void removeAllEnemy() {
-        enemies = FindObjectsOfType<StoryEnemy>();
-
-        if (enemies.Length > 0) {
-            foreach (var go in enemies) {
-                go.StopAllCoroutines();
-                go.CancelInvoke();
-                go.gameObject.SetActive(false);
-            }
-        }
-
-        // remove all bullets 
-        removeAllEnemy_Bullets();
-
-    }
 
 	void fadeOut(){
 		

@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour {
            playerDead();
 
             // save score 
-            ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
+         //   ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
             // save total score
             ScoreManager.Instance.saveTotalScore(ScoreManager.Instance.SCORE);
             print("player died");
@@ -199,6 +199,9 @@ public class PlayerController : MonoBehaviour {
         foreach (Transform child in transform){
             child.gameObject.SetActive(false);
         }
+
+        // prevent to tap 
+        FindObjectOfType<PowerButtonManager>().gameObject.SetActive(false);
     }
 
     public void gameOver(){

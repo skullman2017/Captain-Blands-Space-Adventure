@@ -10,10 +10,10 @@ public class ShopManager : MonoBehaviour {
 	private int totalScore = 0;
 	private int currentScore = 0;
 
-	int bombPrice = 300;
-	int laserPrice = 500;
-	int bombCnt = 0;
-	int laserCnt = 0;
+	public int bombPrice = 300;
+	public int laserPrice = 500;
+	public int bombCnt = 0;
+	public int laserCnt = 0;
 	bool Flag = true;
 	// Use this for initialization
 	void Start () {	
@@ -31,6 +31,8 @@ public class ShopManager : MonoBehaviour {
 			totalScore -= bombPrice;
 			totalText.text = totalScore.ToString();
 			PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
+
+			PlayerPrefs.SetInt("BOMB",bombCnt);
 		}
 		else{
 			
@@ -54,6 +56,8 @@ public class ShopManager : MonoBehaviour {
 			totalScore -= laserPrice;
 			totalText.text = totalScore.ToString();
 			PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
+
+			PlayerPrefs.SetInt("LASER",laserCnt);
 		}
 		else{
 			

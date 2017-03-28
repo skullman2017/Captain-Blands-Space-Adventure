@@ -47,12 +47,37 @@ public class ScoreManager : MonoBehaviour {
 
     public void saveCurrentScore(int score){
         PlayerPrefs.SetInt("PLAYER_CURRENT_SCORE",score);
+        print("current score "+score);
     }
 
-    public void saveTotalScore(int _score){
-        int curScore = PlayerPrefs.GetInt("PLAYER_CURRENT_SCORE");
-        curScore += _score;
-        PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", curScore);
+    public void saveTotalScore(int score){
+       // int totalScore = PlayerPrefs.GetInt("PLAYER_CURRENT_SCORE");
+       // totalScore += _score;
+       // PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
+
+       int totalScore = 0;
+
+       if(PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE")==0){
+           PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE",score);
+       }
+       else{
+        totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
+        totalScore += score;
+        PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE",totalScore);
+       }
+
+       if(PlayerPrefs.GetInt("PLAYTIMES")==0){
+           int t = 0;
+           t +=1;
+           PlayerPrefs.SetInt("PLAYTIMES",t);
+       }
+       else{
+           int t = PlayerPrefs.GetInt("PLAYTIMES");
+           t +=1;
+           PlayerPrefs.SetInt("PLAYTIMES",t);
+       }
+
+        print("total : "+totalScore);
     }
 
 }
