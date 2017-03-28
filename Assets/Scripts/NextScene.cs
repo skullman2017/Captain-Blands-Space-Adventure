@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class StoryManager : MonoBehaviour {
+public class NextScene : MonoBehaviour {
 
-  
+
 	public float delay = 0.1f;
 	public string fullText;
 	private  string currentText;
@@ -19,11 +19,9 @@ public class StoryManager : MonoBehaviour {
 
 	void Start () {
 		theText = GetComponent<Text>();
-
-		Invoke("startDialogue",1f);
 	}
 	
-	IEnumerator typeWriteText(string text){
+	public IEnumerator typeWriteText(string text){
 
 		yield return new WaitForSeconds(1f);
 
@@ -35,9 +33,11 @@ public class StoryManager : MonoBehaviour {
 			
 		}
 		time += 2f;
-		//print("text duration : "+time);
-		fadeScreen.fadeIn();
 
+		//print("text duration : "+time);
+		//fadeScreen.fadeIn();
+		fadeScreen.StartCoroutine("gamePlay");
+		
 		StartCoroutine(fadeText(theText));
 	}
 
@@ -61,9 +61,8 @@ public class StoryManager : MonoBehaviour {
 		myText.color = new Color(myText.color.r, myText.color.g, myText.color.b, 255);
 	}
 
-	public void startDialogue(){
+	 public void startDialogue(){
 		StartCoroutine(typeWriteText(fullText));
 	}
-
 	
 }

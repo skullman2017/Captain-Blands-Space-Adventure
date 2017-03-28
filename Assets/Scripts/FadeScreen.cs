@@ -16,6 +16,7 @@ public class FadeScreen : MonoBehaviour {
 	public GameObject scene1;
 	public GameObject scene2;
 	public GameObject PlayBtn;
+	public NextScene theNextScene;
 
 	void Start(){
 		scene1.SetActive (true);
@@ -65,11 +66,12 @@ public class FadeScreen : MonoBehaviour {
 	void fadeOut(){
 		
 		fadeDir = 1;	
-
-		StartCoroutine (gamePlay ());
+		// write text here 
+			theNextScene.startDialogue();
+		//StartCoroutine (gamePlay ());
 	}
 
-	IEnumerator gamePlay(){
+	public IEnumerator gamePlay(){
 		yield return new WaitForSeconds (3f);
 
 		StartCoroutine (ThefadeIn ());
