@@ -19,7 +19,7 @@ public class EnemyEventManager : MonoBehaviour {
 	void Start () {
 		thebulletPooler = FindObjectOfType <EnemyBulletPooler> ();	
 		theEnemy_01Spawner = FindObjectOfType <Enemy_01_Spawner> ();
-		theEnemySpawner = FindObjectOfType <MultipleEnemySpawner> ();
+		//theEnemySpawner = FindObjectOfType <MultipleEnemySpawner> ();
 
 		// stack events here 
 		theEventDelegate += initiate_Event_B;
@@ -37,8 +37,10 @@ public class EnemyEventManager : MonoBehaviour {
 		// unstack
 		theEventDelegate -= initiate_Event_B;
 		// stack 
-		theEventDelegate += initiate_Event_C;
+		//theEventDelegate += initiate_Event_C;
 		/*theEventDelegate += initiate_Event_C_02;*/
+
+
 	}
 
 	// enemy 02 pattern 
@@ -47,7 +49,7 @@ public class EnemyEventManager : MonoBehaviour {
 		// path following enemy
         // this spawnEnemy will also call Enemy_5 formation follow the chain
 		theEnemySpawner.spawnEnemy ();
-		theEventDelegate -= initiate_Event_C;
+		//theEventDelegate -= initiate_Event_C;
 	}
 
 	

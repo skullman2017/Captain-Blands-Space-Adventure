@@ -171,11 +171,19 @@ public class Enemy_01_Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (Random.Range (max, min));
 			TopToDown ();
 		}
-//		Debug.Log ("event B done");
 
-		// start event C
-		EnemyEventManager.theEventDelegate ();
-	}
+		Debug.Log ("event B done");
+
+        // start event C
+        //EnemyEventManager.theEventDelegate ();
+        MultipleEnemySpawner theEnemySpawner = GameObject.FindObjectOfType<MultipleEnemySpawner>();
+        if (theEnemySpawner != null)
+        {
+            print("initiate event C");
+  
+            theEnemySpawner.spawnEnemy();
+        }
+}
 
 
 	IEnumerator enemy_01_fire(float _sec,float _duration){
