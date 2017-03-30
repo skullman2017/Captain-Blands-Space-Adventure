@@ -58,6 +58,9 @@ public class BossHealth : MonoBehaviour {
 	void OnDisable(){
 		//print("boss is disabled");
 		textmanager.startDialogue();
+
+        FindObjectOfType<FadeInNextScene>().fade();
+
 	}
 
 }

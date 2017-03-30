@@ -26,8 +26,10 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip player_death;
 	public AudioClip hitExplosion;
 	public AudioClip deathWave;
+    public AudioClip playerHitImact;
 	private AudioSource audio;
 	private AudioSource currentAudio;
+
 	void Start()
 	{
 		AudioSource[] audios = GetComponents<AudioSource>();
@@ -56,5 +58,13 @@ public class SoundManager : MonoBehaviour {
 		currentAudio.clip = deathWave;
 		currentAudio.Play();
 	}
+
+    public void playerHitImpactSFX() {
+        currentAudio.Stop();
+        currentAudio.clip = playerHitImact; // player hit by meteors or ...
+        //currentAudio.volume = 0.5f;
+        currentAudio.Play();
+
+    }
 
 }

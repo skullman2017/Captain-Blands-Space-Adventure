@@ -56,7 +56,10 @@ public class Meteors : MonoBehaviour {
         if(other.tag == "Player"){
 			GameObject explosion = ExplosionPooler._Instance.getExplosion ((int)ExplosionPooler.explosionFabs.meteorExplosion);
             explosion.transform.position = transform.position; // meteor position 
-        
+
+            // play impact sound 
+            SoundManager.Instance.playerHitImpactSFX();
+
             _sprite.color = new Color(255,255,255,255);
             gameObject.SetActive(false); // meteor kill
             explosion.SetActive(true);

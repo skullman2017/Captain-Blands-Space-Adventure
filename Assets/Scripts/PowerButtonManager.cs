@@ -17,7 +17,7 @@ public class PowerButtonManager : MonoBehaviour {
   	public Text bombCntText;
     public Text laserCntText;
 
-    private PlayerController thePlayer;
+    public PlayerController thePlayer;
 
     [Space(10)]
     [SerializeField]
@@ -34,24 +34,17 @@ public class PowerButtonManager : MonoBehaviour {
         }
 
 		theLaser = FindObjectOfType <LaserBeamTest> ();
-        
-        if(PlayerPrefs.GetInt("PLAYTIMES")>0){
 
-            bombCount = PlayerPrefs.GetInt("BOMB");
+        //  print(PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE"));
+
+            bombCount = PlayerPrefs.GetInt("BOMB"); 
             laserCount = PlayerPrefs.GetInt("LASER");
 
-                bombCntText.text = bombCount.ToString();
-                laserCntText.text = laserCount.ToString();
-        }
-        else{
-                bombCntText.text = bombCount.ToString();
-                laserCntText.text = laserCount.ToString();
-        }
-
-        //laserCount = 3;
+           bombCntText.text = bombCount.ToString();
+           laserCntText.text = laserCount.ToString();
 
         //print("PLAYTIMES : "+PlayerPrefs.GetInt("PLAYTIMES"));
-	}
+    }
 
     void Awake(){
         PlayerPrefs.SetInt("FIRST_TIME_PLAY",1);
@@ -78,10 +71,9 @@ public class PowerButtonManager : MonoBehaviour {
 		laserFlag = true;
         theLaser.FireLaser();
 
-		int tmp = Convert.ToInt32(laserCntText.text);
-        tmp += -1;
-		laserCount = tmp;
-        laserCntText.text = tmp.ToString();
+        laserCount -= 1;
+        laserCntText.text = laserCount.ToString();
+        PlayerPrefs.SetInt("LASER", laserCount);
 
         //theLaser.laserOn = true;
         // laser time
@@ -91,7 +83,7 @@ public class PowerButtonManager : MonoBehaviour {
 		laserFlag = false;
 
         // turn on player shoot again 
-        thePlayer.InvokeRepeating("FireBtn",1.5f, thePlayer.fireRate);
+       thePlayer.InvokeRepeating("FireBtn",1.5f, thePlayer.fireRate);
 	}
 
     public void startBomb() {
@@ -123,7 +115,8 @@ public class PowerButtonManager : MonoBehaviour {
         bombFlag = false;
         bombCount -= 1;
         bombCntText.text = bombCount.ToString();
-        
+        PlayerPrefs.SetInt("BOMB", bombCount);
+
         // play death wave sound 
         SoundManager.Instance.playDeathWaveSFX();
 
