@@ -14,7 +14,12 @@ public class FadeInNextScene : MonoBehaviour {
 
    public void fade()
     {
-        thePlayer.CancelInvoke("FireBtn");
+        if (thePlayer != null)
+        {
+            thePlayer.CancelInvoke("FireBtn");
+        }
+        else { print("theplayer is null"); }
+
         meteorLeft.GetComponent<MeteorSpawnerLeft>().CancelInvoke("poolMeteor");
         meteorRight.GetComponent<MeteorSpawnerRight>().CancelInvoke("poolMeteor");
 

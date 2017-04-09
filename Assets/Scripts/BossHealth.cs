@@ -9,7 +9,8 @@ public class BossHealth : MonoBehaviour {
 	public static Image health;
 	private Vector2 screenPos = Vector2.zero;
 	public Vector2 offset;
-	private TextManager textmanager;
+    //private TextManager textmanager;
+    private LoadTargetScene loadScene;
 
 	// Use this for initialization
 	void Start () {
@@ -24,20 +25,21 @@ public class BossHealth : MonoBehaviour {
 			screenPos = Camera.main.WorldToScreenPoint(transform.position);
 			//print(pos);
 		}
-		
 
-		GameObject canvas = GameObject.FindGameObjectWithTag("UICanvas");
+        loadScene = Camera.main.GetComponent<LoadTargetScene>();
+        //GameObject canvas = GameObject.FindGameObjectWithTag("UICanvas");
 
-		if(canvas) {
-			textmanager = canvas.GetComponentInChildren<TextManager>();
-		}
-		else{ print("not found"); }
+        //if(canvas) {
+        //	textmanager = canvas.GetComponentInChildren<TextManager>();
+        //}
+        //else{ print("not found"); }
 
-	}
+    }
 	
 	public static float damageHealthBar(double amount){
-		health.fillAmount -= (float)amount; 
+		health.fillAmount -= (float)amount;
 
+        //print("health : " + health.fillAmount);
 		// threshold used to stay boss when health is less than 20%
 		return health.fillAmount;
 	}
@@ -56,10 +58,11 @@ public class BossHealth : MonoBehaviour {
 	/// This function is called when the behaviour becomes disabled or inactive.
 	/// </summary>
 	void OnDisable(){
-		//print("boss is disabled");
-		textmanager.startDialogue();
+        //print("boss is disabled");
+        //textmanager.startDialogue();
 
-        FindObjectOfType<FadeInNextScene>().fade();
+        //  FindObjectOfType<FadeInNextScene>().fade();
+        loadScene.GameoverScene();
 
 	}
 

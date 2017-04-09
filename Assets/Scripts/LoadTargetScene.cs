@@ -7,4 +7,15 @@ public class LoadTargetScene : MonoBehaviour {
         LoadingScreenManager.LoadScene(num);
     }
 
+    public void GameoverScene()
+    {
+        StartCoroutine(loadGameOverScene());
+    }
+
+    IEnumerator loadGameOverScene()
+    {
+        yield return new WaitForSeconds(5f);
+        LoadSceneNum(6);
+    }
+
 }

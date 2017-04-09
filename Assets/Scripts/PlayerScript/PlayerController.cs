@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
 
@@ -42,10 +41,10 @@ public class PlayerController : MonoBehaviour {
         playerHealth = GetComponent<PlayerHealth>();
 
         // player set initial position 
-        float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v = CrossPlatformInputManager.GetAxis("Vertical");
-        Vector2 _dir = new Vector2(h, v);
-        movePlayer(_dir);
+        //float h = CrossPlatformInputManager.GetAxis("Horizontal");
+     //   float v = CrossPlatformInputManager.GetAxis("Vertical");
+       // Vector2 _dir = new Vector2(h, v);
+      //  movePlayer(_dir);
 
         // firing autometically 
         InvokeRepeating("FireBtn",3f, fireRate);
@@ -57,22 +56,22 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         // for joystikc controll
-        float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v = CrossPlatformInputManager.GetAxis("Vertical");
+        //float h = CrossPlatformInputManager.GetAxis("Horizontal");
+       // float v = CrossPlatformInputManager.GetAxis("Vertical");
         
         // for accleometer 
         //float h = Input.acceleration.x;
        // float v = Input.acceleration.y - accleStartY;
 
         // get the joystick input 
-        Vector2 direction = new Vector2(h,v);
+        //Vector2 direction = new Vector2(h,v);
 
-        if(direction.sqrMagnitude > 1){
-            direction.Normalize();  
-        }
+        //if(direction.sqrMagnitude > 1){
+        //    direction.Normalize();  
+        //}
             
-        // moveplayer
-        movePlayer(direction);
+        //// moveplayer
+        //movePlayer(direction);
         // tap to fire 
         //FireBtn();
 
@@ -183,7 +182,7 @@ public class PlayerController : MonoBehaviour {
          //   ScoreManager.Instance.saveCurrentScore(ScoreManager.Instance.SCORE);
             // save total score
             ScoreManager.Instance.saveTotalScore(ScoreManager.Instance.SCORE);
-            print("player died");
+          //  print("player died");
 
             gameOver();
         }
@@ -194,7 +193,7 @@ public class PlayerController : MonoBehaviour {
         //  Destroy(this.gameObject);
         CancelInvoke("FireBtn");
         SoundManager.Instance.playPlayerDeadSFX();
-       this.gameObject.SetActive(false);
+       this.gameObject.SetActive(false); // player dead here
     
         foreach (Transform child in transform){
             child.gameObject.SetActive(false);

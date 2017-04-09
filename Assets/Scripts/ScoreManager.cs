@@ -77,7 +77,7 @@ public class ScoreManager : MonoBehaviour {
            PlayerPrefs.SetInt("PLAYTIMES",t);
        }
 
-        print("total : "+totalScore);
+      //  print("total : "+totalScore);
     }
 
 }

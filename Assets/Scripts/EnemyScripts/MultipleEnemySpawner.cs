@@ -122,7 +122,8 @@ public class MultipleEnemySpawner : MonoBehaviour
                 {
                     canCheckNow = false;
                     isBoss = true;
-					StartCoroutine(instantiateBoss());
+                    instantiateBoss();
+
 					print("boss instantiated");
                 }
             }
@@ -141,10 +142,12 @@ public class MultipleEnemySpawner : MonoBehaviour
 
 
     // get call after enemy_05 event 
-    public IEnumerator instantiateBoss()
+    public void instantiateBoss()
     {
-		yield return new WaitForSeconds(10f);
+		//yield return new WaitForSeconds(4f);
+        print("boss");
         GameObject bossObj = Instantiate(Boss1, bossSpawPos.position, Quaternion.identity) as GameObject;
+        bossObj.SetActive(true);
     }
 
 }

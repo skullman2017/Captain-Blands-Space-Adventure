@@ -19,8 +19,11 @@ public class ShopManager : MonoBehaviour {
 	void Start () {	
 		warningText.text = string.Empty;
 
-		//StartCoroutine(fadeText(warningText));
-	}
+        // PlayerPrefs.SetInt("BOMB", 1);
+        //   PlayerPrefs.SetInt("LASER", 1);
+        AddManager.Instance.showVideoAdd();
+
+    }
 	
 	public void buyBomb(){
 		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
