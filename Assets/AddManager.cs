@@ -7,7 +7,7 @@ public class AddManager : MonoBehaviour {
 
     public static AddManager Instance {get;set;}
 
-    string bannerID = "ca-app-pub-2151861431834316/6320052583";
+    string bannerID = "ca-app-pub-2151861431834316/6320052583"; // banner 
     string videoID = "ca-app-pub-2151861431834316/5262121786"; // interstial
 
     void Awake()

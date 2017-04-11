@@ -21,21 +21,28 @@ public class ShopManager : MonoBehaviour {
 
         // PlayerPrefs.SetInt("BOMB", 1);
         //   PlayerPrefs.SetInt("LASER", 1);
+       // DontDestroyOnLoad(this.gameObject);
         AddManager.Instance.showVideoAdd();
 
     }
 	
 	public void buyBomb(){
 		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
+
 		if(totalScore>=bombPrice){
-			bombCnt++;
+
+            int tmp = PlayerPrefs.GetInt("BOMB"); // previous bomb get 
+
+            bombCnt += 1; // bought one bomb 
+            bombCnt += tmp; // sum previous one 
+
 			bombBuyText.text = bombCnt.ToString();
 
 			totalScore -= bombPrice;
 			totalText.text = totalScore.ToString();
 			PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
 
-			PlayerPrefs.SetInt("BOMB",bombCnt);
+			PlayerPrefs.SetInt("BOMB",bombCnt); // store 
 		}
 		else{
 			
@@ -52,8 +59,11 @@ public class ShopManager : MonoBehaviour {
 
 	public void buyLaser(){
 		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
+
 		if(totalScore>=laserPrice){
-			laserCnt++;
+            int tmp = PlayerPrefs.GetInt("LASER");
+            laserCnt +=1;
+            laserCnt += tmp;
 			laserBuyText.text = laserCnt.ToString();
 
 			totalScore -= laserPrice;
@@ -75,7 +85,6 @@ public class ShopManager : MonoBehaviour {
 
 	IEnumerator fadeText(Text txt){
 		Flag = false;
-		print("co");
 		yield return new WaitForSeconds(1f);
 		
 		Text myText= txt.GetComponent<Text>();

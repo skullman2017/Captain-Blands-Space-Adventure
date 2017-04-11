@@ -35,20 +35,14 @@ public class PowerButtonManager : MonoBehaviour {
 
 		theLaser = FindObjectOfType <LaserBeamTest> ();
 
-        //  print(PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE"));
-
             bombCount = PlayerPrefs.GetInt("BOMB"); 
             laserCount = PlayerPrefs.GetInt("LASER");
 
            bombCntText.text = bombCount.ToString();
            laserCntText.text = laserCount.ToString();
 
-        //print("PLAYTIMES : "+PlayerPrefs.GetInt("PLAYTIMES"));
     }
 
-    void Awake(){
-        PlayerPrefs.SetInt("FIRST_TIME_PLAY",1);
-    }
 
     public  void laserUp(int cnt) {
         laserCount += cnt;

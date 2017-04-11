@@ -66,16 +66,16 @@ public class ScoreManager : MonoBehaviour {
         PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE",totalScore);
        }
 
-       if(PlayerPrefs.GetInt("PLAYTIMES")==0){
-           int t = 0;
-           t +=1;
-           PlayerPrefs.SetInt("PLAYTIMES",t);
-       }
-       else{
-           int t = PlayerPrefs.GetInt("PLAYTIMES");
-           t +=1;
-           PlayerPrefs.SetInt("PLAYTIMES",t);
-       }
+       //if(PlayerPrefs.GetInt("PLAYTIMES")==0){
+       //    int t = 0;
+       //    t +=1;
+       //    PlayerPrefs.SetInt("PLAYTIMES",t);
+       //}
+       //else{
+       //    int t = PlayerPrefs.GetInt("PLAYTIMES");
+       //    t +=1;
+       //    PlayerPrefs.SetInt("PLAYTIMES",t);
+       //}
 
       //  print("total : "+totalScore);
     }
