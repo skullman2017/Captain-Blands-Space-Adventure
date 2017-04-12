@@ -11,8 +11,8 @@ public class PowerButtonManager : MonoBehaviour {
 	private bool laserFlag = false;
     private bool bombFlag = true;
 
-    public int laserCount;
-    public int bombCount;
+     int laserCount;
+     int bombCount;
 
   	public Text bombCntText;
     public Text laserCntText;
@@ -29,14 +29,27 @@ public class PowerButtonManager : MonoBehaviour {
 
 	void Start () {
 
+        laserCount = 0;
+        bombCount = 0;
+
         if (playerBomb.activeInHierarchy) {
             playerBomb.SetActive(false);
         }
 
 		theLaser = FindObjectOfType <LaserBeamTest> ();
 
-            bombCount = PlayerPrefs.GetInt("BOMB"); 
-            laserCount = PlayerPrefs.GetInt("LASER");
+        bombCount = PlayerPrefs.GetInt("CURRENT_BOMB");
+        laserCount = PlayerPrefs.GetInt("CURRENT_LASER");
+
+        // now add bought items
+            bombCount += PlayerPrefs.GetInt("BOMB"); 
+            laserCount += PlayerPrefs.GetInt("LASER");
+
+        PlayerPrefs.SetInt("BOMB", 0);
+        PlayerPrefs.SetInt("LASER", 0);
+
+        PlayerPrefs.SetInt("CURRENT_BOMB", bombCount);
+        PlayerPrefs.SetInt("CURRENT_LASER", laserCount);
 
            bombCntText.text = bombCount.ToString();
            laserCntText.text = laserCount.ToString();
@@ -67,7 +80,7 @@ public class PowerButtonManager : MonoBehaviour {
 
         laserCount -= 1;
         laserCntText.text = laserCount.ToString();
-        PlayerPrefs.SetInt("LASER", laserCount);
+        PlayerPrefs.SetInt("CURRENT_LASER", laserCount);
 
         //theLaser.laserOn = true;
         // laser time
@@ -109,7 +122,7 @@ public class PowerButtonManager : MonoBehaviour {
         bombFlag = false;
         bombCount -= 1;
         bombCntText.text = bombCount.ToString();
-        PlayerPrefs.SetInt("BOMB", bombCount);
+        PlayerPrefs.SetInt("CURRENT_BOMB", bombCount);
 
         // play death wave sound 
         SoundManager.Instance.playDeathWaveSFX();

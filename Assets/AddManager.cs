@@ -15,6 +15,10 @@ public class AddManager : MonoBehaviour {
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
+        if (FindObjectsOfType(GetType()).Length > 1 )
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -34,6 +38,10 @@ public class AddManager : MonoBehaviour {
         if (Admob.Instance().isInterstitialReady())
         {
             Admob.Instance().showInterstitial();
+        }
+        else
+        {
+            Admob.Instance().loadInterstitial();
         }
     }
 

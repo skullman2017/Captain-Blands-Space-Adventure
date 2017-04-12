@@ -51,9 +51,6 @@ public class ScoreManager : MonoBehaviour {
     }
 
     public void saveTotalScore(int score){
-       // int totalScore = PlayerPrefs.GetInt("PLAYER_CURRENT_SCORE");
-       // totalScore += _score;
-       // PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", totalScore);
 
        int totalScore = 0;
 
@@ -66,18 +63,6 @@ public class ScoreManager : MonoBehaviour {
         PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE",totalScore);
        }
 
-       //if(PlayerPrefs.GetInt("PLAYTIMES")==0){
-       //    int t = 0;
-       //    t +=1;
-       //    PlayerPrefs.SetInt("PLAYTIMES",t);
-       //}
-       //else{
-       //    int t = PlayerPrefs.GetInt("PLAYTIMES");
-       //    t +=1;
-       //    PlayerPrefs.SetInt("PLAYTIMES",t);
-       //}
-
-      //  print("total : "+totalScore);
     }
 
 }

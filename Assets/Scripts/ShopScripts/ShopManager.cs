@@ -15,13 +15,15 @@ public class ShopManager : MonoBehaviour {
 	public int bombCnt = 0;
 	public int laserCnt = 0;
 	bool Flag = true;
+
+
 	// Use this for initialization
 	void Start () {	
 		warningText.text = string.Empty;
 
-        // PlayerPrefs.SetInt("BOMB", 1);
-        //   PlayerPrefs.SetInt("LASER", 1);
-       // DontDestroyOnLoad(this.gameObject);
+         //PlayerPrefs.SetInt("BOMB", 1);
+        // PlayerPrefs.SetInt("PLAYER_TOTAL_SCORE", 2000);
+
         AddManager.Instance.showVideoAdd();
 
     }
@@ -31,11 +33,7 @@ public class ShopManager : MonoBehaviour {
 
 		if(totalScore>=bombPrice){
 
-            int tmp = PlayerPrefs.GetInt("BOMB"); // previous bomb get 
-
             bombCnt += 1; // bought one bomb 
-            bombCnt += tmp; // sum previous one 
-
 			bombBuyText.text = bombCnt.ToString();
 
 			totalScore -= bombPrice;
@@ -61,9 +59,7 @@ public class ShopManager : MonoBehaviour {
 		totalScore = PlayerPrefs.GetInt("PLAYER_TOTAL_SCORE");
 
 		if(totalScore>=laserPrice){
-            int tmp = PlayerPrefs.GetInt("LASER");
             laserCnt +=1;
-            laserCnt += tmp;
 			laserBuyText.text = laserCnt.ToString();
 
 			totalScore -= laserPrice;

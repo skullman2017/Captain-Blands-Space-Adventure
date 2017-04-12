@@ -7,7 +7,9 @@ public class QuiteGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AddManager.Instance.showBanner();
+        // I dont want to show banner top of the Game Title 
+
+       // AddManager.Instance.showBanner();
 	}
 	
 
